@@ -40,6 +40,7 @@ $.ajax({
                 })
                 .done(function(res){
                     originspp = res.spp;
+                    $("#spp_").val(numberWithCommas(res.spp));
                     $("#spp").val(numberWithCommas(res.spp));
                     $("#bimbel").val(numberWithCommas(res.bimbel));
                     filltotal();
