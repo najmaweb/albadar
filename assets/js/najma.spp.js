@@ -126,6 +126,7 @@ $(".sppperiod").change(function(){
     }
     spptotal = parseInt(originspp)*monthcount;
     $("#spp").val(numberWithCommas(spptotal));
+    $("#spp_").val(numberWithCommas(spptotal));
     if(test===true){
         alert(monthcount);
     };
