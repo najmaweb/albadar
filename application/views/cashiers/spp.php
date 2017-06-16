@@ -43,6 +43,7 @@
                                                 <label class="col-lg-3 control-label" for="spp">SPP&nbsp;<input type="checkbox" id="sppcheckbox"></label>
                                                 <div class="col-lg-9">
                                                     <input type="hidden" name="spp" id="spp" value=0/>
+                                                    <input type="hidden" id="orispp" name="orispp"  class="form-control affect-total" value="0">
                                                     <input type="text" disabled="disabled" id="spp_" name="spp_"  class="form-control affect-total" value="0">
                                                 </div>
                                             </div>
