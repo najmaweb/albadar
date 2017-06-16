@@ -79,25 +79,28 @@
                                             <div class="form-group bimbel">
                                                 <label class="col-lg-3 control-label" for="bimbel">Bimbel&nbsp;<input type="checkbox" id="bimbelcheckbox"></label>
                                                 <div class="col-lg-9">
-                                                    <input type="text" id="bimbel" name="bimbel"  class="form-control affect-total" value="0">
+                                                    <input type="text" id="bimbel_" name="bimbel_"  class="form-control affect-total" value="0">
+                                                    <input type="hidden" id="bimbel" name="bimbel"  class="form-control affect-total" value="0">
+                                                    <input type="hidden" id="oribimbel" name="oribimbel"  class="form-control affect-total" value="0">
+
                                                 </div>
                                             </div>
                                             <div class="form-group bimbel" id="bimbelmonthdiv">
                                                 <label class="col-lg-3 control-label" for="frstmonth">Untuk Bimbel Bulan</label>
                                                 <div class="col-lg-2">
-                                                    <?php echo form_dropdown("frstmonth",$months,1,"class='form-control' id='frstmonth'");?>
+                                                    <?php echo form_dropdown("frstmonth",$months,1,"class='form-control bimberperiod' id='frstmonth'");?>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <?php echo form_dropdown("frstyear",$years,1,"class='form-control' id='frstyear'");?>
+                                                    <?php echo form_dropdown("frstyear",$years,1,"class='form-control bimberperiod' id='frstyear'");?>
                                                 </div>
                                                 <div class="col-lg-1" style="text-align:center">
                                                 <label class=" control-label text-align:center" for="nextmonth">s/d</label>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <?php echo form_dropdown("nextmonth",$months,1,"class='form-control' id='nextmonth'");?>
+                                                    <?php echo form_dropdown("nextmonth",$months,1,"class='form-control bimberperiod' id='nextmonth'");?>
                                                 </div>
                                                 <div class="col-lg-2">
-                                                    <?php echo form_dropdown("nextyear",$years,1,"class='form-control' id='nextyear'");?>
+                                                    <?php echo form_dropdown("nextyear",$years,1,"class='form-control bimberperiod' id='nextyear'");?>
                                                 </div>
                                             </div>
                                             <div class="form-group has-warning">

@@ -41,8 +41,10 @@ $.ajax({
                 .done(function(res){
                     originspp = res.spp;
                     $("#spp_").val(numberWithCommas(res.spp));
-                    $("#spp").val(numberWithCommas(res.spp));
-                    $("#bimbel").val(numberWithCommas(res.bimbel));
+                    $("#spp").val(res.spp);
+                    $("#bimbel_").val(numberWithCommas(res.bimbel));
+                    $("#bimbel").val(res.bimbel);
+                    $("#oribimbel").val(res.bimbel);
                     filltotal();
                     fillreturnmoney();
                 });
@@ -102,6 +104,56 @@ $(".affect-total").keyup(function(){
     filltotal();
 //    $("#returnmoney").val(parseInt($("#cashpay").val())-total);
     fillreturnmoney();
+});
+$.fn.adjustval = function(options){
+    $(this).change(function(){
+        var settings = $.extend({
+            firstmonth:$("#sppfrstmonth"),
+            firstyear:$("#sppfrstyear"),
+            nextmonth:$("#sppnextmonth"),
+            nextyear:$("#sppnextyear"),
+            hiddenval : $("#spp_"),
+            shownval: $("#bimbel"),
+            orival:$("#orival")
+        },options);
+        console.log("time changed");
+        monthcount = 0;
+        if(settings.nextyear.val()===settings.firstyear.val()){
+            if(settings.nextmonth.val()===settings.firstmonth.val()){
+                monthcount = 1;
+            }else
+            if(settings.nextmonth.val()>settings.firstmonth.val()){
+                monthcount = settings.nextmonth.val() - settings.firstmonth.val() + 1;
+                
+            }else{
+                alert("Bulan Kedua harus lebih besar dari bulan Pertama");
+            }
+        }else
+        if(settings.nextyear.val()>settings.firstyear.val()){
+            frsmonths = 12 - settings.firstmonth.val();
+            months = 12*(settings.nextyear.val()-settings.firstyear.val() - 1);
+            nextmonths = settings.nextmonth.val();
+            monthcount = parseInt(frsmonths)+parseInt(months)+parseInt(nextmonths) + 1;
+        }else{
+            alert("Tahun kedua tidak boleh kurang tahun pertama");
+        }
+        _total = parseInt(settings.orival.val())*monthcount;
+        settings.shownval.val(numberWithCommas(_total));
+        settings.hiddenval.val(_total);
+        if(test===true){
+            alert(monthcount);
+        };
+
+    });
+};
+$(".bimberperiod").adjustval({
+        firstmonth:$("#frstmonth"),
+        firstyear:$("#frstyear"),
+        nextmonth:$("#nextmonth"),
+        nextyear:$("#nextyear"),
+        hiddenval : $("#bimbel"),
+        shownval: $("#bimbel_"),
+        orival: $("#oribimbel")
 });
 $(".sppperiod").change(function(){
     console.log("time changed");
