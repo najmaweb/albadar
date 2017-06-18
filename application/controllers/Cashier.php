@@ -27,12 +27,10 @@ class Cashier extends CI_Controller{
         }
         redirect("../");
     }
-    function removedot($str){
-        return str_replace(",","",$str);
-    }
     function savesession(){
         //$this->checksession();
         $params = $this->input->post();
+        $currentyear = $this->dates->getcurrentyear();
         $DEBUG = false;
         if($DEBUG){
             foreach($params as $key=>$val){
@@ -67,22 +65,22 @@ class Cashier extends CI_Controller{
         $_SESSION["sppnextyear"] = $params["sppnextyear"];
         $_SESSION["nis"] = $params["nis"];
         $_SESSION["studentname"] = $params["studentname"];
-        $_SESSION["spp"] = $this->removedot($params["spp"]);
+        $_SESSION["spp"] = removedot($params["spp"]);
         $_SESSION["frstyear"] = $params["frstyear"];
         $_SESSION["frstmonth"] = $params["frstmonth"];
         $_SESSION["bimbelnextmonth"] = $params["nextmonth"];
         $_SESSION["bimbelnextyear"] = $params["nextyear"];
-        $_SESSION["psb"] = $this->removedot($params["psb"]);
-        $_SESSION["book"] = $this->removedot($params["book"]);
+        $_SESSION["psb"] = removedot($params["psb"]);
+        $_SESSION["book"] = removedot($params["book"]);
         $_SESSION["grade"] = $params["grade"];
-        $_SESSION["cashpay"] = $this->removedot($params["cashpay"]);
-        $_SESSION["bimbel"] = $this->removedot($params["bimbel"]);
-        $_SESSION["dupsbremain"] = $this->Mcashier->getdupsbremain($params["nis"]);
-        $_SESSION["dupsbpaid"] = $this->Mcashier->getdupsbpaid($params["nis"]);
-        $_SESSION["totaltagihan"] = $this->Mcashier->gettotaltagihan($params["nis"]);
+        $_SESSION["cashpay"] = removedot($params["cashpay"]);
+        $_SESSION["bimbel"] = removedot($params["bimbel"]);
+        $_SESSION["dupsbpaid"] = $this->Mcashier->getdupsbpaid($params["nis"],$currentyear);
+        $_SESSION["totaltagihan"] = $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
         $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
         $_SESSION["sppmonthcount"] = $sppmonthcount;
         $_SESSION["bimbelmonthcount"] = $bimbelmonthcount;
+        $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - ($_SESSION["psb"]+$_SESSION["dupsbpaid"]);//$this->Mcashier->getdupsbremain($params["nis"]);
         $this->previewkwitansi();
     }
     function previewkwitansi(){

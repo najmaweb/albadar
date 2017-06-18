@@ -13,7 +13,6 @@ function terbilang($params){
     $has_zero = false;
     for($c = 0;$c < strlen($params); $c++){
         $urutdigit = strlen($params) - $c;
-/*posisi sbl*/
         switch($params[$c]){
             case '1':
                 if(in_array($urutdigit,$no_se)){
@@ -83,4 +82,7 @@ function terbilang($params){
     }
     //echo number_format($params) . "<br />";
     return $str;
+}
+function removedot($str){
+    return str_replace(",","",$str);
 }

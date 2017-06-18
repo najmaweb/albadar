@@ -57,9 +57,9 @@
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td class="line" colspan=6></td</tr>
-        <tr><td>Total Tagihan</td><td><?php echo number_format($totaltagihan);?></td><td colspan=2>&nbsp;</td><td>TOTAL</td><td class="rightaligned number"><?php echo number_format($total);?></td></tr>
-        <tr><td>Yang sudah dibayar</td><td><?php echo number_format($dupsbpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
-        <tr><td>Sisa Tagihan</td><td><?php echo number_format($dupsbremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>Total Tagihan</td><td class="rightaligned number"><?php echo number_format($totaltagihan);?></td><td colspan=2>&nbsp;</td><td>TOTAL</td><td class="rightaligned number"><?php echo number_format($total);?></td></tr>
+        <tr><td>Yang sudah dibayar</td><td class="rightaligned number"><?php echo number_format($dupsbpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>Sisa Tagihan</td><td class="rightaligned number"><?php echo number_format($dupsbremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
         <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
     </tbody>
 </table>
