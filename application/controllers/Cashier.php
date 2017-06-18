@@ -197,14 +197,25 @@ class Cashier extends CI_Controller{
             "spp"=>$_SESSION["spp"],
             "frstyear"=>$_SESSION["frstyear"],
             "frstmonth"=>$_SESSION["frstmonth"],
+            "bimbelnextmonth"=>$_SESSION["bimbelnextmonth"],
+            "bimbelnextyear"=>$_SESSION["bimbelnextyear"],
             "psb"=>$_SESSION["psb"],
             "book"=>$_SESSION["book"],
             "grade"=>$_SESSION["grade"],
             "cashpay"=>$_SESSION["cashpay"],
             "dupsbremain"=>$_SESSION["dupsbremain"],
             "dupsbpaid"=>$_SESSION["dupsbpaid"],
-            "totaltagihan"=>$_SESSION["totaltagihan"]
+            "totaltagihan"=>$_SESSION["totaltagihan"],
+            "bimbel"=>$_SESSION["bimbel"],
+            "dupsbremain"=>$_SESSION["dupsbremain"],
+            "dupsbpaid"=>$_SESSION["dupsbpaid"],
+            "totaltagihan"=>$_SESSION["totaltagihan"],
+            "total"=>$_SESSION["total"],
+            "sppmonthcount"=>$_SESSION["sppmonthcount"],
+            "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
+            "monthsarray"=>$this->dates->getmonthsarray()
         );
+        $params["topaid"] = $_SESSION["total"];
         $this->load->view("cashiers/kwitansi",$params);
     }
 }
