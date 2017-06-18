@@ -6,6 +6,7 @@ class Students extends CI_Controller{
         $this->load->model("Grade");
         $this->load->model("Sppgroup");
         $this->load->model("Dupsbgroup");
+        $this->load->library("Dates");
     }
     function index(){
         $data = array(
@@ -40,6 +41,7 @@ class Students extends CI_Controller{
         $this->load->view("students/edit",$data);        
     }
     function getjson(){
+        $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,a.nis,b.name grade,c.amount spp from students a ";
         $sql.= "left outer join grades b on b.id=a.grade_id ";
         $sql.= "left outer join sppgroups c on c.id=a.sppgroup_id ";
@@ -72,14 +74,22 @@ class Students extends CI_Controller{
     }
     function getproperties(){
         $nis = $this->uri->segment(3);
-        $sql = "select a.id,a.name,b.amount spp,c.amount bimbel from students a ";
+        $year = $this->dates->getcurrentyear();
+        $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
+        $sql.= "count(e.amount) dupsbpaid, ";
+        $sql.= "(d.amount-count(e.amount)) dupsbremain ";
+        $sql.= "from students a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
+        $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
+        $sql.= "left outer join dupsb e on e.nis=a.nis ";
         $sql.= "where a.nis = '".$nis."' ";
+        $sql.= "and a.year='" . $year . "' ";
+        $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result()[0];
-        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'"}';
+        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'"}';
     }
     function remove(){
         $id = $this->uri->segment(3);

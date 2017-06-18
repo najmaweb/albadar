@@ -20,7 +20,7 @@
                 <!-- content -->
                 <div class="col-md-10">
 
-                    <form class="form-horizontal" action="/cashier/previewkwitansi" method="POST">
+                    <form class="form-horizontal" action="/cashier/savesession" method="POST">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
@@ -69,6 +69,7 @@
                                                 <label class="col-lg-3 control-label" for="psb">DU/PSB&nbsp;</label>
                                                 <div class="col-lg-9">
                                                     <input type="text" id="psb" name="psb"  class="form-control affect-total" value="0">
+                                                    <input type="hidden" id="psb_" name="psb_"  class="form-control affect-total" value="0">
                                                 </div>
                                             </div>
                                             <div class="form-group has-warning">
@@ -113,7 +114,7 @@
                                             <div class="form-group has-success">
                                                 <label class="col-lg-3 control-label" for="inputError">Dibayarkan</label>
                                                 <div class="col-lg-9">
-                                                    <input type="text" id="cashpay" name="paid" class="form-control" value="0">
+                                                    <input type="text" id="cashpay" name="cashpay" class="form-control" value="0">
                                                 </div>
                                             </div>
                                             <div class="form-group has-success">

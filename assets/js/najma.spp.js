@@ -99,6 +99,8 @@ $.ajax({
                     $("#bimbel_").val(numberWithCommas(res.bimbel));
                     $("#bimbel").val(res.bimbel);
                     $("#oribimbel").val(res.bimbel);
+                    $("#psb_").val(numberWithCommas(res.dupsbremain));
+                    $("#psb").val(res.dupsbremain);
                     filltotal();
                     fillreturnmoney();
                 });
