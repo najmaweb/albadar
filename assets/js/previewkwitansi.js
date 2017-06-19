@@ -16,6 +16,8 @@ $("#btnprint").click(function(){
             "frstmonth":$("#frstmonth").val(),
             "psb":$("#psb").val(),
             "book":$("#book").val(),
+            "orispp":$("#orispp").val(),
+            "months":["012017","022017","032017"]
         },
         type:'post'
     })

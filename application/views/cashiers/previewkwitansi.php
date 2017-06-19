@@ -17,7 +17,7 @@
 <input type="hidden" id="frstmonth" value="<?php echo $frstmonth;?>">
 <input type="hidden" id="psb" value="<?php echo $psb;?>">
 <input type="hidden" id="book" value="<?php echo $book;?>">
-
+<input type="text" id="orispp" value="<?php echo $orispp;?>">
 
 <table id="rpt" width=100%>
     <thead>

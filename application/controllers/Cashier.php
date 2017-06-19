@@ -6,6 +6,7 @@ class Cashier extends CI_Controller{
         $this->load->model("Mcashier");
         $this->load->helper("terbilang");
         $this->load->library("Dates");
+        $this->load->helper("datetime");
     }
     function index(){
         $this->load->library("Dates");
@@ -22,7 +23,7 @@ class Cashier extends CI_Controller{
         $this->load->view("cashiers/spp",$data);
     }
     function checksession(){
-        if(isset($_SESSION["nis"])){
+        if(isset($_SESSION["sppfrstyear"])){
             return true;
         }
         redirect("../");
@@ -37,6 +38,7 @@ class Cashier extends CI_Controller{
                 echo $key . ' : ' . $val;
             }
         }
+        $montharray = array();
         $sppmonthcount = 1;
         if($params["sppfrstyear"]===$params["sppnextyear"]){
             $sppmonthcount += $params["sppnextmonth"] - $params["sppfrstmonth"];
@@ -80,6 +82,7 @@ class Cashier extends CI_Controller{
         $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
         $_SESSION["sppmonthcount"] = $sppmonthcount;
         $_SESSION["bimbelmonthcount"] = $bimbelmonthcount;
+        $_SESSION["orispp"] = $params["orispp"];
         $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - ($_SESSION["psb"]+$_SESSION["dupsbpaid"]);//$this->Mcashier->getdupsbremain($params["nis"]);
         $this->previewkwitansi();
     }
@@ -118,7 +121,8 @@ class Cashier extends CI_Controller{
             "total"=>$_SESSION["total"],
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
             "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
-            "monthsarray"=>$this->dates->getmonthsarray()
+            "monthsarray"=>$this->dates->getmonthsarray(),
+            "orispp"=>$_SESSION["orispp"]
         );
         if($debug){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
@@ -151,14 +155,20 @@ class Cashier extends CI_Controller{
         $this->savespp($params);
     }
     function savespp($params){
-        $purpose = "Untuk pembayaran SPP bulan " . $params["sppfrstmonth"] . '/' . $params["sppfrstyear"];
-        $purpose.= " - " . $params["sppnextmonth"] . '/' . $params["sppnextyear"];
-        $sql = "insert into spp ";
-        $sql.= "(nis,amount,pyear,pmonth,paymenttype,purpose) ";
-        $sql.= "values ";
-        $sql.= "('".$params["nis"]."','".$params["spp"]."','".$params["sppfrstyear"]."','".$params["sppfrstmonth"]."','1','".$purpose."')";
-        $ci = & get_instance();
-        $que = $ci->db->query($sql);
+        $montharray = getmontharray($params["sppfrstmonth"],$params["sppfrstyear"],$params["sppnextmonth"],$params["sppnextyear"]);
+        foreach($montharray as $monthyear){
+        //foreach($params["months"] as $monthyear){
+            $month = substr($monthyear,0,2);
+            $year = substr($monthyear,2,4);
+            $purpose = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
+//            $purpose.= " - " . $params["sppnextmonth"] . '/' . $params["sppnextyear"];
+            $sql = "insert into spp ";
+            $sql.= "(nis,amount,pyear,pmonth,paymenttype,purpose) ";
+            $sql.= "values ";
+            $sql.= "('".$params["nis"]."','".$params["orispp"]."','".$year."','".$month."','1','".$purpose."')";
+            $ci = & get_instance();
+            $que = $ci->db->query($sql);
+        }
         $this->savedupsb($params);
         $this->savepembayaranbuku($params);
         $this->kwitansi($params);
