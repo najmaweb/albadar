@@ -4,19 +4,6 @@
     <link rel="stylesheet" href="/assets/css/kwitansi.css" />
 </head>
 <body>
-<input type="hidden" id="sppfrstmonth" value="<?php echo $sppfrstmonth;?>">
-<input type="hidden" id="studentname" value="<?php echo $studentname;?>">
-<input type="hidden" id="sppfrstyear" value="<?php echo $sppfrstyear;?>">
-<input type="hidden" id="sppnextmonth" value="<?php echo $sppnextmonth;?>">
-<input type="hidden" id="sppnextyear" value="<?php echo $sppnextyear;?>">
-<input type="hidden" id="nis" value="<?php echo $nis;?>">
-<input type="hidden" id="spp" value="<?php echo $spp;?>">
-<input type="hidden" id="frstyear" value="<?php echo $frstyear;?>">
-<input type="hidden" id="frstmonth" value="<?php echo $frstmonth;?>">
-<input type="hidden" id="psb" value="<?php echo $psb;?>">
-<input type="hidden" id="book" value="<?php echo $book;?>">
-
-
 <table id="rpt" width=100%>
     <thead>
         <tr><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td></tr>
@@ -24,7 +11,7 @@
     </thead>
     <tbody>
         <tr><td class="line" colspan=6></td</tr>
-        <tr><td>Telah terima dari</td><td>: <?php echo substr($studentname,0,18);?> - <?php echo $grade;?></td><td id="terbilang" rowspan="2" colspan="4"><?php echo humanize(terbilang((string) $total)) . " Rupiah";?></td></tr>
+        <tr><td>Telah terima dari</td><td>: <?php echo substr($studentname,0,15);?> - <?php echo $grade;?></td><td id="terbilang" rowspan="2" colspan="4"><?php echo humanize(terbilang((string) $total)) . " Rupiah";?></td></tr>
         <tr><td>Sejumlah Uang</td><td>: <?php echo number_format($topaid);?></td></tr>
         <tr><td class="line" colspan=6></td</tr>
 

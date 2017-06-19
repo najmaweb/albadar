@@ -29,7 +29,6 @@ class Cashier extends CI_Controller{
         redirect("../");
     }
     function savesession(){
-        //$this->checksession();
         $params = $this->input->post();
         $currentyear = $this->dates->getcurrentyear();
         $DEBUG = false;
@@ -49,7 +48,6 @@ class Cashier extends CI_Controller{
             $lastyearmonthcount = $params["sppnextmonth"]; 
             $sppmonthcount += $firstyearmonthcount + 12*$yearcount + $lastyearmonthcount;
         }
-
         $bimbelmonthcount = 1;
         if($params["frstyear"]===$params["nextyear"]){
             $bimbelmonthcount += $params["nextmonth"] - $params["frstmonth"];
@@ -83,13 +81,11 @@ class Cashier extends CI_Controller{
         $_SESSION["sppmonthcount"] = $sppmonthcount;
         $_SESSION["bimbelmonthcount"] = $bimbelmonthcount;
         $_SESSION["orispp"] = $params["orispp"];
-        $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - ($_SESSION["psb"]+$_SESSION["dupsbpaid"]);//$this->Mcashier->getdupsbremain($params["nis"]);
         $this->previewkwitansi();
     }
     function previewkwitansi(){
         $check = true;
         $debug = false;
-        //session_start();
         if((!isset($_SESSION["studentname"])||trim($_SESSION["studentname"]===""))){
             $check = false;
             $err_msg = "Siswa belum dipilih";
@@ -157,11 +153,9 @@ class Cashier extends CI_Controller{
     function savespp($params){
         $montharray = getmontharray($params["sppfrstmonth"],$params["sppfrstyear"],$params["sppnextmonth"],$params["sppnextyear"]);
         foreach($montharray as $monthyear){
-        //foreach($params["months"] as $monthyear){
             $month = substr($monthyear,0,2);
             $year = substr($monthyear,2,4);
             $purpose = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
-//            $purpose.= " - " . $params["sppnextmonth"] . '/' . $params["sppnextyear"];
             $sql = "insert into spp ";
             $sql.= "(nis,amount,pyear,pmonth,paymenttype,purpose) ";
             $sql.= "values ";
