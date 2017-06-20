@@ -9,7 +9,13 @@ removeCommas = function(myVar){
     return myVar;
 }
 filltotal = function(){
-    var total = parseInt(removeCommas($("#spp").val()))+parseInt(removeCommas($("#psb").val()))+parseInt(removeCommas($("#book").val()))+parseInt(removeCommas($("#bimbel").val()));
+    
+    console.log("SPP",removeCommas($("#spp_").val()));
+    console.log("PSB",removeCommas($("#psb").val()));
+    console.log("Book",removeCommas($("#book").val()));
+    console.log("Bimbel",removeCommas($("#bimbel").val()));
+    
+    var total = parseInt(removeCommas($("#spp_").val()))+parseInt(removeCommas($("#psb").val()))+parseInt(removeCommas($("#book").val()))+parseInt(removeCommas($("#bimbel").val()));
     $("#total").val(numberWithCommas(total));
 }
 fillreturnmoney = function(){
@@ -64,6 +70,8 @@ $.fn.adjustval = function(options){
         _total = parseInt(settings.orival.val())*monthcount;
         settings.shownval.val(numberWithCommas(_total));
         settings.hiddenval.val(_total);
+        filltotal();
+        fillreturnmoney();
         if(test===true){
             alert(monthcount);
         };
@@ -100,7 +108,7 @@ $.ajax({
                     $("#bimbel").val(res.bimbel);
                     $("#oribimbel").val(res.bimbel);
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
-                    $("#psb").val(res.dupsbremain);
+                    $("#psb").val(numberWithCommas(res.dupsbremain));
                     filltotal();
                     fillreturnmoney();
                 });
@@ -140,6 +148,10 @@ $("#bimbelcheckbox").change(function(){
     togglebimbel();
 });
 $(".affect-total").keyup(function(){
+    filltotal();
+    fillreturnmoney();
+});
+$(".affect-total").change(function(){
     filltotal();
     fillreturnmoney();
 });

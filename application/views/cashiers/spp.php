@@ -48,19 +48,19 @@
                                         <div class="form-group has-error" id="sppmonthdiv">
                                             <label class="col-lg-3 control-label" for="sppfrstmonth">Untuk Bulan</label>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("sppfrstmonth",$months,$curmonth,"class='form-control sppperiod' id='sppfrstmonth'");?>
+                                                <?php echo form_dropdown("sppfrstmonth",$months,$curmonth,"class='form-control sppperiod affect-total' id='sppfrstmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("sppfrstyear",$years,1,"class='form-control sppperiod' id='sppfrstyear'");?>
+                                                <?php echo form_dropdown("sppfrstyear",$years,1,"class='form-control sppperiod affect-total' id='sppfrstyear'");?>
                                             </div>
                                             <div class="col-lg-1" style="text-align:center">
                                             <label class=" control-label text-align:center" for="sppnextmonth">s/d</label>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("sppnextmonth",$months,$curmonth,"class='form-control sppperiod' id='sppnextmonth'");?>
+                                                <?php echo form_dropdown("sppnextmonth",$months,$curmonth,"class='form-control sppperiod affect-total' id='sppnextmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("sppnextyear",$years,1,"class='form-control sppperiod' id='sppnextyear'");?>
+                                                <?php echo form_dropdown("sppnextyear",$years,1,"class='form-control sppperiod affect-total' id='sppnextyear'");?>
                                             </div>
                                         </div>
                                         <div class="form-group has-warning">
