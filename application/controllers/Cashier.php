@@ -23,12 +23,13 @@ class Cashier extends CI_Controller{
         $this->load->view("cashiers/spp",$data);
     }
     function checksession(){
-        if(isset($_SESSION["sppfrstyear"])){
+        if(in_array("sppfrstyear",$_SESSION)){
             return true;
         }
         redirect("../");
     }
     function savesession(){
+        //$this->checksession();
         $params = $this->input->post();
         $currentyear = $this->dates->getcurrentyear();
         $DEBUG = false;
@@ -81,6 +82,7 @@ class Cashier extends CI_Controller{
         $_SESSION["sppmonthcount"] = $sppmonthcount;
         $_SESSION["bimbelmonthcount"] = $bimbelmonthcount;
         $_SESSION["orispp"] = $params["orispp"];
+        $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - $_SESSION["dupsbpaid"];
         $this->previewkwitansi();
     }
     function previewkwitansi(){
@@ -209,9 +211,6 @@ class Cashier extends CI_Controller{
             "dupsbpaid"=>$_SESSION["dupsbpaid"],
             "totaltagihan"=>$_SESSION["totaltagihan"],
             "bimbel"=>$_SESSION["bimbel"],
-            "dupsbremain"=>$_SESSION["dupsbremain"],
-            "dupsbpaid"=>$_SESSION["dupsbpaid"],
-            "totaltagihan"=>$_SESSION["totaltagihan"],
             "total"=>$_SESSION["total"],
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
             "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],

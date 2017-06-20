@@ -106,7 +106,7 @@
                                         <div class="form-group has-warning">
                                             <label class="col-lg-3 control-label" for="inputError">Total</label>
                                             <div class="col-lg-9">
-                                                <input type="text" id="total" name="total"  class="form-control" value="0">
+                                                <input type="text" id="total" name="total"  disabled="disabled" class="form-control" value="0">
                                             </div>
                                         </div>
                                         <div class="form-group has-success">

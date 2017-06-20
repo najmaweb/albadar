@@ -3,7 +3,7 @@ class Mcashier extends CI_Model{
     function __construct(){
         parent::__construct();
     }
-    function getdupsbremain($nis){
+    function getdupsbremain($nis,$year){
         $sql = "select nis,sum(amount)amnt from dupsb group by nis;";
         return "2598000";
     }
