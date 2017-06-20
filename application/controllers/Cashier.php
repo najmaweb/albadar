@@ -23,13 +23,13 @@ class Cashier extends CI_Controller{
         $this->load->view("cashiers/spp",$data);
     }
     function checksession(){
-        if(in_array("sppfrstyear",$_SESSION)){
-            return true;
+        if(!in_array("sppfrstyear",$_SESSION)){
+            redirect("../");
         }
-        redirect("../");
+        return true;
     }
     function savesession(){
-        $this->checksession();
+        //$this->checksession();
         $params = $this->input->post();
         $currentyear = $this->dates->getcurrentyear();
         $DEBUG = false;

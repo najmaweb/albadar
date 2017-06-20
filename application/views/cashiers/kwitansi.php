@@ -12,7 +12,7 @@
     <tbody>
         <tr><td class="line" colspan=6></td</tr>
         <tr><td>Telah terima dari</td><td>: <?php echo substr($studentname,0,15);?> - <?php echo $grade;?></td><td id="terbilang" rowspan="2" colspan="4"><?php echo humanize(terbilang((string) $total)) . " Rupiah";?></td></tr>
-        <tr><td>Sejumlah Uang</td><td>: <?php echo number_format($topaid);?></td></tr>
+        <tr><td>Sejumlah Uang</td><td>: <?php echo "Rp. " . number_format($topaid);?></td></tr>
         <tr><td class="line" colspan=6></td</tr>
 
         <tr><td class="centeraligned bold">No</td><td colspan=3 class="centeraligned  bold">Keterangan</td><td colspan=2 class="centeraligned bold">Jumlah</td></tr>
@@ -20,31 +20,31 @@
         <tr><td class="line" colspan=6></td</tr>
         <?php $counter = 1;?>
         <?php if($spp){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo number_format($spp);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td></tr>
         <?php 
         $counter++;
         }?>
         <?php if($bimbel){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Bimbel <?php echo $monthsarray[$frstmonth] . " " . $frstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo number_format($bimbel);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Bimbel <?php echo $monthsarray[$frstmonth] . " " . $frstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td></tr>
         <?php 
         $counter++;
         }?>
         <?php if($book){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Buku</td><td colspan=2 class="rightaligned number"><?php echo number_format($book);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Buku</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($book);?></td></tr>
         <?php 
         $counter++;
         }?>
         <?php if($psb){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>PSB</td><td colspan=2 class="rightaligned number"><?php echo number_format($psb);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>PSB</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($psb);?></td></tr>
         <?php }?>
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td class="line" colspan=6></td</tr>
-        <tr><td>Total Tagihan</td><td><?php echo number_format($totaltagihan);?></td><td colspan=2>&nbsp;</td><td>TOTAL</td><td class="rightaligned number"><?php echo number_format($total);?></td></tr>
-        <tr><td>Yang sudah dibayar</td><td><?php echo number_format($dupsbpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
-        <tr><td>Sisa Tagihan</td><td><?php echo number_format($dupsbremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>Total Tagihan</td><td><?php echo "Rp. " .  number_format($totaltagihan);?></td><td colspan=2>&nbsp;</td><td>TOTAL</td><td class="rightaligned number"><?php echo number_format($total);?></td></tr>
+        <tr><td>Yang sudah dibayar</td><td><?php echo "Rp. " .  number_format($dupsbpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>Sisa Tagihan</td><td><?php echo  "Rp. " . number_format($dupsbremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
         <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
     </tbody>
 </table>

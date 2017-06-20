@@ -46,39 +46,46 @@ function terbilang($params){
         if(($params[$c]==='1')&&(in_array($urutdigit,$no_se))){
             $belas = true;
         }
-        if(!$has_zero){
             switch($urutdigit){
                 case 2:
                 if(!$belas){
-                    $str.= " puluh";
+                    if(!$has_zero){
+                        $str.= " puluh";
+                    }
                 }
                 break;
                 case 3:
-                $str.= " ratus";
+                if(!$has_zero){
+                    $str.= " ratus";
+                }
                 break;
                 case 4:
                 $str.= " ribu";
                 break;
                 case 5:
                 if(!$belas){
-                    $str.= " puluh";
+                    if(!$has_zero){
+                        $str.= " puluh";
+                    }
                 }
                 break;
                 case 6:
-                $str.= " ratus";
+                if(!$has_zero){
+                    $str.= " ratus";
+                }
                 break;
                 case 7:
                 $str.= " juta";
                 break;
                 case 8:
                 if(!$belas){
-                    $str.= " puluh";
+                    if(!$has_zero){
+                        $str.= " puluh";
+                    }
                 }
                 break;
             }
-        }else{
             $has_zero = false;
-        }        
     }
     //echo number_format($params) . "<br />";
     return $str;
