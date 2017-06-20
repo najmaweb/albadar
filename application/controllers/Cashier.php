@@ -29,7 +29,7 @@ class Cashier extends CI_Controller{
         redirect("../");
     }
     function savesession(){
-        //$this->checksession();
+        $this->checksession();
         $params = $this->input->post();
         $currentyear = $this->dates->getcurrentyear();
         $DEBUG = false;
