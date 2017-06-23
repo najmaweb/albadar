@@ -40,7 +40,7 @@
                                                             <label class="col-lg-12 control-label center"><?php echo $info1;?></label>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label class="col-lg-12 control-label center"><?php echo $info1;?></label>
+                                                            <label class="col-lg-12 control-label center"><?php echo $info2;?></label>
                                                         </div>
                                                     </fieldset>
                                                     <button class="btn" type="submit">OK</button>

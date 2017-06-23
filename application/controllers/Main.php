@@ -45,7 +45,7 @@ class Main extends CI_Controller{
     }
     function loginhandler(){
         $params = $this->input->post();
-        switch($this->User->login($params["$email"],$params["password"])){
+        switch($this->User->login($params["email"],$params["password"])){
             case "password benar":
                 redirect("/cashier");
             break;
@@ -53,7 +53,7 @@ class Main extends CI_Controller{
                 $data = array(
                     "info1"=>"Password tidak cocok",
                     "info2"=>"",
-                    "redirect"=>"../../cashier"
+                    "redirect"=>"../../main/login"
                 );
                 $this->load->view("info",$data);
             break;
@@ -61,7 +61,7 @@ class Main extends CI_Controller{
                 $data = array(
                     "info1"=>"Email tidak dikenali",
                     "info2"=>"",
-                    "redirect"=>"../../cashier"
+                    "redirect"=>"../../main/login"
                 );
                 $this->load->view("info",$data);
             break;
