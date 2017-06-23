@@ -2,7 +2,7 @@
 function getmontharray($firstmonth,$firstyear,$nextmonth,$nextyear){
     $out = array();
     if($firstyear===$nextyear){
-        for($c = $firstmonth;$c<$nextmonth;$c++){
+        for($c = $firstmonth;$c<=$nextmonth;$c++){
             array_push($out,addzero($c).$firstyear);
         }
     }
