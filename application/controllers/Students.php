@@ -77,7 +77,7 @@ class Students extends CI_Controller{
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
         $sql.= "count(e.amount) dupsbpaid, ";
-        $sql.= "(d.amount-count(e.amount)) dupsbremain ";
+        $sql.= "(d.amount-sum(e.amount)) dupsbremain ";
         $sql.= "from students a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
