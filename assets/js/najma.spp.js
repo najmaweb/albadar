@@ -18,16 +18,24 @@ fillreturnmoney = function(){
 togglespp = function(){
     if($("#sppcheckbox").prop("checked")){
         $("#sppmonthdiv").show();
+        $("#spp_").val($("#orispp").val());
     }else{
         $("#sppmonthdiv").hide();
+        $("#spp_").val(0);
     }
+    filltotal();
+    fillreturnmoney();
 }
 togglebimbel = function(){
     if($("#bimbelcheckbox").prop("checked")){
         $("#bimbelmonthdiv").show();
+        $("#bimbel").val($("#oribimbel").val());
     }else{
         $("#bimbelmonthdiv").hide();
+        $("#bimbel").val(0);
     }
+    filltotal();
+    fillreturnmoney();
 }
 $.fn.adjustval = function(options){
     $(this).change(function(){
