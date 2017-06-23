@@ -13,4 +13,10 @@ class Main extends CI_Controller{
     function login(){
         $this->load->view("login");
     }
+    function loginhandler(){
+        $params = $this->input->post();
+        foreach($params as $key=>$val){
+            echo $key . " and " . $val . "<br />";
+        }
+    }
 }

@@ -33,25 +33,25 @@
                                     <div id="rootwizard">
                                         <div class="tab-content">
                                             <div class="tab-paned" id="tab1x">
-                                                <form class="form-horizontal">
+                                                <form class="form-horizontal" action="/main/loginhandler" method="post">
                                                     <fieldset>
                                                         <div class="form-group">
                                                             <label class="col-lg-4 control-label" for="focusedInput2">Email</label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" id="focusedInput2" type="text" value="">
+                                                                <input class="form-control" id="email" name="email" type="text" value="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-lg-4 control-label" for="focusedInput3">Password</label>
                                                             <div class="col-lg-8">
-                                                                <input class="form-control" id="focusedInput3" type="password" value="">
+                                                                <input class="form-control" id="password" name="password" type="password" value="">
                                                             </div>
                                                         </div>
                                                     </fieldset>
+                                                    <button class="btn" type="submit">Login</button>
+                                                    <button class="btn">Lupa Password</button>
                                                 </form>
                                             </div>
-                                            <button class="btn">Login</button>
-                                            <button class="btn">Lupa Password</button>
                                         </div>
                                     </div>
                                 </div>
