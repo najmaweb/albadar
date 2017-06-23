@@ -477,7 +477,10 @@ table > tbody > tr > td.actions .btn{
 .page-header h1{
     margin-bottom: 0;
 }
-
+.page-header h1.centered{
+    margin-bottom: 0;
+    text-align:center;
+}
 /** Modal Window */
 .modal .modal-footer {
     margin-top: 0px;
