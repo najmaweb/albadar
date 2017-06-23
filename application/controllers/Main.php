@@ -47,7 +47,7 @@ class Main extends CI_Controller{
         $params = $this->input->post();
         switch($this->User->login($params["email"],$params["password"])){
             case "password benar":
-                redirect("/cashier");
+                redirect("../../cashier");
             break;
             case "password tidak cocok":
                 $data = array(
