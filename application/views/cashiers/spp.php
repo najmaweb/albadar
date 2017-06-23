@@ -38,7 +38,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-3 control-label" for="spp">SPP&nbsp;<input type="checkbox" id="sppcheckbox" name="sppcheckbox"></label>
+                                            <label class="col-lg-3 control-label" for="spp">SPP&nbsp;<input type="checkbox" id="sppcheckbox" name="sppcheckbox" checked="checked"></label>
                                             <div class="col-lg-9">
                                                 <input type="hidden" name="spp" id="spp" value=0/>
                                                 <input type="hidden" id="orispp" name="orispp"  class="form-control affect-total" value="0">
@@ -77,7 +77,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group bimbel">
-                                            <label class="col-lg-3 control-label" for="bimbel">Bimbel&nbsp;<input type="checkbox" id="bimbelcheckbox" name="bimbelcheckbox"></label>
+                                            <label class="col-lg-3 control-label" for="bimbel">Bimbel&nbsp;<input type="checkbox" id="bimbelcheckbox" name="bimbelcheckbox" checked="checked"></label>
                                             <div class="col-lg-9">
                                                 <input type="hidden" id="bimbel_" name="bimbel_"  class="form-control affect-total" value="0">
                                                 <input type="text" id="bimbel" name="bimbel"  class="form-control affect-total" value="0">
