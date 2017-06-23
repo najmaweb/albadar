@@ -18,7 +18,7 @@
                         <li class="dropdown">
                             <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> Puji <i class="caret"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Setting</a></li>
+                                <li><a href="/main/changepassword">Ganti Password</a></li>
                                 <li role="presentation" class="divider"></li>
                                 <li><a href="index.html">Logout</a></li>
                             </ul>
