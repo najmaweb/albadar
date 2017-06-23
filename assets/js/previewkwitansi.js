@@ -11,11 +11,15 @@ $("#btnprint").click(function(){
             "sppnextyear":$("#sppnextyear").val(),
             "nis":$("#nis").val(),
             "spp":$("#spp").val(),
-            "frstyear":$("#frstyear").val(),
-            "frstmonth":$("#frstmonth").val(),
+            "bimbel":$("#bimbel").val(),
+            "bimbelfrstyear":$("#bimbelfrstyear").val(),
+            "bimbelfrstmonth":$("#bimbelfrstmonth").val(),
+            "bimbelnextmonth":$("#bimbelnextmonth").val(),
+            "bimbelnextyear":$("#bimbelnextyear").val(),
             "psb":$("#psb").val(),
             "book":$("#book").val(),
             "orispp":$("#orispp").val(),
+            "oribimbel":$("#oribimbel").val(),
         },
         type:'post'
     })
