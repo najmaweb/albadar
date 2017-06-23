@@ -19,3 +19,6 @@
 .table thead th{
     text-align:center;
 }
+.form-horizontal .control-label.center{
+    text-align: center;
+}
