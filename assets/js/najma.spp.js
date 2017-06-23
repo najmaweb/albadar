@@ -9,12 +9,6 @@ removeCommas = function(myVar){
     return myVar;
 }
 filltotal = function(){
-    
-    console.log("SPP",removeCommas($("#spp_").val()));
-    console.log("PSB",removeCommas($("#psb").val()));
-    console.log("Book",removeCommas($("#book").val()));
-    console.log("Bimbel",removeCommas($("#bimbel").val()));
-    
     var total = parseInt(removeCommas($("#spp_").val()))+parseInt(removeCommas($("#psb").val()))+parseInt(removeCommas($("#book").val()))+parseInt(removeCommas($("#bimbel").val()));
     $("#total").val(numberWithCommas(total));
 }
@@ -155,11 +149,11 @@ $(".affect-total").change(function(){
     filltotal();
     fillreturnmoney();
 });
-$(".bimberperiod").adjustval({
-    firstmonth:$("#frstmonth"),
-    firstyear:$("#frstyear"),
-    nextmonth:$("#nextmonth"),
-    nextyear:$("#nextyear"),
+$(".bimbelperiod").adjustval({
+    firstmonth:$("#bimbelfrstmonth"),
+    firstyear:$("#bimbelfrstyear"),
+    nextmonth:$("#bimbelnextmonth"),
+    nextyear:$("#bimbelnextyear"),
     hiddenval : $("#bimbel"),
     shownval: $("#bimbel_"),
     orival: $("#oribimbel")
