@@ -3,13 +3,15 @@ class Sppgroups extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("Sppgroup");
+        $this->load->model("User");
     }
     function index(){
         $data = array(
             "breadcrumb" => array(1=>"Grup SPP",2=>"Daftar"),
             "formtitle"=>"Daftar Grup SPP",
             "feedData"=>"sppgroup",
-            "objs" => $this->Sppgroup->getsppgroups()
+            "objs" => $this->Sppgroup->getsppgroups(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("sppgroups/sppgroup",$data);
     }
@@ -18,7 +20,8 @@ class Sppgroups extends CI_Controller{
             "breadcrumb" => array(1=>"Grup SPP",2=>"Penambahan"),
             "formtitle"=>"Penambahan Grup SPP",
             "feedData"=>"sppgroup",
-            "sppgroups"=>$this->Sppgroup->getsppgroups()
+            "sppgroups"=>$this->Sppgroup->getsppgroups(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("sppgroups/add",$data);        
     }
@@ -27,7 +30,8 @@ class Sppgroups extends CI_Controller{
             "breadcrumb" => array(1=>"Grup SPP",2=>"Edit"),
             "formtitle"=>"Edit Grup SPP",
             "feedData"=>"sppgroup",
-            "obj"=>$this->Sppgroup->getsppgroup($this->uri->segment(3))
+            "obj"=>$this->Sppgroup->getsppgroup($this->uri->segment(3)),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("sppgroups/edit",$data);        
     }

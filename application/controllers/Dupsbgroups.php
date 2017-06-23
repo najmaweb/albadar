@@ -3,13 +3,15 @@ class Dupsbgroups extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("Dupsbgroup");
+        $this->load->model("User");
     }
     function index(){
         $data = array(
             "breadcrumb" => array(1=>"Grup Dupsb",2=>"Daftar"),
             "formtitle"=>"Daftar Grup Dupsb",
             "feedData"=>"Dupsbgroup",
-            "objs" => $this->Dupsbgroup->getDupsbgroups()
+            "objs" => $this->Dupsbgroup->getDupsbgroups(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("dupsbgroups/dupsbgroup",$data);
     }
@@ -18,7 +20,8 @@ class Dupsbgroups extends CI_Controller{
             "breadcrumb" => array(1=>"Grup Dupsb",2=>"Penambahan"),
             "formtitle"=>"Penambahan Grup Dupsb",
             "feedData"=>"Dupsbgroup",
-            "Dupsbgroups"=>$this->Dupsbgroup->getDupsbgroups()
+            "Dupsbgroups"=>$this->Dupsbgroup->getDupsbgroups(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("dupsbgroups/add",$data);        
     }
@@ -27,7 +30,8 @@ class Dupsbgroups extends CI_Controller{
             "breadcrumb" => array(1=>"Grup Dupsb",2=>"Edit"),
             "formtitle"=>"Edit Grup Dupsb",
             "feedData"=>"Dupsbgroup",
-            "obj"=>$this->Dupsbgroup->getDupsbgroup($this->uri->segment(3))
+            "obj"=>$this->Dupsbgroup->getDupsbgroup($this->uri->segment(3)),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("dupsbgroups/edit",$data);        
     }

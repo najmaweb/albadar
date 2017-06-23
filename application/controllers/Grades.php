@@ -6,13 +6,15 @@ class Grades extends CI_Controller{
         $this->load->model("Sppgroup");
         $this->load->model("Bimbelgroup");
         $this->load->model("Dupsbgroup");
+        $this->load->model("User");
     }
     function index(){
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Daftar"),
             "formtitle"=>"Daftar Kelas",
             "feedData"=>"kelas",
-            "objs" => $this->Grade->getgrades()
+            "objs" => $this->Grade->getgrades(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("grades/grades",$data);
     }
@@ -23,7 +25,8 @@ class Grades extends CI_Controller{
             "feedData"=>"kelas",
             "grades"=>$this->Grade->getgrades(),
             "sppdefault"=>$this->Sppgroup->getsppgrouparray(),
-            "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray()
+            "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("grades/add",$data);        
     }
@@ -35,7 +38,8 @@ class Grades extends CI_Controller{
             "obj"=>$this->Grade->getgrade($this->uri->segment(3)),
             "sppdefault"=>$this->Sppgroup->getsppgrouparray(),
             "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray(),
-            "dupsbdefault"=>$this->Dupsbgroup->getDupsbgrouparray()
+            "dupsbdefault"=>$this->Dupsbgroup->getDupsbgrouparray(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("grades/edit",$data);        
     }

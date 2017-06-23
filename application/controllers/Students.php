@@ -4,6 +4,7 @@ class Students extends CI_Controller{
         parent::__construct();
         $this->load->model("Student");
         $this->load->model("Grade");
+        $this->load->model("User");
         $this->load->model("Sppgroup");
         $this->load->model("Dupsbgroup");
         $this->load->library("Dates");
@@ -13,7 +14,8 @@ class Students extends CI_Controller{
             "breadcrumb" => array(1=>"Siswa",2=>"Daftar"),
             "formtitle"=>"Daftar Siswa",
             "feedData"=>"siswa",
-            "objs"=>$this->Student->getStudents()
+            "objs"=>$this->Student->getStudents(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("students/students",$data);
     }
@@ -24,7 +26,8 @@ class Students extends CI_Controller{
             "feedData"=>"siswa",
             "students"=>$this->Student->getStudents(),
             "grades"=>$this->Grade->getclassarray(),
-            "sppgroups"=>$this->Sppgroup->getsppgrouparray()
+            "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("students/add",$data);        
     }
@@ -36,7 +39,8 @@ class Students extends CI_Controller{
             "obj"=>$this->Student->getStudent($this->uri->segment(3)),
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
-            "dupsbgroups"=>$this->Dupsbgroup->getDupsbgrouparray()
+            "dupsbgroups"=>$this->Dupsbgroup->getDupsbgrouparray(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("students/edit",$data);        
     }

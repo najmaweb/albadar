@@ -7,6 +7,7 @@ class Cashier extends CI_Controller{
         $this->load->helper("terbilang");
         $this->load->library("Dates");
         $this->load->helper("datetime");
+        $this->load->model("User");
     }
     function index(){
         $this->load->library("Dates");
@@ -18,7 +19,8 @@ class Cashier extends CI_Controller{
             "months"=>$this->dates->getmonthsarray(),
             "years"=>$this->dates->getyearsarray(),
             "curmonth"=>date('Y'),
-            "err_message"=>""
+            "err_message"=>"",
+            "role"=>$this->User->getrole()
         );
         $this->load->view("cashiers/spp",$data);
     }
@@ -131,7 +133,8 @@ class Cashier extends CI_Controller{
             "monthsarray"=>$this->dates->getmonthsarray(),
             "orispp"=>$_SESSION["orispp"],
             "oribimbel"=>$_SESSION["oribimbel"],
-            "sppcheckbox"=>$_SESSION["sppcheckbox"]
+            "sppcheckbox"=>$_SESSION["sppcheckbox"],
+            "role"=>$this->User->getrole()
         );
         if($DEBUG){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
@@ -247,7 +250,8 @@ class Cashier extends CI_Controller{
             "total"=>$_SESSION["total"],
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
             "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
-            "monthsarray"=>$this->dates->getmonthsarray()
+            "monthsarray"=>$this->dates->getmonthsarray(),
+            "role"=>$this->User->getrole()
         );
         $params["topaid"] = $_SESSION["total"];
         $this->load->view("cashiers/kwitansi",$params);

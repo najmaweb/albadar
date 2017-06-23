@@ -3,6 +3,7 @@ class Settings extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("Setting");
+        $this->load->model("User");
     }
     function getyear(){
         $sql = "select currentyear from settings ";
@@ -15,7 +16,8 @@ class Settings extends CI_Controller{
             "breadcrumb" => array(1=>"App",2=>"Setting"),
             "formtitle"=>"Setting",
             "feedData"=>"settings",
-            "currentyear"=>$this->Setting->getcurrentyear()
+            "currentyear"=>$this->Setting->getcurrentyear(),
+            "role"=>$this->User->getrole()
         );
         $this->load->view("commons/settings",$data);
     }
