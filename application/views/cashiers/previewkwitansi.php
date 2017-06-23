@@ -19,11 +19,15 @@
         <input type="hidden" id="sppnextyear" value="<?php echo $sppnextyear;?>">
         <input type="hidden" id="nis" value="<?php echo $nis;?>">
         <input type="hidden" id="spp" value="<?php echo $spp;?>">
-        <input type="hidden" id="frstyear" value="<?php echo $frstyear;?>">
-        <input type="hidden" id="frstmonth" value="<?php echo $frstmonth;?>">
+        <input type="hidden" id="bimbel" value="<?php echo $bimbel;?>">
+        <input type="hidden" id="bimbelfrstyear" value="<?php echo $bimbelfrstyear;?>">
+        <input type="hidden" id="bimbelfrstmonth" value="<?php echo $bimbelfrstmonth;?>">
+        <input type="hidden" id="bimbelnextyear" value="<?php echo $bimbelnextyear;?>">
+        <input type="hidden" id="bimbelnextmonth" value="<?php echo $bimbelnextmonth;?>">
         <input type="hidden" id="psb" value="<?php echo $psb;?>">
         <input type="hidden" id="book" value="<?php echo $book;?>">
         <input type="hidden" id="orispp" value="<?php echo $orispp;?>">
+        <input type="hidden" id="oribimbel" value="<?php echo $oribimbel;?>">
 
         <table id="rpt" width=100%>
             <thead>
@@ -46,7 +50,7 @@
                 $counter++;
                 }?>
                 <?php if($bimbel){?>
-                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Bimbel <?php echo $monthsarray[$frstmonth] . " " . $frstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td></tr>
+                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Bimbel <?php echo $monthsarray[$bimbelfrstmonth] . " " . $bimbelfrstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td></tr>
                 <?php 
                 $counter++;
                 }?>
@@ -67,6 +71,10 @@
                 <tr><td>Yang sudah dibayar</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
                 <tr><td>Sisa Tagihan</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
                 <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, 12-Juni-2017</td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Krisma Huda Akida</td><td></td></tr>
             </tbody>
         </table>
         <script type="text/javascript" src="/assets/js/previewkwitansi.js"></script>
