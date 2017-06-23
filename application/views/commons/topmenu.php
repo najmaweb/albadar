@@ -20,7 +20,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="/main/changepassword">Ganti Password</a></li>
                                 <li role="presentation" class="divider"></li>
-                                <li><a href="index.html">Logout</a></li>
+                                <li><a href="/main/logout">Logout</a></li>
                             </ul>
                         </li>
                     </ul>

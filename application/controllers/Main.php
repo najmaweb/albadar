@@ -67,4 +67,9 @@ class Main extends CI_Controller{
             break;
         }
     }
+    function logout(){
+        session_unset();
+        session_destroy();
+        redirect("../../main/login");
+    }
 }
