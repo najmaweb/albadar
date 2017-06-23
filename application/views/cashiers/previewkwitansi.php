@@ -28,6 +28,7 @@
         <input type="hidden" id="book" value="<?php echo $book;?>">
         <input type="hidden" id="orispp" value="<?php echo $orispp;?>">
         <input type="hidden" id="oribimbel" value="<?php echo $oribimbel;?>">
+        <input type="hidden" id="sppcheckbox" value="<?php echo $sppcheckbox;?>">
 
         <table id="rpt" width=100%>
             <thead>
