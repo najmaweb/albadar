@@ -10,4 +10,7 @@ class Main extends CI_Controller{
         );
         redirect("../cashier");
     }
+    function login(){
+        $this->load->view("login");
+    }
 }
