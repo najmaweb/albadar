@@ -37,7 +37,7 @@
                                                 <input type="hidden" name="grade" id="grade"/>
                                             </div>
                                         </div>
-                                        <div class="form-group has-warning">
+                                        <div class="form-group">
                                             <label class="col-lg-3 control-label" for="spp">SPP&nbsp;<input type="checkbox" id="sppcheckbox" name="sppcheckbox"></label>
                                             <div class="col-lg-9">
                                                 <input type="hidden" name="spp" id="spp" value=0/>
@@ -45,7 +45,7 @@
                                                 <input type="text" disabled="disabled" id="spp_" name="spp_"  class="form-control affect-total" value="0">
                                             </div>
                                         </div>
-                                        <div class="form-group has-error" id="sppmonthdiv">
+                                        <div class="form-group" id="sppmonthdiv">
                                             <label class="col-lg-3 control-label" for="sppfrstmonth">Untuk Bulan</label>
                                             <div class="col-lg-2">
                                                 <?php echo form_dropdown("sppfrstmonth",$months,$curmonth,"class='form-control sppperiod affect-total' id='sppfrstmonth'");?>
@@ -63,14 +63,14 @@
                                                 <?php echo form_dropdown("sppnextyear",$years,1,"class='form-control sppperiod affect-total' id='sppnextyear'");?>
                                             </div>
                                         </div>
-                                        <div class="form-group has-warning">
+                                        <div class="form-group">
                                             <label class="col-lg-3 control-label" for="psb">DU/PSB&nbsp;</label>
                                             <div class="col-lg-9">
                                                 <input type="text" id="psb" name="psb"  class="form-control affect-total" value="0">
                                                 <input type="hidden" id="psb_" name="psb_"  class="form-control affect-total" value="0">
                                             </div>
                                         </div>
-                                        <div class="form-group has-warning">
+                                        <div class="form-group">
                                             <label class="col-lg-3 control-label" for="book">Buku&nbsp;</label>
                                             <div class="col-lg-9">
                                                 <input type="text" id="book" name="book"  class="form-control affect-total" value="0">
@@ -79,8 +79,8 @@
                                         <div class="form-group bimbel">
                                             <label class="col-lg-3 control-label" for="bimbel">Bimbel&nbsp;<input type="checkbox" id="bimbelcheckbox" name="bimbelcheckbox"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" id="bimbel_" name="bimbel_"  class="form-control affect-total" value="0">
-                                                <input type="hidden" id="bimbel" name="bimbel"  class="form-control affect-total" value="0">
+                                                <input type="hidden" id="bimbel_" name="bimbel_"  class="form-control affect-total" value="0">
+                                                <input type="text" id="bimbel" name="bimbel"  class="form-control affect-total" value="0">
                                                 <input type="hidden" id="oribimbel" name="oribimbel"  class="form-control affect-total" value="0">
 
                                             </div>
@@ -88,23 +88,23 @@
                                         <div class="form-group bimbel" id="bimbelmonthdiv">
                                             <label class="col-lg-3 control-label" for="frstmonth">Untuk Bimbel Bulan</label>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("frstmonth",$months,1,"class='form-control bimberperiod' id='frstmonth'");?>
+                                                <?php echo form_dropdown("bimbelfrstmonth",$months,1,"class='form-control bimbelperiod affect-total' id='bimbelfrstmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("frstyear",$years,1,"class='form-control bimberperiod' id='frstyear'");?>
+                                                <?php echo form_dropdown("bimbelfrstyear",$years,1,"class='form-control bimbelperiod affect-total' id='bimbelfrstyear'");?>
                                             </div>
                                             <div class="col-lg-1" style="text-align:center">
                                             <label class=" control-label text-align:center" for="nextmonth">s/d</label>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("nextmonth",$months,1,"class='form-control bimberperiod' id='nextmonth'");?>
+                                                <?php echo form_dropdown("bimbelnextmonth",$months,1,"class='form-control bimbelperiod affect-total' id='bimbelnextmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("nextyear",$years,1,"class='form-control bimberperiod' id='nextyear'");?>
+                                                <?php echo form_dropdown("bimbelnextyear",$years,1,"class='form-control bimbelperiod affect-total' id='bimbelnextyear'");?>
                                             </div>
                                         </div>
-                                        <div class="form-group has-warning">
-                                            <label class="col-lg-3 control-label" for="inputError">Total</label>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label" for="total">Total</label>
                                             <div class="col-lg-9">
                                                 <input type="text" id="total" name="total"  disabled="disabled" class="form-control" value="0">
                                             </div>
