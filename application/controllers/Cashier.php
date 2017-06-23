@@ -50,13 +50,13 @@ class Cashier extends CI_Controller{
             $sppmonthcount += $firstyearmonthcount + 12*$yearcount + $lastyearmonthcount;
         }
         $bimbelmonthcount = 1;
-        if($params["frstyear"]===$params["nextyear"]){
-            $bimbelmonthcount += $params["nextmonth"] - $params["frstmonth"];
+        if($params["bimbelfrstyear"]===$params["bimbelnextyear"]){
+            $bimbelmonthcount += $params["bimbelnextmonth"] - $params["bimbelfrstmonth"];
         }
-        if($params["nextyear"]<$params["frstyear"]){
-            $firstyearmonthcount = 12-$params["frstmonth"];
-            $yearcount = $params["nextyear"] - $params["frstyear"];
-            $lastyearmonthcount = $params["nextmonth"]; 
+        if($params["bimbelnextyear"]<$params["bimbelfrstyear"]){
+            $firstyearmonthcount = 12-$params["bimbelfrstmonth"];
+            $yearcount = $params["bimbelnextyear"] - $params["bimbelfrstyear"];
+            $lastyearmonthcount = $params["bimbelnextmonth"]; 
             $bimbelmonthcount += $firstyearmonthcount + 12*$yearcount + $lastyearmonthcount;
         }
         session_start();
@@ -67,10 +67,10 @@ class Cashier extends CI_Controller{
         $_SESSION["nis"] = $params["nis"];
         $_SESSION["studentname"] = $params["studentname"];
         $_SESSION["spp"] = removedot($params["spp"]);
-        $_SESSION["frstyear"] = $params["frstyear"];
-        $_SESSION["frstmonth"] = $params["frstmonth"];
-        $_SESSION["bimbelnextmonth"] = $params["nextmonth"];
-        $_SESSION["bimbelnextyear"] = $params["nextyear"];
+        $_SESSION["bimbelfrstyear"] = $params["bimbelfrstyear"];
+        $_SESSION["bimbelfrstmonth"] = $params["bimbelfrstmonth"];
+        $_SESSION["bimbelnextmonth"] = $params["bimbelnextmonth"];
+        $_SESSION["bimbelnextyear"] = $params["bimbelnextyear"];
         $_SESSION["psb"] = removedot($params["psb"]);
         $_SESSION["book"] = removedot($params["book"]);
         $_SESSION["grade"] = $params["grade"];
@@ -82,6 +82,7 @@ class Cashier extends CI_Controller{
         $_SESSION["sppmonthcount"] = $sppmonthcount;
         $_SESSION["bimbelmonthcount"] = $bimbelmonthcount;
         $_SESSION["orispp"] = $params["orispp"];
+        $_SESSION["oribimbel"] = $params["oribimbel"];
         $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - $_SESSION["dupsbpaid"];
         $this->previewkwitansi();
     }
@@ -104,8 +105,8 @@ class Cashier extends CI_Controller{
             "nis"=>$_SESSION["nis"],
             "studentname"=>$_SESSION["studentname"],
             "spp"=>$_SESSION["spp"],
-            "frstyear"=>$_SESSION["frstyear"],
-            "frstmonth"=>$_SESSION["frstmonth"],
+            "bimbelfrstyear"=>$_SESSION["bimbelfrstyear"],
+            "bimbelfrstmonth"=>$_SESSION["bimbelfrstmonth"],
             "bimbelnextmonth"=>$_SESSION["bimbelnextmonth"],
             "bimbelnextyear"=>$_SESSION["bimbelnextyear"],
             "psb"=>$_SESSION["psb"],
@@ -120,7 +121,8 @@ class Cashier extends CI_Controller{
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
             "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
             "monthsarray"=>$this->dates->getmonthsarray(),
-            "orispp"=>$_SESSION["orispp"]
+            "orispp"=>$_SESSION["orispp"],
+            "oribimbel"=>$_SESSION["oribimbel"]
         );
         if($debug){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
@@ -150,10 +152,26 @@ class Cashier extends CI_Controller{
     }
     function saveall(){
         $params = $this->input->post();
+        $this->savebimbel($params);
         $this->savespp($params);
+    }
+    function savebimbel($params){
+        $montharray = getmontharray($params["bimbelfrstmonth"],$params["bimbelfrstyear"],$params["bimbelnextmonth"],$params["bimbelnextyear"]);
+        foreach($montharray as $monthyear){
+            $month = substr($monthyear,0,2);
+            $year = substr($monthyear,2,4);
+            $purpose = "Untuk pembayaran Bimbel bulan " . $month . '/' . $year;
+            $sql = "insert into bimbel ";
+            $sql.= "(nis,amount,pyear,pmonth,paymenttype,purpose) ";
+            $sql.= "values ";
+            $sql.= "('".$params["nis"]."','".$params["oribimbel"]."','".$year."','".$month."','1','".$purpose."')";
+            $ci = & get_instance();
+            $que = $ci->db->query($sql);
+        }
     }
     function savespp($params){
         $montharray = getmontharray($params["sppfrstmonth"],$params["sppfrstyear"],$params["sppnextmonth"],$params["sppnextyear"]);
+        $sql = "SQL";
         foreach($montharray as $monthyear){
             $month = substr($monthyear,0,2);
             $year = substr($monthyear,2,4);
@@ -165,6 +183,7 @@ class Cashier extends CI_Controller{
             $ci = & get_instance();
             $que = $ci->db->query($sql);
         }
+        echo $montharray[0];
         $this->savedupsb($params);
         $this->savepembayaranbuku($params);
         $this->kwitansi($params);
@@ -199,8 +218,8 @@ class Cashier extends CI_Controller{
             "nis"=>$_SESSION["nis"],
             "studentname"=>$_SESSION["studentname"],
             "spp"=>$_SESSION["spp"],
-            "frstyear"=>$_SESSION["frstyear"],
-            "frstmonth"=>$_SESSION["frstmonth"],
+            "bimbelfrstyear"=>$_SESSION["bimbelfrstyear"],
+            "bimbelfrstmonth"=>$_SESSION["bimbelfrstmonth"],
             "bimbelnextmonth"=>$_SESSION["bimbelnextmonth"],
             "bimbelnextyear"=>$_SESSION["bimbelnextyear"],
             "psb"=>$_SESSION["psb"],
