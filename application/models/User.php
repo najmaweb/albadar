@@ -29,14 +29,14 @@ class User extends CI_Model{
         return $que->result();
     }
     function login($email,$password){
-        $sql = "select nname,email,salt,password from users where email='".$email."' ";
+        $sql = "select id,nname,email,salt,password from users where email='".$email."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
         if($que->num_rows()>0){
         $salted = $password.$res[0]->salt;
             if($res[0]->password===hash("sha256",$salted)){
-                return array("message"=>"password benar","username"=>$res[0]->nname);
+                return array("message"=>"password benar","username"=>$res[0]->nname,"userid"=>$res[0]->id);
             }
             else{
                 return array("message"=>"password tidak cocok");
