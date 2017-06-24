@@ -16,7 +16,7 @@
                             <a href="#">Settings <i class="glyphicon glyphicon-cog"></i></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> Puji <i class="caret"></i></a>
+                            <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION["username"]?> <i class="caret"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/main/changepassword">Ganti Password</a></li>
                                 <li role="presentation" class="divider"></li>
