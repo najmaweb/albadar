@@ -8,11 +8,18 @@ class Main extends CI_Controller{
         $this->load->view("changepassword");
     }
     function changepasswordhandler(){
+        session_start();
         $params = $this->input->post();
         if(isset($params["save"])){
             if($params["password1"]===$params["password2"]){
-                //$userid = $_SESSION["userid"];
-                $this->User->changepassword(1,$params["password1"]);
+                $userid = $_SESSION["userid"];
+                $this->User->changepassword($userid,$params["password1"]);
+                $data = array(
+                    "info1"=>"Passwod anda telah berubah",
+                    "info2"=>"Jangan sampai lupa",
+                    "redirect"=>"../../cashier"
+                );
+                $this->load->view("info",$data);
             }else{
                 echo "Kedua Password yang anda isikan tidak sama";
             }
@@ -22,6 +29,7 @@ class Main extends CI_Controller{
         }
     }
     function index(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Entri Nilai"),
             "feedData"=>"evaluasi"
@@ -29,6 +37,7 @@ class Main extends CI_Controller{
         redirect("../cashier");
     }
     function info(){
+        session_start();
         $data = array(
             "info1"=>"test",
             "info2"=>"Hi",
@@ -45,8 +54,12 @@ class Main extends CI_Controller{
     }
     function loginhandler(){
         $params = $this->input->post();
-        switch($this->User->login($params["email"],$params["password"])){
+        $login = $this->User->login($params["email"],$params["password"]);
+        switch($login["message"]){
             case "password benar":
+                session_start();
+                $_SESSION["username"] = $login["username"];
+                $_SESSION["userid"] = $login["userid"];
                 redirect("../../cashier");
             break;
             case "password tidak cocok":
@@ -66,10 +79,11 @@ class Main extends CI_Controller{
                 $this->load->view("info",$data);
             break;
         }
+        session_write_close();
     }
     function logout(){
-        session_unset();
-        session_destroy();
+        session_start();
+        unset($_SESSION["username"]);
         redirect("../../main/login");
     }
 }
