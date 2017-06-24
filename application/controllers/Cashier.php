@@ -2,14 +2,14 @@
 class Cashier extends CI_Controller{
     function __construct(){
         parent::__construct();
-        $this->load->helper("inflector");
         $this->load->model("Mcashier");
         $this->load->helper("terbilang");
         $this->load->library("Dates");
         $this->load->helper("datetime");
-        $this->load->model("User");
     }
     function index(){
+        session_start();
+        checklogin();
         $this->load->library("Dates");
         $this->load->helper("form");
         $data = array(
@@ -25,10 +25,12 @@ class Cashier extends CI_Controller{
         $this->load->view("cashiers/spp",$data);
     }
     function checksession(){
-        if(!in_array("sppfrstyear",$_SESSION)){
-            redirect("../");
+        if (session_status() == PHP_SESSION_NONE) {
+            if(!isset($_SESSION["username"])){
+                redirect("../../main/login");
+            }
+            echo $_SESSION["username"];
         }
-        return true;
     }
     function savesession(){
         $CHECKSESSION = false;
