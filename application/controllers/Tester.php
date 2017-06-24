@@ -27,4 +27,7 @@ class Tester extends CI_Controller{
         echo "TEST Add Zero <br />";
         echo addzero($str);
     }
+    function phpinfo(){
+        phpinfo();
+    }
 }
