@@ -29,20 +29,20 @@ class User extends CI_Model{
         return $que->result();
     }
     function login($email,$password){
-        $sql = "select email,salt,password from users where email='".$email."' ";
+        $sql = "select nname,email,salt,password from users where email='".$email."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
         if($que->num_rows()>0){
         $salted = $password.$res[0]->salt;
             if($res[0]->password===hash("sha256",$salted)){
-                return "password benar";
+                return array("message"=>"password benar","username"=>$res[0]->nname);
             }
             else{
-                return "password tidak cocok";
+                return array("message"=>"password tidak cocok");
             }
         }else{
-            return "email tidak dikenali";
+            return array("message"=>"email tidak dikenali");
         }
     }
     function remove($id){
