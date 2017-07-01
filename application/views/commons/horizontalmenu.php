@@ -26,7 +26,7 @@
             <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Pembayaran</a>
         </li>
         <li class="<?php echo ($feedData==='report')?'active':'';?>">
-            <a href="/cashier"><i class="glyphicon glyphicon-chevron-down"></i> Laporan</a>
+            <a href="/reports/index"><i class="glyphicon glyphicon-chevron-down"></i> Laporan</a>
             <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
                 <li>
                     <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Rkp SPP,Bimbel</a>
