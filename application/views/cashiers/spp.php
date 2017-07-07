@@ -42,7 +42,7 @@
                                             <div class="col-lg-9">
                                                 <input type="hidden" name="spp" id="spp" value=0/>
                                                 <input type="hidden" id="orispp" name="orispp"  class="form-control affect-total" value="0">
-                                                <input type="text" disabled="disabled" id="spp_" name="spp_"  class="form-control affect-total" value="0">
+                                                <input type="text" disabled="disabled" id="spp_" name="spp_"  class="form-control affect-total formatted" value="0">
                                             </div>
                                         </div>
                                         <div class="form-group" id="sppmonthdiv">
@@ -66,21 +66,21 @@
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label" for="psb">DU/PSB&nbsp;</label>
                                             <div class="col-lg-9">
-                                                <input type="text" id="psb" name="psb"  class="form-control affect-total" value="0">
+                                                <input type="text" id="psb" name="psb"  class="form-control affect-total formatted" value="0">
                                                 <input type="hidden" id="psb_" name="psb_"  class="form-control affect-total" value="0">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label" for="book">Buku&nbsp;</label>
                                             <div class="col-lg-9">
-                                                <input type="text" id="book" name="book"  class="form-control affect-total" value="0">
+                                                <input type="text" id="book" name="book"  class="form-control affect-total formatted" value="0">
                                             </div>
                                         </div>
                                         <div class="form-group bimbel">
                                             <label class="col-lg-3 control-label" for="bimbel">Bimbel&nbsp;<input type="checkbox" id="bimbelcheckbox" name="bimbelcheckbox" checked="checked"></label>
                                             <div class="col-lg-9">
                                                 <input type="hidden" id="bimbel_" name="bimbel_"  class="form-control affect-total" value="0">
-                                                <input type="text" id="bimbel" name="bimbel"  class="form-control affect-total" value="0">
+                                                <input type="text" id="bimbel" name="bimbel"  class="form-control affect-total formatted" value="0">
                                                 <input type="hidden" id="oribimbel" name="oribimbel"  class="form-control affect-total" value="0">
 
                                             </div>
