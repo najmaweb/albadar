@@ -5,6 +5,7 @@ class Reports extends CI_Controller{
         $this->load->model("report");
         $this->load->helper("datetime");
         $this->load->model("setting");
+        $this->load->model("grade");
     }
     function index(){
         session_start();
@@ -94,6 +95,23 @@ class Reports extends CI_Controller{
             "objs"=>$this->report->getrekapsppperkelas()
         );
         $this->load->view("reports/rekapsppperkelas",$data);
+    }
+    function filterrekapbimbelperkelas(){
+        session_start();
+        checklogin();
+        $pyear = $this->setting->getcurrentyear();
+        $data = array(
+            "breadcrumb" => array(1=>"Laporan",2=>"Rekap Pembayaran Bimbel"),
+            "formtitle"=>"Rekap Pembayaran Bimbel",
+            "feedData"=>"reports",
+            "err_message"=>"",
+            "role"=>$this->User->getrole(),
+            "pyear"=>$pyear,
+            "periodmonths"=>getperiodmonths(),
+            "objs"=>$this->report->getrekapbimbelperkelas(),
+            "grades"=>$this->grade->getclassarray()
+        );
+        $this->load->view("reports/filterrekapbimbelperkelas",$data);
     }
     function rekapbimbelperkelas(){
         session_start();
