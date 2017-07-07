@@ -67,7 +67,8 @@ $.fn.adjustval = function(options){
             nextmonths = settings.nextmonth.val();
             monthcount = parseInt(frsmonths)+parseInt(months)+parseInt(nextmonths) + 1;
         }else{
-            alert("Tahun kedua tidak boleh kurang tahun pertama");
+            //alert("Tahun kedua: "+settings.nextyear.val()+", Tahun Pertama: ".settings.firstyear.val()+". Tahun kedua tidak boleh kurang tahun pertama");
+            alert(". Tahun kedua tidak boleh kurang tahun pertama");
         }
         _total = parseInt(settings.orival.val())*monthcount;
         settings.shownval.val(numberWithCommas(_total));
@@ -138,7 +139,7 @@ $(".affect-total").focus(function(){
     $(this).val(removeCommas($(this).val().toString()));
     $(this).select();
 })
-$(".affect-total").blur(function(){
+$(".formatted").blur(function(){
     $(this).val(numberWithCommas($(this).val().toString()));
 })
 togglespp();
