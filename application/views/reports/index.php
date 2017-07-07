@@ -61,7 +61,7 @@
                                     <a href="/reports/rekapsppperkelas" class="btn">Rekap SPP Per Kelas</a>
                                     </div>
                                     <div class="col-lg-3">
-                                    <a href="/reports/rekapbimbelperkelas" class="btn">Rekap Bimbel Per Kelas</a>
+                                    <a href="/reports/filterrekapbimbelperkelas" class="btn">Rekap Bimbel Per Kelas</a>
                                     </div>
                                     <div class="col-lg-3">
                                     <a href="/reports/dubuku" class="btn">Rekap DU &amp; Buku</a>
