@@ -175,3 +175,4 @@ $(".sppperiod").adjustval({
     shownval: $("#spp_"),
     orival: $("#orispp")
 });
+$('[data-toggle="tooltip"]').tooltip();
