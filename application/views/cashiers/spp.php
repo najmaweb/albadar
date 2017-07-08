@@ -24,14 +24,14 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Entri Pembayaran SPP <span id="err_message"><?php echo $err_message;?></span></div>
+                                    <div class="text-muted bootstrap-admin-box-title">Entri Pembayaran SPP <span id="err_message"><?php echo $err_message;?></span><span class="right pointer info">?</span></div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                     <fieldset>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label" for="sname">Nama Siswa</label>
                                             <div class="col-lg-9" id="the-basics">
-                                                <input class="form-control typeahead" name="name" id="sname" type="text" value="" placeholder="Nama Siswa" />
+                                                <input class="form-control typeahead" name="name" id="sname" type="text" value="" placeholder="Nama Siswa"  data-toggle="tooltip" title="Harus dipilih dari pilihan otomatis"/>
                                                 <input type="hidden" name="nis" id="nis"/>
                                                 <input type="hidden" name="studentname" id="studentname"/>
                                                 <input type="hidden" name="grade" id="grade"/>
@@ -39,11 +39,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label" for="spp">SPP&nbsp;<input type="checkbox" id="sppcheckbox" name="sppcheckbox" checked="checked"></label>
-                                            <div class="col-lg-9">
+                                            <div class="col-lg-4">
                                                 <input type="hidden" name="spp" id="spp" value=0/>
                                                 <input type="hidden" id="orispp" name="orispp"  class="form-control affect-total" value="0">
-                                                <input type="text" disabled="disabled" id="spp_" name="spp_"  class="form-control affect-total formatted" value="0">
+                                                <input type="text" disabled="disabled" id="spp_" name="spp_"  class="form-control affect-total formatted" value="0" data-toggle="tooltip" title="Otomatis menampilkan tagihan SPP berdasarkan siswa yg dipilih">
                                             </div>
+                                            <div class="col-lg-5"></div>
                                         </div>
                                         <div class="form-group" id="sppmonthdiv">
                                             <label class="col-lg-3 control-label" for="sppfrstmonth">Untuk Bulan</label>
@@ -65,10 +66,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label" for="psb">DU/PSB&nbsp;</label>
-                                            <div class="col-lg-9">
-                                                <input type="text" id="psb" name="psb"  class="form-control affect-total formatted" value="0">
+                                            <div class="col-lg-4">
+                                                <input type="text" id="psb" name="psb"  class="form-control affect-total formatted" value="0" data-toggle="tooltip" title="Selalu menampilkan sisa tagihan DU/PSB">
                                                 <input type="hidden" id="psb_" name="psb_"  class="form-control affect-total" value="0">
                                             </div>
+                                            <div class="col-lg-5"></div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label" for="book">Buku&nbsp;</label>
