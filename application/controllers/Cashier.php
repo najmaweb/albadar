@@ -20,7 +20,8 @@ class Cashier extends CI_Controller{
             "years"=>$this->dates->getyearsarray(),
             "curmonth"=>date('Y'),
             "err_message"=>"",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole(),
+            "defaultyear"=>date("Y")
         );
         $this->load->view("cashiers/spp",$data);
     }
