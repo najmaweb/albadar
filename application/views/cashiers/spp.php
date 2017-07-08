@@ -14,6 +14,9 @@
         <!-- main / large navbar -->
         <?php $this->load->view("commons/level2menu");?>
         <div class="container">
+            <?php
+            $this->load->view("cashiers/dialogs");
+            ?>
             <!-- left, vertical navbar & content -->
             <div class="row">
             <?php $this->load->view("commons/horizontalmenu");?>
@@ -24,7 +27,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Entri Pembayaran SPP <span id="err_message"><?php echo $err_message;?></span><span class="right pointer info">?</span></div>
+                                    <div class="text-muted bootstrap-admin-box-title">Entri Pembayaran SPP <span id="err_message"><?php echo $err_message;?></span><span class="right pointer info" id="spphelp"><a href="#helpdialog" data-toggle="modal" >&nbsp;?&nbsp;</a></span></div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                                     <fieldset>
@@ -52,7 +55,7 @@
                                                 <?php echo form_dropdown("sppfrstmonth",$months,$curmonth,"class='form-control sppperiod affect-total' id='sppfrstmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("sppfrstyear",$years,1,"class='form-control sppperiod affect-total' id='sppfrstyear'");?>
+                                                <?php echo form_dropdown("sppfrstyear",$years,$defaultyear,"class='form-control sppperiod affect-total' id='sppfrstyear'");?>
                                             </div>
                                             <div class="col-lg-1" style="text-align:center">
                                             <label class=" control-label text-align:center" for="sppnextmonth">s/d</label>
@@ -61,7 +64,7 @@
                                                 <?php echo form_dropdown("sppnextmonth",$months,$curmonth,"class='form-control sppperiod affect-total' id='sppnextmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("sppnextyear",$years,1,"class='form-control sppperiod affect-total' id='sppnextyear'");?>
+                                                <?php echo form_dropdown("sppnextyear",$years,$defaultyear,"class='form-control sppperiod affect-total' id='sppnextyear'");?>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -93,7 +96,7 @@
                                                 <?php echo form_dropdown("bimbelfrstmonth",$months,1,"class='form-control bimbelperiod affect-total' id='bimbelfrstmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("bimbelfrstyear",$years,1,"class='form-control bimbelperiod affect-total' id='bimbelfrstyear'");?>
+                                                <?php echo form_dropdown("bimbelfrstyear",$years,$defaultyear,"class='form-control bimbelperiod affect-total' id='bimbelfrstyear'");?>
                                             </div>
                                             <div class="col-lg-1" style="text-align:center">
                                             <label class=" control-label text-align:center" for="nextmonth">s/d</label>
@@ -102,7 +105,7 @@
                                                 <?php echo form_dropdown("bimbelnextmonth",$months,1,"class='form-control bimbelperiod affect-total' id='bimbelnextmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("bimbelnextyear",$years,1,"class='form-control bimbelperiod affect-total' id='bimbelnextyear'");?>
+                                                <?php echo form_dropdown("bimbelnextyear",$years,$defaultyear,"class='form-control bimbelperiod affect-total' id='bimbelnextyear'");?>
                                             </div>
                                         </div>
                                         <div class="form-group">
