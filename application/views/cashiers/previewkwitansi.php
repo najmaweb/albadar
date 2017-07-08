@@ -72,7 +72,7 @@
                 <tr><td>Yang sudah dibayar</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
                 <tr><td>Sisa Tagihan</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
                 <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
-                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, 12-Juni-2017</td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td><td></td></tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Krisma Huda Akida</td><td></td></tr>

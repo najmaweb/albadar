@@ -30,4 +30,9 @@ class Tester extends CI_Controller{
     function phpinfo(){
         phpinfo();
     }
+    function removezero(){
+        $this->load->helper("datetime");
+        $number = $this->uri->segment(3);
+        echo removezero($number);
+    }
 }

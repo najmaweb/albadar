@@ -27,6 +27,19 @@ function addzero($str){
     }
     return $str;
 }
+function removezero($str,$length=2){
+    $out = "";
+    $found = false;
+    for($c=0;$c<$length;$c++){
+        if(substr($str,$c,1)!=="0"){
+            $found = true;
+        }
+        if($found){
+            $out.=substr($str,$c,1);
+        }
+    }
+    return $out;
+}
 function getperiodmonths(){
     return array(
         "7"=>"Juli","8"=>"Agustus","9"=>"September","10"=>"Oktober","11"=>"September","12"=>"Desember","1"=>"Januari","2"=>"Februari","3"=>"Maret","4"=>"April","5"=>"Mei","6"=>"Juni"

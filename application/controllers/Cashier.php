@@ -136,7 +136,8 @@ class Cashier extends CI_Controller{
             "orispp"=>$_SESSION["orispp"],
             "oribimbel"=>$_SESSION["oribimbel"],
             "sppcheckbox"=>$_SESSION["sppcheckbox"],
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole(),
+            "periodmonths"=>getperiodmonths(),
         );
         if($DEBUG){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
