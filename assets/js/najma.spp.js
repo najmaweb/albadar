@@ -58,7 +58,7 @@ $.fn.adjustval = function(options){
                 monthcount = settings.nextmonth.val() - settings.firstmonth.val() + 1;
                 
             }else{
-                alert("Bulan Kedua harus lebih besar dari bulan Pertama");
+                settings.nextmonth.val(settings.firstmonth.val());
             }
         }else
         if(settings.nextyear.val()>settings.firstyear.val()){
@@ -67,8 +67,7 @@ $.fn.adjustval = function(options){
             nextmonths = settings.nextmonth.val();
             monthcount = parseInt(frsmonths)+parseInt(months)+parseInt(nextmonths) + 1;
         }else{
-            //alert("Tahun kedua: "+settings.nextyear.val()+", Tahun Pertama: ".settings.firstyear.val()+". Tahun kedua tidak boleh kurang tahun pertama");
-            alert(". Tahun kedua tidak boleh kurang tahun pertama");
+            settings.nextyear.val(settings.firstyear.val());
         }
         _total = parseInt(settings.orival.val())*monthcount;
         settings.shownval.val(numberWithCommas(_total));
