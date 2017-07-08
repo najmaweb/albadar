@@ -6,4 +6,4 @@ $autoload['drivers'] = array();
 $autoload['helper'] = array("form","inflector","login","string","url");
 $autoload['config'] = array();
 $autoload['language'] = array();
-$autoload['model'] = array("User");
+$autoload['model'] = array("User","Setting");
