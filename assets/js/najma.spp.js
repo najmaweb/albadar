@@ -111,10 +111,14 @@ $.ajax({
                     $("#oribimbel").val(res.bimbel);
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
                     $("#psb").val(numberWithCommas(res.dupsbremain));
-                    $("#sppfrstmonth").val(res.maxmonth);
-                    $("#sppfrstyear").val(res.maxyear);
+                    $("#sppfrstmonth").val(res.sppmaxmonth);
+                    $("#sppfrstyear").val(res.sppmaxyear);
+                    $("#bimbelfrstmonth").val(res.bimbelmaxmonth);
+                    $("#bimbelfrstyear").val(res.bimbelmaxyear);
                     filltotal();
                     fillreturnmoney();
+                    console.log("SPPMAXMONTH",res.sppmaxmonth);
+                    console.log("SPPMAXYEAR",res.sppmaxyear);
                 });
         },
         onHint: function (hint) {
