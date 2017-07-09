@@ -111,6 +111,8 @@ $.ajax({
                     $("#oribimbel").val(res.bimbel);
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
                     $("#psb").val(numberWithCommas(res.dupsbremain));
+                    $("#sppfrstmonth").val(res.maxmonth);
+                    $("#sppfrstyear").val(res.maxyear);
                     filltotal();
                     fillreturnmoney();
                 });
@@ -175,4 +177,4 @@ $(".sppperiod").adjustval({
     shownval: $("#spp_"),
     orival: $("#orispp")
 });
-$('[data-toggle="tooltip"]').tooltip();
+//$('[data-toggle="tooltip"]').tooltip();

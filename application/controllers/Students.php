@@ -8,6 +8,7 @@ class Students extends CI_Controller{
         $this->load->model("Sppgroup");
         $this->load->model("Dupsbgroup");
         $this->load->library("Dates");
+        $this->load->helper("datetime");
     }
     function index(){
         $data = array(
@@ -81,19 +82,28 @@ class Students extends CI_Controller{
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
         $sql.= "count(e.amount) dupsbpaid, ";
-        $sql.= "(d.amount-sum(e.amount)) dupsbremain ";
+        $sql.= "(d.amount-sum(e.amount)) dupsbremain, ";
+        $sql.= "max(f.pyear)maxyear,max(f.pmonth)maxmonth ";
         $sql.= "from students a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
         $sql.= "left outer join dupsb e on e.nis=a.nis ";
+        $sql.= "left outer join spp f on f.nis=a.nis ";
         $sql.= "where a.nis = '".$nis."' ";
         $sql.= "and a.year='" . $year . "' ";
         $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result()[0];
-        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'"}';
+        if($res->maxmonth==12){
+            $maxmonth = 1;
+            $maxyear = $res->maxyear + 1;
+        }else{
+            $maxmonth = addzero($res->maxmonth+1);
+            $maxyear = addzero($res->maxyear);
+        }
+        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'","maxyear":"'.$maxyear.'","maxmonth":"'.$maxmonth.'"}';
     }
     function remove(){
         $id = $this->uri->segment(3);
