@@ -10,7 +10,6 @@ class Cashier extends CI_Controller{
     function index(){
         session_start();
         checklogin();
-        $this->load->library("Dates");
         $this->load->helper("form");
         $data = array(
             "breadcrumb" => array(1=>"Pembayaran",2=>"SPP"),

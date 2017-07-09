@@ -102,7 +102,7 @@
                                             <label class=" control-label text-align:center" for="nextmonth">s/d</label>
                                             </div>
                                             <div class="col-lg-2">
-                                                <?php echo form_dropdown("bimbelnextmonth",$months,1,"class='form-control bimbelperiod affect-total' id='bimbelnextmonth'");?>
+                                                <?php echo form_dropdown("bimbelnextmonth",$months,addzero($curmonth),"class='form-control bimbelperiod affect-total' id='bimbelnextmonth'");?>
                                             </div>
                                             <div class="col-lg-2">
                                                 <?php echo form_dropdown("bimbelnextyear",$years,$curyear,"class='form-control bimbelperiod affect-total' id='bimbelnextyear'");?>
