@@ -35,4 +35,16 @@ class Tester extends CI_Controller{
         $number = $this->uri->segment(3);
         echo removezero($number);
     }
+    function getmax(){
+        $nis = $this->uri->segment(3);
+        $this->load->model("Mcashier");
+        $remain = $this->Mcashier->getsppmaxyearmonth($nis);
+        echo $remain["maxyear"] . "<br />";
+        echo $remain["maxmonth"] . "<br />";
+    }
+    function getsppremain(){
+        $this->load->model("Mcashier");
+        $nis = $this->uri->segment(3);
+        echo $this->Mcashier->getsppremain($nis);
+    }
 }
