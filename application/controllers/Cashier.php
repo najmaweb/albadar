@@ -186,8 +186,9 @@ class Cashier extends CI_Controller{
         }
     }
     function savespp($params){
+        session_start();
         $montharray = getmontharray($params["sppfrstmonth"],$params["sppfrstyear"],$params["sppnextmonth"],$params["sppnextyear"]);
-        if($params["sppcheckbox"]>0){
+        //if($params["sppcheckbox"]>0){
             foreach($montharray as $monthyear){
                 $month = substr($monthyear,0,2);
                 $year = substr($monthyear,2,4);
@@ -199,7 +200,7 @@ class Cashier extends CI_Controller{
                 $ci = & get_instance();
                 $que = $ci->db->query($sql);
             }
-        }
+        //}
         echo $montharray[0];
         $this->savedupsb($params);
         $this->savepembayaranbuku($params);
@@ -255,7 +256,8 @@ class Cashier extends CI_Controller{
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
             "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
             "monthsarray"=>$this->dates->getmonthsarray(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole(),
+            "periodmonths"=>getperiodmonths(),
         );
         $params["topaid"] = $_SESSION["total"];
         $this->load->view("cashiers/kwitansi",$params);

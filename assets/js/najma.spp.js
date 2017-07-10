@@ -117,6 +117,8 @@ $.ajax({
                     $("#bimbelfrstyear").val(res.bimbelmaxyear);
                     filltotal();
                     fillreturnmoney();
+                    $(".sppperiod").change();
+                    $(".bimbelperiod"),change();
                     console.log("SPPMAXMONTH",res.sppmaxmonth);
                     console.log("SPPMAXYEAR",res.sppmaxyear);
                 });

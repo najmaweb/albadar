@@ -47,4 +47,13 @@ class Tester extends CI_Controller{
         $nis = $this->uri->segment(3);
         echo $this->Mcashier->getsppremain($nis);
     }
+    function changepassword(){
+        $id= $this->uri->segment(3);
+        $pass = $this->uri->segment(4);
+        if ($this->User->changepassword($id,$pass)){
+            echo "sukses";
+        }else{
+            echo "tidak sukses";
+        };
+    }
 }
