@@ -1,47 +1,22 @@
 <html>
     <head>
         <title>Laporan Transaksi Harian</title>
-        <style>
-            h1,h2,h3{
-                text-align: center;
-            }
-            .commonreport{
-                width: 100%;
-            }
-            .commonreport thead tr th{
-                border: 1px solid black;
-            }
-            .commonreport tbody tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-
-            }
-            .number{
-                text-align: right;
-            }
-            .commonreport tfoot tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-                font-weight: bold;
-            }
-         </style>
+        <link rel="stylesheet" href="/assets/css/najma.reports.css" />
     </head>
     <body>
         <h1>Laporan Transaksi Harian</h1>
-        <h3>Tanggal 1 Juli 2017</h3>
+        <h3>Tanggal <?php echo date("d m Y");?></h3>
         <table class="commonreport">
             <thead>
-                <tr><th>No</th><th>Uraian</th><th>Jumlah</th><th>Nama Petugas</th></tr>
+                <tr><th>No</th><th>Jam</th><th>Uraian</th><th>Jumlah</th><th>Nama Petugas</th></tr>
             </thead>
             <tbody>
-                <tr><td class="number">1</td><td>Pembayaran SPP</td><td class="number"><?php echo "Rp." . number_format(450000);?></td><td>Risma</td></tr>
-                <tr><td class="number">2</td><td>Pembayaran SPP,Buku</td><td class="number"><?php echo "Rp." . number_format(650000);?></td><td>Risma</td></tr>
-                <tr><td class="number">3</td><td>Pembayaran DU/PSB</td><td class="number"><?php echo "Rp." . number_format(400000);?></td><td>Risma</td></tr>
-                <tr><td class="number">4</td><td>Pembayaran SPP</td><td class="number"><?php echo "Rp." . number_format(450000);?></td><td>Puji</td></tr>
-
+                <?php foreach($dailyreports as $report){?>
+                <tr><td class="number">1</td><td class="center"><?php echo date("H:i:s")?></td><td>Pembayaran SPP</td><td>Risma</td><td class="number"><?php echo "Rp." . number_format(450000);?></td></tr>
+                <?php }?>
             </tbody>
             <tfoot>
-                <tr><td>Total</td><td colspan=2 class="number"><?php echo "Rp." . number_format(450000);?></td><td></td></tr>
+                <tr><td>Total</td><td colspan=4 class="number"><?php echo "Rp." . number_format(450000);?></td></tr>
             </tfoot>
         </table>
     </body>
