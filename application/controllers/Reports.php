@@ -27,7 +27,8 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Transaksi Harian",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole(),
+            "dailyreports"=>array("1"=>"1")
         );
         $this->load->view("reports/dailytransactions",$data);
     }
