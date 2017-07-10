@@ -48,6 +48,8 @@ class Tester extends CI_Controller{
         echo $this->Mcashier->getsppremain($nis);
     }
     function changepassword(){
+        $COMMENT = "INTERFACE FOR CHANGE PASSWORD ";
+        $COMMENT.= "http://albadar/tester/changepassword/2/puji";
         $id= $this->uri->segment(3);
         $pass = $this->uri->segment(4);
         if ($this->User->changepassword($id,$pass)){
