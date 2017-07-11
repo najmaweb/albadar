@@ -8,11 +8,27 @@ removeCommas = function(myVar){
     myVar = myVar.replace(/[ ,]/g, "");
     return myVar;
 }
+validate = function(){
+    if(!$("#psb").val()){
+        $("#psb").val("0");
+    }
+    if(!$("#book").val()){
+        $("#book").val("0");
+    }
+    if(!$("#bimbel").val()){
+        $("#bimbel").val("0");
+    }
+    if(!$("#cashpay").val()){
+        $("#cashpay").val("0");
+    }
+}
 filltotal = function(){
+    validate();
     var total = parseInt(removeCommas($("#spp_").val()))+parseInt(removeCommas($("#psb").val()))+parseInt(removeCommas($("#book").val()))+parseInt(removeCommas($("#bimbel").val()));
     $("#total").val(numberWithCommas(total));
 }
 fillreturnmoney = function(){
+    validate();
     $("#returnmoney").val(numberWithCommas(parseInt(removeCommas($("#cashpay").val()))-parseInt(removeCommas($("#total").val()))));
 }
 togglespp = function(){
