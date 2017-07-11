@@ -36,13 +36,13 @@
                                     <a href="/reports/dailytransactions" class="btn">Rekap Transaksi Harian</a>
                                     </div>
                                     <div class="col-lg-3">
+                                    <a href="/reports/transactionperuser" class="btn">Rekap Per Petugas</a>
+                                    </div>
+                                    <div class="col-lg-3">
                                     <a href="/reports/sppbimbel" class="btn">Rekap SPP &amp; Bimbel</a>
                                     </div>
                                     <div class="col-lg-3">
                                     <a href="/reports/dubuku" class="btn">Rekap DU &amp; Buku</a>
-                                    </div>
-                                    <div class="col-lg-3">
-                                    <a href="/reports/tertanggung" class="btn">Rekap Tertanggung</a>
                                     </div>
                                 </div>
                             </div>
