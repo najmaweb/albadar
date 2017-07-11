@@ -4,9 +4,73 @@ class Report extends CI_Model{
         parent::__construct();
     }
     function getdailytransaction(){
-        $sql = "select date_format(createdate,'%H:%i:%s')jam,'Pembayaran SPP' uraian,sum(amount)amount,createuser from spp a ";
-        $sql.= "where date_format(createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
-        $sql.= "group by date_format(createdate,'%H:%i:%s'),createuser";
+        $sql = "select jam,uraian,amount,createuser from ( ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran SPP ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "from spp a ";
+        $sql.= "left outer join students b on b.nis=a.nis ";
+        $sql.= "left outer join grades c on c.id=b.grade_id ";
+        $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= "union ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Bimbel ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "from bimbel a ";
+        $sql.= "left outer join students b on b.nis=a.nis ";
+        $sql.= "left outer join grades c on c.id=b.grade_id ";
+        $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= "union ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Daftar Ulang / PSB ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "from dupsb a ";
+        $sql.= "left outer join students b on b.nis=a.nis ";
+        $sql.= "left outer join grades c on c.id=b.grade_id ";
+        $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= "union ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Buku ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "from pembayaranbuku a ";
+        $sql.= "left outer join students b on b.nis=a.nis ";
+        $sql.= "left outer join grades c on c.id=b.grade_id ";
+        $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= ")q order by jam ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return $que->result();
+    }
+    function gettransactionperuser($user=null){
+        if(is_null($user)){
+            $userfilter = " ";
+        }else{
+            if($user==='all'){
+                $userfilter = " ";
+            }else{
+                $userfilter = "where createuser='".$user."' ";
+            }        
+        }
+        $sql = 'select ord,dt,createuser,sum(amount)amount from (';
+        $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
+        $sql.= 'from spp ';
+        $sql.= $userfilter;
+        $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
+        $sql.= "union ";
+        $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
+        $sql.= 'from bimbel  ';
+        $sql.= $userfilter;
+
+        $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
+        $sql.= "union ";
+        $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
+        $sql.= 'from dupsb  ';
+        $sql.= $userfilter;
+
+        $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
+        $sql.= "union ";
+        $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
+        $sql.= 'from pembayaranbuku  ';
+        $sql.= $userfilter;
+
+        $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
+        $sql.= ')q group by ord,dt,createuser';
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result();
