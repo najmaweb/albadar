@@ -7,6 +7,10 @@ class Reports extends CI_Controller{
         $this->load->model("setting");
         $this->load->model("grade");
     }
+    function filtertransactionperuser(){
+        $params = $this->input->post();
+        redirect("../transactionperuser/".$params["user"]);
+    }
     function index(){
         session_start();
         checklogin();
@@ -28,10 +32,34 @@ class Reports extends CI_Controller{
             "feedData"=>"reports",
             "err_message"=>"",
             "role"=>$this->User->getrole(),
-            "dailyreports"=>$this->report->getdailytransaction()
+            "dailyreports"=>$this->report->getdailytransaction(),
+            "humanmonth"=>getperiodmonths()
         );
         $this->load->view("reports/dailytransactions",$data);
     }
+    function transactionperuser(){
+        session_start();
+        checklogin();
+        if($this->uri->total_segments()>2){
+            $user = $this->uri->segment(3);
+            $dailyreports = $this->report->gettransactionperuser($user);
+        }else{
+            $user = "all";
+            $dailyreports = $this->report->gettransactionperuser();
+        }
+        $data = array(
+            "breadcrumb" => array(1=>"Laporan",2=>"Rekap Transaksi Harian"),
+            "formtitle"=>"Rekap Transaksi Harian",
+            "feedData"=>"reports",
+            "err_message"=>"",
+            "role"=>$this->User->getrole(),
+            "dailyreports"=>$dailyreports,
+            "humanmonth"=>getperiodmonths(),
+            "users"=>array("all"=>"Semua","puji"=>"Puji","risma"=>"Risma"),
+            "user"=>$user
+        );
+        $this->load->view("reports/transactionperuser",$data);
+    }    
     function sppbimbel(){
         session_start();
         checklogin();
