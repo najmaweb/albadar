@@ -5,10 +5,10 @@
     </head>
     <body>
         <h1>Laporan Transaksi Harian</h1>
-        <h3>Tanggal <?php echo date("d m Y");?></h3>
+        <h3>Tanggal <?php echo date("d")." ".$humanmonth[removezero(date("m"))]." ".date("Y");?></h3>
         <table class="commonreport">
             <thead>
-                <tr><th>No</th><th>Jam</th><th>Uraian</th><th>Jumlah</th><th>Nama Petugas</th></tr>
+                <tr><th>No</th><th>Jam</th><th>Uraian</th><th>Petugas</th><th>Jumlah</th></tr>
             </thead>
             <tbody>
                 <?php 
@@ -20,8 +20,12 @@
                     $tot+=$report->amount;
                     $c+=1;
                 ?>
-                <tr><td class="number"><?php echo $c;?></td><td class="center"><?php echo $report->jam;?></td><td><?php echo $report->uraian;?></td><td class="number"><?php echo "Rp." . number_format($report->amount);?>
-                </td><td><?php echo humanize($report->createuser);?></td>
+                <tr>
+                    <td class="number"><?php echo $c;?></td>
+                    <td class="center"><?php echo $report->jam;?></td>
+                    <td><?php echo $report->uraian;?></td><td><?php echo humanize($report->createuser);?></td>
+                    <td class="number"><?php echo "Rp." . number_format($report->amount);?>
+                </td>
                 </tr>
                 <?php }?>
             </tbody>
