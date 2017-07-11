@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Laporan Rekap Transaksi Per Petugas</title>
+        <link rel="stylesheet" href="/assets/css/najma.reports.css" />
+    </head>
+    <body>
+        <h1>Laporan Rekap Transaksi Per Petugas</h1>
+        <h3>
+        <form action="/reports/filtertransactionperuser" method="post">
+        <?php echo form_dropdown("user",$users,$user);?>
+        Tanggal <?php echo date("d")." ".$humanmonth[removezero(date("m"))]." ".date("Y");?>
+        <button id="filter" name="filter">Filter</button>
+        </form>
+        </h3>
+        <table class="commonreport">
+            <thead>
+                <tr><th>No</th><th>Tanggal</th><th>Petugas</th><th>Jumlah</th></tr>
+            </thead>
+            <tbody>
+                <?php 
+                    $tot = 0;
+                    $c = 0;
+                ?>
+                <?php foreach($dailyreports as $report){?>
+                <?php 
+                    $tot+=$report->amount;
+                    $c+=1;
+                ?>
+                <tr>
+                    <td class="number"><?php echo $c;?></td>
+                    <td class="center"><?php echo $report->dt;?></td>
+                    <td><?php echo humanize($report->createuser);?></td>
+                    <td class="number"><?php echo "Rp." . number_format($report->amount);?>
+                </td>
+                </tr>
+                <?php }?>
+            </tbody>
+            <tfoot>
+                <tr><td>Total</td><td colspan=4 class="number"><?php echo "Rp." . number_format($tot);?></td></tr>
+            </tfoot>
+        </table>
+    </body>
+</html>
