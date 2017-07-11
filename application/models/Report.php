@@ -3,6 +3,14 @@ class Report extends CI_Model{
     function __construct(){
         parent::__construct();
     }
+    function getdailytransaction(){
+        $sql = "select date_format(createdate,'%H:%i:%s')jam,'Pembayaran SPP' uraian,sum(amount)amount,createuser from spp a ";
+        $sql.= "where date_format(createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
+        $sql.= "group by date_format(createdate,'%H:%i:%s'),createuser";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return $que->result();
+    }
     function getspp($year){
         $sql = "select date_format(createdate,'%d %M %Y') createdate,sum(amount) spp,'Pemb. SPP' subj,createuser from spp ";
         $sql.= "where pyear='".$year."' ";
