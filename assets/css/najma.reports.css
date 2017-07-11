@@ -3,6 +3,8 @@ h1,h2,h3{
 }
 .commonreport{
     width: 100%;
+    padding:0px 40px 0px 40px;
+    font-family: arial;
 }
 .commonreport thead tr th{
     border: 1px solid black;
@@ -10,7 +12,7 @@ h1,h2,h3{
 .commonreport tbody tr td{
     padding: 10px;
     border-bottom: solid 1px black;
-
+    font-size: 16px;
 }
 .number{
     text-align: right;
@@ -22,5 +24,5 @@ h1,h2,h3{
 .commonreport tfoot tr td{
     padding: 10px;
     border-bottom: solid 1px black;
-    font-weight: bold;
+    font-weight: normal;
 }
