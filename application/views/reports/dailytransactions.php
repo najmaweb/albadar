@@ -11,12 +11,22 @@
                 <tr><th>No</th><th>Jam</th><th>Uraian</th><th>Jumlah</th><th>Nama Petugas</th></tr>
             </thead>
             <tbody>
+                <?php 
+                    $tot = 0;
+                    $c = 0;
+                ?>
                 <?php foreach($dailyreports as $report){?>
-                <tr><td class="number">1</td><td class="center"><?php echo date("H:i:s")?></td><td>Pembayaran SPP</td><td>Risma</td><td class="number"><?php echo "Rp." . number_format(450000);?></td></tr>
+                <?php 
+                    $tot+=$report->amount;
+                    $c+=1;
+                ?>
+                <tr><td class="number"><?php echo $c;?></td><td class="center"><?php echo $report->jam;?></td><td><?php echo $report->uraian;?></td><td class="number"><?php echo "Rp." . number_format($report->amount);?>
+                </td><td><?php echo humanize($report->createuser);?></td>
+                </tr>
                 <?php }?>
             </tbody>
             <tfoot>
-                <tr><td>Total</td><td colspan=4 class="number"><?php echo "Rp." . number_format(450000);?></td></tr>
+                <tr><td>Total</td><td colspan=4 class="number"><?php echo "Rp." . number_format($tot);?></td></tr>
             </tfoot>
         </table>
     </body>
