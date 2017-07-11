@@ -26,18 +26,7 @@
             <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Pembayaran</a>
         </li>
         <li class="<?php echo ($feedData==='report')?'active':'';?>">
-            <a href="/reports/index"><i class="glyphicon glyphicon-chevron-down"></i> Laporan</a>
-            <ul class="nav navbar-collapse bootstrap-admin-navbar-side">
-                <li>
-                    <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Rkp SPP,Bimbel</a>
-                </li>
-                <li>
-                    <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Rkp DU &amp; Buku</a>
-                </li>
-                <li>
-                    <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Rkp Tertanggung</a>
-                </li>                
-            </ul>
+            <a href="/reports/index"><i class="glyphicon glyphicon-chevron-right"></i> Laporan</a>
         </li>
         <li class="<?php echo ($feedData==='settings')?'active':'';?>">
             <a href="/settings"><i class="glyphicon glyphicon-chevron-right"></i> Setting</a>

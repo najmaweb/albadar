@@ -1,3 +1,5 @@
+<?php $showbreadcrumb = false;?>
+<?php if($showbreadcrumb){?>
 <nav class="navbar navbar-default navbar-fixed-top bootstrap-admin-navbar bootstrap-admin-navbar-under-small" role="navigation">
     <div class="container">
         <div class="row">
@@ -21,3 +23,4 @@
         </div>
     </div><!-- /.container -->
 </nav>
+<?php }?>
