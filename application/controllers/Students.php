@@ -81,22 +81,20 @@ class Students extends CI_Controller{
         $nis = $this->uri->segment(3);
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
-        $sql.= "count(e.amount) dupsbpaid, ";
-        $sql.= "(d.amount-sum(e.amount)) dupsbremain, ";
+        $sql.= "e.dupsbpaid, ";
+        $sql.= "case when e.amount is null then d.amount else (d.amount-e.amount) end  dupsbremain, ";
         $sql.= "f.pyear sppmaxyear,f.pmonth sppmaxmonth, ";
         $sql.= "g.pyear bimbelmaxyear,g.pmonth bimbelmaxmonth ";
         $sql.= "from students a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
-        $sql.= "left outer join dupsb e on e.nis=a.nis ";
+        $sql.= "left outer join (select nis,count(amount) dupsbpaid,sum(amount) amount from dupsb where nis='".$nis."' group by nis) e on e.nis=a.nis ";
         $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from spp where nis='".$nis."') a left outer join (select nis,pyear,max(pmonth)mmonth from spp where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) f on f.nis=a.nis ";
-        //$sql.= "left outer join spp f on f.nis=a.nis ";
         $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from bimbel where nis='".$nis."') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) g on g.nis=a.nis ";
-//        $sql.= "left outer join bimbel g on g.nis=a.nis ";
         $sql.= "where a.nis = '".$nis."' ";
         $sql.= "and a.year='" . $year . "' ";
-        $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount,f.pyear,f.pmonth,g.pyear,g.pmonth ";
+        $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount,f.pyear,f.pmonth,g.pyear,g.pmonth,dupsbpaid ";
 
         $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel group by nis) a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
         $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel where nis='060477') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='060477' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
