@@ -6,10 +6,11 @@ class Reports extends CI_Controller{
         $this->load->helper("datetime");
         $this->load->model("setting");
         $this->load->model("grade");
+        $this->load->library("dates");
     }
     function filtertransactionperuser(){
         $params = $this->input->post();
-        redirect("../transactionperuser/".$params["user"]);
+        redirect("../transactionperuser/".addzero($params["month"])."/".$params["year"]."/".$params["user"]);
     }
     function index(){
         session_start();
@@ -40,12 +41,14 @@ class Reports extends CI_Controller{
     function transactionperuser(){
         session_start();
         checklogin();
-        if($this->uri->total_segments()>2){
-            $user = $this->uri->segment(3);
-            $dailyreports = $this->report->gettransactionperuser($user);
+        $month = $this->uri->segment(3);
+        $year = $this->uri->segment(4);
+        if($this->uri->total_segments()>4){
+            $user = $this->uri->segment(5);
+            $dailyreports = $this->report->gettransactionperuser($month,$year,$user);
         }else{
             $user = "all";
-            $dailyreports = $this->report->gettransactionperuser();
+            $dailyreports = $this->report->gettransactionperuser($month,$year);
         }
         $data = array(
             "breadcrumb" => array(1=>"Laporan",2=>"Rekap Transaksi Harian"),
@@ -55,6 +58,9 @@ class Reports extends CI_Controller{
             "role"=>$this->User->getrole(),
             "dailyreports"=>$dailyreports,
             "humanmonth"=>getperiodmonths(),
+            "month"=>$this->uri->segment(3),
+            "year"=>$this->uri->segment(4),
+            "years"=>$this->dates->getyearsarray(),
             "users"=>array("all"=>"Semua","puji"=>"Puji","risma"=>"Risma"),
             "user"=>$user
         );

@@ -7,8 +7,11 @@
         <h1>Laporan Rekap Transaksi Per Petugas</h1>
         <h3>
         <form action="/reports/filtertransactionperuser" method="post">
+        <span class="filter">Petugas</label>
         <?php echo form_dropdown("user",$users,$user);?>
-        Tanggal <?php echo date("d")." ".$humanmonth[removezero(date("m"))]." ".date("Y");?>
+        <span class="filter">Bulan</label>
+        <?php echo form_dropdown("month",$humanmonth,$month);?>
+        <?php echo form_dropdown("year",$years,$year);?>
         <button id="filter" name="filter">Filter</button>
         </form>
         </h3>

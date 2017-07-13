@@ -37,36 +37,40 @@ class Report extends CI_Model{
         $que = $ci->db->query($sql);
         return $que->result();
     }
-    function gettransactionperuser($user=null){
+    function gettransactionperuser($month,$year,$user=null){
         if(is_null($user)){
             $userfilter = " ";
         }else{
             if($user==='all'){
                 $userfilter = " ";
             }else{
-                $userfilter = "where createuser='".$user."' ";
+                $userfilter = "and createuser='".$user."' ";
             }        
         }
         $sql = 'select ord,dt,createuser,sum(amount)amount from (';
         $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
         $sql.= 'from spp ';
+        $sql.= 'where date_format(createdate,"%m-%Y")="'.$month.'-'.$year.'" ';
         $sql.= $userfilter;
         $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
         $sql.= "union ";
         $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
         $sql.= 'from bimbel  ';
+        $sql.= 'where date_format(createdate,"%m-%Y")="'.$month.'-'.$year.'" ';
         $sql.= $userfilter;
 
         $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
         $sql.= "union ";
         $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
         $sql.= 'from dupsb  ';
+        $sql.= 'where date_format(createdate,"%m-%Y")="'.$month.'-'.$year.'" ';
         $sql.= $userfilter;
 
         $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
         $sql.= "union ";
         $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
         $sql.= 'from pembayaranbuku  ';
+        $sql.= 'where date_format(createdate,"%m-%Y")="'.$month.'-'.$year.'" ';
         $sql.= $userfilter;
 
         $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
@@ -173,5 +177,17 @@ class Report extends CI_Model{
         $sql.= "union ";
         $sql.= "select nis,sum(amount) from bimbel where pmonth='05' and pyear='".$pyear."' group by nis ";
         echo $sql;
+    }
+    function gettertanggung(){
+        $sql = "select mmonth,myear,A.name from(select max(b.pyear)myear,a.name,a.nis from students a left outer join spp b on b.nis=a.nis group by a.name,a.nis)A left outer join  
+(select max(pmonth)mmonth,pyear,a.name,a.nis from students a left outer join spp b on b.nis=a.nis group by pyear,a.name,a.nis) B on B.nis=A.nis and A.myear=B.pyear";
+
+
+$sql = "select B.mmonth,A.myear,A.name from(select max(b.pyear)myear,a.name,a.nis from students a left outer join bimbel b on b.nis=a.nis group by a.name,a.nis)A left outer join  
+(select max(pmonth)mmonth,pyear,a.name,a.nis from students a left outer join bimbel b on b.nis=a.nis group by pyear,a.name,a.nis) B on B.nis=A.nis and A.myear=B.pyear";
+
+
+$sql = "select case when mmonth is null then timestampdiff(month,'2014-7-1',curdate()) else timestampdiff(month,concat(A.myear,'-',B.mmonth,'-','01'),curdate()) end totmonth,case when B.mmonth is null then '-' else concat(A.myear,'-',B.mmonth) end terakhirbayar,A.name from(select max(b.pyear)myear,a.name,a.nis from students a left outer join bimbel b on b.nis=a.nis group by a.name,a.nis)A left outer join   (select max(pmonth)mmonth,pyear,a.name,a.nis from students a left outer join bimbel b on b.nis=a.nis group by pyear,a.name,a.nis) B on B.nis=A.nis and A.myear=B.pyear;
+";
     }
 }
