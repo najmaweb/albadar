@@ -84,7 +84,7 @@ class Students extends CI_Controller{
         $sql.= "e.dupsbpaid, ";
         $sql.= "case when e.amount is null then d.amount else (d.amount-e.amount) end  dupsbremain, ";
         $sql.= "case when f.pyear is null then a.inityear else f.pyear end sppmaxyear,case when f.pmonth is null then a.initmonth else f.pmonth end sppmaxmonth, ";
-        $sql.= "g.pyear bimbelmaxyear,g.pmonth bimbelmaxmonth ";
+        $sql.= "case when g.pyear is null then a.inityear else g.pyear end bimbelmaxyear,case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
         $sql.= "from students a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
