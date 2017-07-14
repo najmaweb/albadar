@@ -47,5 +47,19 @@ class Student extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $sql;
+    }
+    function getspp($nis){
+        $sql = "select a.nis,amount from students a left outer join sppgroups b on b.id=a.sppgroup_id where a.nis='".$nis."' ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        $res = $que->result();
+        return $res[0]->amount;
+    }    
+    function getbimbel($nis){
+        $sql = "select a.nis,amount from students a left outer join bimbelgroups b on b.id=a.bimbelgroup_id where a.nis='".$nis."' ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        $res = $que->result();
+        return $res[0]->amount;
     }    
 }
