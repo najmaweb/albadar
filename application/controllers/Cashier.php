@@ -184,9 +184,9 @@ class Cashier extends CI_Controller{
             $year = substr($monthyear,2,4);
             $purpose = "Untuk pembayaran Bimbel bulan " . $month . '/' . $year;
             $sql = "insert into bimbel ";
-            $sql.= "(nis,amount,pyear,pmonth,paymenttype,purpose,createuser) ";
+            $sql.= "(nis,amount,pyear,pmonth,cyear,paymenttype,purpose,createuser) ";
             $sql.= "values ";
-            $sql.= "('".$params["nis"]."','".$params["oribimbel"]."','".$year."','".$month."','1','".$purpose."','".$_SESSION["username"]."')";
+            $sql.= "('".$params["nis"]."','".$params["oribimbel"]."','".$year."','".$month."','".$this->dates->getcurrentyear()."','1','".$purpose."','".$_SESSION["username"]."')";
             $ci = & get_instance();
             $que = $ci->db->query($sql);
         }
@@ -200,9 +200,9 @@ class Cashier extends CI_Controller{
                 $year = substr($monthyear,2,4);
                 $purpose = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
                 $sql = "insert into spp ";
-                $sql.= "(nis,amount,pyear,pmonth,paymenttype,purpose,createuser) ";
+                $sql.= "(nis,amount,pyear,pmonth,cyear,paymenttype,purpose,createuser) ";
                 $sql.= "values ";
-                $sql.= "('".$params["nis"]."','".$params["orispp"]."','".$year."','".$month."','1','".$purpose."','".$_SESSION["username"]."')";
+                $sql.= "('".$params["nis"]."','".$params["orispp"]."','".$year."','".$month."','".$this->dates->getcurrentyear()."','1','".$purpose."','".$_SESSION["username"]."')";
                 $ci = & get_instance();
                 $que = $ci->db->query($sql);
             }
@@ -239,6 +239,7 @@ class Cashier extends CI_Controller{
     function kwitansi(){
         session_start();
         $params = array(
+            "allpaid"=>$_SESSION["allpaid"],
             "sppfrstmonth"=>$_SESSION["sppfrstmonth"],
             "sppfrstyear"=>$_SESSION["sppfrstyear"],
             "sppnextmonth"=>$_SESSION["sppnextmonth"],
@@ -264,6 +265,7 @@ class Cashier extends CI_Controller{
             "monthsarray"=>$this->dates->getmonthsarray(),
             "role"=>$this->User->getrole(),
             "periodmonths"=>getperiodmonths(),
+            "tagihanremain"=>$_SESSION["tagihanremain"]
         );
         $params["topaid"] = $_SESSION["total"];
         $this->load->view("cashiers/kwitansi",$params);
