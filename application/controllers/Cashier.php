@@ -156,8 +156,10 @@ class Cashier extends CI_Controller{
                 "feedData"=>"cashier",
                 "months"=>$this->dates->getmonthsarray(),
                 "years"=>$this->dates->getyearsarray(),
-                "curmonth"=>date('Y'),
+                "curmonth"=>date('m'),
+                "curyear"=>date("Y"),
                 "err_message"=>" (".$err_msg.")",
+                "role"=>$this->User->getrole(),
             );
             $this->load->view("cashiers/spp",$data);
         }else{
