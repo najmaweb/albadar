@@ -84,6 +84,7 @@ class Cashier extends CI_Controller{
         $_SESSION["cashpay"] = removedot($params["cashpay"]);
         $_SESSION["bimbel"] = removedot($params["bimbel"]);
         $_SESSION["dupsbpaid"] = $this->Mcashier->getdupsbpaid($params["nis"],$currentyear);
+        $_SESSION["allpaid"] = $this->Mcashier->getallpaid($params["nis"],$currentyear);
         $_SESSION["totaltagihan"] = $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
         $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
         $_SESSION["sppmonthcount"] = $sppmonthcount;
@@ -91,6 +92,7 @@ class Cashier extends CI_Controller{
         $_SESSION["orispp"] = $params["orispp"];
         $_SESSION["oribimbel"] = $params["oribimbel"];
         $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - $_SESSION["dupsbpaid"];
+        $_SESSION["tagihanremain"] = $this->Mcashier->gettagihanremain($params["nis"],$currentyear);
         if(isset($params["sppcheckbox"])){
             $_SESSION["sppcheckbox"] = "1";
         }else{
@@ -128,6 +130,7 @@ class Cashier extends CI_Controller{
             "bimbel"=>$_SESSION["bimbel"],
             "dupsbremain"=>$_SESSION["dupsbremain"],
             "dupsbpaid"=>$_SESSION["dupsbpaid"],
+            "allpaid"=>$_SESSION["allpaid"],
             "totaltagihan"=>$_SESSION["totaltagihan"],
             "total"=>$_SESSION["total"],
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
@@ -138,6 +141,7 @@ class Cashier extends CI_Controller{
             "sppcheckbox"=>$_SESSION["sppcheckbox"],
             "role"=>$this->User->getrole(),
             "periodmonths"=>getperiodmonths(),
+            "tagihanremain"=>$_SESSION["tagihanremain"]
         );
         if($DEBUG){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
