@@ -105,8 +105,6 @@ class Mcashier extends CI_Model{
             $COMMENT = "BANYAKNYA BULAN = SELISIH TAHUN x 12, DITAMBAH BULAN SAAT INI DIKURANGI BULAN TERAKHIR PEMBARAYARAN";
             $tagihan = $spp*$count;
         }else{
-            echo $maxym["maxyear"] . "<br />";
-            echo date("Y") . "<br />";
             $tagihan = 0;
         }
         return array("tagihan"=>$tagihan);
@@ -145,8 +143,6 @@ class Mcashier extends CI_Model{
             $COMMENT = "BANYAKNYA BULAN = SELISIH TAHUN x 12, DITAMBAH BULAN SAAT INI DIKURANGI BULAN TERAKHIR PEMBARAYARAN";
             $tagihan = $bimbel*$count;
         }else{
-            echo $maxym["maxyear"] . "<br />";
-            echo date("Y") . "<br />";
             $tagihan = 0;
         }
         return array("tagihan"=>$tagihan);
