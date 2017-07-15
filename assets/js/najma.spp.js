@@ -127,6 +127,8 @@ $.ajax({
                     $("#oribimbel").val(res.bimbel);
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
                     $("#psb").val(numberWithCommas(res.dupsbremain));
+                    $("#book_").val(numberWithCommas(res.bookremain));
+                    $("#book").val(numberWithCommas(res.bookremain));
                     $("#sppfrstmonth").val(res.sppmaxmonth);
                     $("#sppfrstyear").val(res.sppmaxyear);
                     $("#bimbelfrstmonth").val(res.bimbelmaxmonth);
