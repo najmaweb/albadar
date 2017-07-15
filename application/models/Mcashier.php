@@ -4,8 +4,15 @@ class Mcashier extends CI_Model{
         parent::__construct();
     }
     function getdupsbremain($nis,$year){
-        $sql = "select nis,sum(amount)amnt from dupsb group by nis;";
-        return "2598000";
+        $ci = & get_instance();
+        $sql = "select A.nis,case when A.amnt is null then B.amount else (B.amount - A.amnt) end remain from ";
+        $sql.= "(select a.nis,sum(amount)amnt from students a ";
+        $sql.= "left outer join (select nis,amount from dupsb where year='".$year."') b on b.nis=a.nis where a.nis='".$nis."') A ";
+        $sql.= "left outer join ";
+        $sql.= "(select a.nis,amount from students a ";
+        $sql.= "left outer join dupsbgroups b on b.id=a.dupsbgroup_id where a.nis='".$nis."') B on B.nis=A.nis ";
+        $que = $ci->db->query($sql);
+        return $que->result()[0]->remain;
     }
     function getdupsbpaid($nis,$year){
         $sql = "select sum(amount)amnt from dupsb a where nis='".$nis."' and year='".$year."' ";
@@ -16,18 +23,33 @@ class Mcashier extends CI_Model{
         }
         return $que->result()[0]->amnt;
     }
-    function getallpaid($nis,$year){
-/*        $sql = "select nis,sum(amount)spp from spp where nis='".$nis."' and cyear='".$year."'";
+    function getspppaid($nis,$year){
+        $sql = "select sum(amount)amnt from spp a where nis='".$nis."' and cyear='".$year."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         if($que->num_rows()===0){
             return 0;
         }
-        return $que->result()[0]->amnt;*/
-        return $_SESSION["spp"] + $_SESSION["psb"] + $_SESSION["bimbel"];
+        return $que->result()[0]->amnt;
+    }
+    function getbimbelpaid($nis,$year){
+        $sql = "select sum(amount)amnt from bimbel a where nis='".$nis."' and cyear='".$year."' ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        if($que->num_rows()===0){
+            return 0;
+        }
+        return $que->result()[0]->amnt;
+    }
+    function getallpaid($nis,$year){
+        $ci = & get_instance();
+        $cyear = $ci->dates->getcurrentyear();
+        return $_SESSION["spp"] + $_SESSION["psb"] + $_SESSION["bimbel"] + $this->getdupsbpaid($nis,$year) + $this->getspppaid($nis,$cyear) + $this->getbimbelpaid($nis,$cyear);
     }
     function gettagihanremain($nis,$year){
-        return $this->gettotaltagihan($nis,$year) - $this->getallpaid($nis,$year);
+        $ci = & get_instance();
+        $cyear = $ci->dates->getcurrentyear();
+        return $this->gettotaltagihan($nis,$year) - $this->getallpaid($nis,$year) - $this->getdupsbpaid($nis,$year) - $this->getspppaid($nis,$cyear) - $this->getbimbelpaid($nis,$cyear);
     }
     function gettotaltagihan($nis,$year){
         $sql = "select sum(b.amount)amnt from students a ";
@@ -38,6 +60,7 @@ class Mcashier extends CI_Model{
         if($que->num_rows()===0){
             return 0;
         }
+        return $this->getdupsbremain($nis,$this->dates->getcurrentyear());
         return $que->result()[0]->amnt;
     }
     function getsppmaxyearmonth($nis){
