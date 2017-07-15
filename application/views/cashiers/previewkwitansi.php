@@ -105,7 +105,7 @@
                 </tr>
                 <tr>
                     <td>Sisa Tagihan Buku</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bookpaymentremain);?></td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bookpaymentremain-$book);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>
