@@ -34,11 +34,16 @@ class Cashier extends CI_Controller{
         }
     }
     function savesession(){
+        session_start();
+        checklogin();
         $CHECKSESSION = false;
         if($CHECKSESSION){
             $this->checksession();
         }
         $params = $this->input->post();
+        if(!isset($params["sppfrstyear"])){
+            redirect("../");
+        }
         $currentyear = $this->dates->getcurrentyear();
         $DEBUG = false;
         if($DEBUG){
@@ -67,7 +72,6 @@ class Cashier extends CI_Controller{
             $lastyearmonthcount = $params["bimbelnextmonth"]; 
             $bimbelmonthcount += $firstyearmonthcount + 12*$yearcount + $lastyearmonthcount;
         }
-        session_start();
         $_SESSION["sppfrstmonth"] = $params["sppfrstmonth"];
         $_SESSION["sppfrstyear"] = $params["sppfrstyear"];
         $_SESSION["sppnextmonth"] = $params["sppnextmonth"];
@@ -100,7 +104,6 @@ class Cashier extends CI_Controller{
         $total+= $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
         
         $_SESSION["totaltagihan"] = $total;
-        //$_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - $_SESSION["dupsbpaid"];
         
         $remain = 0;
         $remain+= $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
@@ -167,7 +170,7 @@ class Cashier extends CI_Controller{
             "periodmonths"=>getperiodmonths(),
             "tagihanremain"=>$_SESSION["tagihanremain"],
             "sppremain"=>$_SESSION["sppremain"],
-            "bimbelremain"=>$_SESSION["bimbelremain"]
+            "bimbelremain"=>$_SESSION["bimbelremain"],
         );
         if($DEBUG){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
@@ -209,26 +212,41 @@ class Cashier extends CI_Controller{
             $month = substr($monthyear,0,2);
             $year = substr($monthyear,2,4);
             $purpose = "Untuk pembayaran Bimbel bulan " . $month . '/' . $year;
+            $description = "Untuk pembayaran Bimbel bulan " . $month . '/' . $year;
             $sql = "insert into bimbel ";
-            $sql.= "(nis,amount,pyear,pmonth,cyear,paymenttype,purpose,createuser) ";
+            $sql.= "(nis,amount,pyear,pmonth,cyear,paymenttype,purpose,description,createuser) ";
             $sql.= "values ";
-            $sql.= "('".$params["nis"]."','".$params["oribimbel"]."','".$year."','".$month."','".$this->dates->getcurrentyear()."','1','".$purpose."','".$_SESSION["username"]."')";
+            $sql.= "('";
+            $sql.= $params["nis"]."','";
+            $sql.= $params["oribimbel"]."','";
+            $sql.= $year."','";
+            $sql.= $month."','";
+            $sql.= $this->dates->getcurrentyear()."','1','";
+            $sql.= $purpose."','".$description."','".$_SESSION["username"]."')";
             $ci = & get_instance();
             $que = $ci->db->query($sql);
         }
     }
     function savespp($params){
-        session_start();
+        //session_start();
         $montharray = getmontharray($params["sppfrstmonth"],$params["sppfrstyear"],$params["sppnextmonth"],$params["sppnextyear"]);
         //if($params["sppcheckbox"]>0){
             foreach($montharray as $monthyear){
                 $month = substr($monthyear,0,2);
                 $year = substr($monthyear,2,4);
                 $purpose = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
+                $description = "Untuk pembayaran SPP bulan " . $month . '/' . $year;
                 $sql = "insert into spp ";
-                $sql.= "(nis,amount,pyear,pmonth,cyear,paymenttype,purpose,createuser) ";
+                $sql.= "(nis,amount,pyear,pmonth,cyear,paymenttype,purpose,description,createuser) ";
                 $sql.= "values ";
-                $sql.= "('".$params["nis"]."','".$params["orispp"]."','".$year."','".$month."','".$this->dates->getcurrentyear()."','1','".$purpose."','".$_SESSION["username"]."')";
+                $sql.= "('".$params["nis"]."','";
+                $sql.= $params["orispp"]."','";
+                $sql.= $year."','";
+                $sql.= $month."','";
+                $sql.= $this->dates->getcurrentyear()."','1','";
+                $sql.= $purpose."','";
+                $sql.= $description."','";
+                $sql.= $_SESSION["username"]."')";
                 $ci = & get_instance();
                 $que = $ci->db->query($sql);
             }
@@ -243,9 +261,11 @@ class Cashier extends CI_Controller{
             $this->load->library("Dates");
             $currentyear = $this->dates->getcurrentyear();
             $sql = "insert into dupsb ";
-            $sql.= "(nis,amount,year,paymenttype,createuser) ";
+            $sql.= "(nis,amount,year,paymenttype,purpose,description,createuser) ";
             $sql.= "values ";
-            $sql.= "('".$params["nis"]."','".$params["psb"]."','".$currentyear."','1','".$_SESSION["username"]."')";
+            $sql.= "('".$params["nis"]."','";
+            $sql.= $params["psb"]."','";
+            $sql.= $currentyear."','1','Pembayaran DU/PSB','Pembayaran DU/PSB','".$_SESSION["username"]."')";
             $ci = & get_instance();
             $que = $ci->db->query($sql);
         }
@@ -254,7 +274,7 @@ class Cashier extends CI_Controller{
         if($params["book"]>0){
             $this->load->library("Dates");
             $currentyear = $this->dates->getcurrentyear();
-            $sql = "insert into pembayaranbuku ";
+            $sql = "insert into bookpayment ";
             $sql.= "(nis,amount,year,paymenttype,createuser) ";
             $sql.= "values ";
             $sql.= "('".$params["nis"]."','".$params["book"]."','".$currentyear."','1','".$_SESSION["username"]."')";
