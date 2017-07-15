@@ -81,8 +81,9 @@ class Students extends CI_Controller{
         $nis = $this->uri->segment(3);
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
-        $sql.= "e.dupsbpaid, ";
+        $sql.= "e.dupsbpaid,j.bookpaymentpaid, ";
         $sql.= "case when e.amount is null then d.amount else (d.amount-e.amount) end  dupsbremain, ";
+        $sql.= "case when j.amount is null then i.amount else (i.amount-j.amount) end  bookremain, ";
         $sql.= "case when f.pyear is null then a.inityear else f.pyear end sppmaxyear,case when f.pmonth is null then a.initmonth else f.pmonth end sppmaxmonth, ";
         $sql.= "case when g.pyear is null then a.inityear else g.pyear end bimbelmaxyear,case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
         $sql.= "from students a ";
@@ -92,9 +93,14 @@ class Students extends CI_Controller{
         $sql.= "left outer join (select nis,count(amount) dupsbpaid,sum(amount) amount from dupsb where nis='".$nis."' group by nis) e on e.nis=a.nis ";
         $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from spp where nis='".$nis."') a left outer join (select nis,pyear,max(pmonth)mmonth from spp where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) f on f.nis=a.nis ";
         $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from bimbel where nis='".$nis."') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) g on g.nis=a.nis ";
+        $sql.= "left outer join studentshistory h on h.nis=a.nis ";
+        $sql.= "left outer join bookpaymentgroups i on i.id=h.bookpaymentgroup_id ";
+        $sql.= "left outer join (select nis,count(amount) bookpaymentpaid,sum(amount) amount from bookpayment where nis='".$nis."' group by nis) j on j.nis=a.nis ";
+
+
         $sql.= "where a.nis = '".$nis."' ";
         $sql.= "and a.year='" . $year . "' ";
-        $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount,f.pyear,f.pmonth,g.pyear,g.pmonth,dupsbpaid ";
+        $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount,f.pyear,f.pmonth,g.pyear,g.pmonth,dupsbpaid,j.bookpaymentpaid,i.amount,j.amount ";
 
         $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel group by nis) a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
         $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel where nis='060477') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='060477' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
@@ -115,7 +121,7 @@ class Students extends CI_Controller{
             $bimbelmaxmonth = addzero($res->bimbelmaxmonth+1);
             $bimbelmaxyear = addzero($res->bimbelmaxyear);
         }
-        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'","sppmaxyear":"'.$sppmaxyear.'","sppmaxmonth":"'.$sppmaxmonth.'","bimbelmaxyear":"'.$bimbelmaxyear.'","bimbelmaxmonth":"'.$bimbelmaxmonth.'"}';
+        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'","bookremain":"'.$res->bookremain.'","sppmaxyear":"'.$sppmaxyear.'","sppmaxmonth":"'.$sppmaxmonth.'","bimbelmaxyear":"'.$bimbelmaxyear.'","bimbelmaxmonth":"'.$bimbelmaxmonth.'"}';
     }
     function remove(){
         $id = $this->uri->segment(3);
