@@ -29,7 +29,7 @@ class Report extends CI_Model{
         $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,a.year,' ',b.name,c.name ";
         $sql.= "union ";
         $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Buku ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
-        $sql.= "from pembayaranbuku a ";
+        $sql.= "from bookpayment a ";
         $sql.= "left outer join students b on b.nis=a.nis ";
         $sql.= "left outer join grades c on c.id=b.grade_id ";
         $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
@@ -71,7 +71,7 @@ class Report extends CI_Model{
         $sql.= 'group by createuser,date_format(createdate,"%d-%m-%Y"),date_format(createdate,"%Y-%m-%d") ';
         $sql.= "union ";
         $sql.= 'select date_format(createdate,"%d-%m-%Y") dt,date_format(createdate,"%Y-%m-%d") ord,createuser,sum(amount) amount ';
-        $sql.= 'from pembayaranbuku  ';
+        $sql.= 'from bookpayment  ';
         $sql.= 'where date_format(createdate,"%m-%Y")="'.$month.'-'.$year.'" ';
         $sql.= $userfilter;
 
