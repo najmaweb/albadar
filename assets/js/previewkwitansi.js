@@ -24,11 +24,11 @@ $("#btnprint").click(function(){
         type:'post'
     })
     .done(function(res){
-        console.log(res);
+        console.log("Success save transaction",res);
         window.location.href = "/cashier/kwitansi"
     })
     .fail(function(err){
         alert("Err saveall"+err);
-        console.log(err);
+        console.log("Error save transaction",err);
     });
 });
