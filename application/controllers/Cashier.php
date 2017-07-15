@@ -103,7 +103,11 @@ class Cashier extends CI_Controller{
         $total+= $this->Student->getbimbel($params["nis"]);
         $total+= $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
         
-        $_SESSION["totaltagihan"] = $total;
+        $dupsbremain = $this->Mcashier->getdupsbremain($params["nis"],$currentyear);
+        $bookpaymentremain = $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
+        $sppremain = $this->Mcashier->getsppremain($params["nis"]);
+        $bimbelremain = $this->Mcashier->getbimbelremain($params["nis"]);
+        $_SESSION["totaltagihan"] = $dupsbremain+$bookpaymentremain+$sppremain["tagihan"]+$bimbelremain["tagihan"];
         
         $remain = 0;
         $remain+= $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
