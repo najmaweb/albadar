@@ -2,29 +2,31 @@
 class Report extends CI_Model{
     function __construct(){
         parent::__construct();
+        $this->load->library("Dates");
     }
     function getdailytransaction(){
+        $montharray = $this->dates->getmonthsarray();
         $sql = "select jam,uraian,amount,createuser from ( ";
-        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran SPP ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran SPP ',a.pmonth,'-',a.pyear,' ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
         $sql.= "from spp a ";
         $sql.= "left outer join students b on b.nis=a.nis ";
         $sql.= "left outer join grades c on c.id=b.grade_id ";
         $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
-        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.pmonth,a.pyear,a.createuser,b.name,c.name ";
         $sql.= "union ";
-        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Bimbel ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Bimbel ',a.pmonth,'-',a.pyear,' ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
         $sql.= "from bimbel a ";
         $sql.= "left outer join students b on b.nis=a.nis ";
         $sql.= "left outer join grades c on c.id=b.grade_id ";
         $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
-        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,a.pmonth,a.pyear,b.name,c.name ";
         $sql.= "union ";
-        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Daftar Ulang / PSB ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
+        $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Daftar Ulang / PSB ',a.year,' ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
         $sql.= "from dupsb a ";
         $sql.= "left outer join students b on b.nis=a.nis ";
         $sql.= "left outer join grades c on c.id=b.grade_id ";
         $sql.= "where date_format(a.createdate,'%Y-%m-%d')=date_format(now(),'%Y-%m-%d') ";
-        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,b.name,c.name ";
+        $sql.= "group by date_format(a.createdate,'%H:%i:%s'),a.createuser,a.year,' ',b.name,c.name ";
         $sql.= "union ";
         $sql.= "select date_format(a.createdate,'%H:%i:%s')jam,concat('Pembayaran Buku ',b.name,' ',c.name) uraian,sum(a.amount)amount,a.createuser ";
         $sql.= "from pembayaranbuku a ";

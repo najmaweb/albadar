@@ -61,7 +61,9 @@
                 $counter++;
                 }?>
                 <?php if($psb){?>
-                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>PSB</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($psb);?></td></tr>
+                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>PSB</td>
+                <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($psb);?></td>
+                </tr>
                 <?php }?>
                 <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
                 <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
@@ -73,20 +75,51 @@
                     <td colspan=2>&nbsp;</td><td>TOTAL</td>
                     <td class="rightaligned number"><?php echo  "Rp. " . number_format($total);?></td>
                 </tr>
-                <tr><td>Yang sudah dibayar</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($allpaid);?></td>
+                <tr><td>Yang dibayar</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($total);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr><td colspan=2 class="line"></td><td colspan=3></td></tr>
+                <tr>
+                    <td>Sisa Tagihan SPP</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . ($sppremain);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Sisa Tagihan</td>
-                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($tagihanremain);?></td>
+                    <td>Sisa Tagihan Bimbel</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bimbelremain);?></td>
                     <td colspan=2>&nbsp;</td>
                     <td></td>
                     <td></td>
                 </tr>
-                <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
+                <tr>
+                    <td>Sisa Tagihan DU/PSB</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbremain);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Sisa Tagihan Buku</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bookpaymentremain);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr><td colspan=2 class="line"></td><td colspan=3></td></tr>
+                <tr>
+                    <td>Total Sisa Tagihan</td>
+                    <td class="rightaligned number">
+                        <?php echo  "Rp. " . number_format($sppremain+$bimbelremain+$dupsbremain+$bookpaymentremain);?>
+                    </td>
+                    <td colspan=2></td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td><td></td></tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>

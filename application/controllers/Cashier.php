@@ -3,6 +3,7 @@ class Cashier extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("Mcashier");
+        $this->load->model("Student");
         $this->load->helper("terbilang");
         $this->load->library("Dates");
         $this->load->helper("datetime");
@@ -84,15 +85,36 @@ class Cashier extends CI_Controller{
         $_SESSION["cashpay"] = removedot($params["cashpay"]);
         $_SESSION["bimbel"] = removedot($params["bimbel"]);
         $_SESSION["dupsbpaid"] = $this->Mcashier->getdupsbpaid($params["nis"],$currentyear);
+        $_SESSION["bookpaymentpaid"] = $this->Mcashier->getbookpaymentpaid($params["nis"],$currentyear);
         $_SESSION["allpaid"] = $this->Mcashier->getallpaid($params["nis"],$currentyear);
-        $_SESSION["totaltagihan"] = $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
+        
         $_SESSION["total"] = $_SESSION["psb"]+$_SESSION["spp"]+$_SESSION["book"]+$_SESSION["bimbel"];
         $_SESSION["sppmonthcount"] = $sppmonthcount;
         $_SESSION["bimbelmonthcount"] = $bimbelmonthcount;
         $_SESSION["orispp"] = $params["orispp"];
         $_SESSION["oribimbel"] = $params["oribimbel"];
-        $_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - $_SESSION["dupsbpaid"];
-        $_SESSION["tagihanremain"] = $this->Mcashier->gettagihanremain($params["nis"],$currentyear);
+        $total = 0;
+        $total+= $this->Mcashier->getdupsbremain($params["nis"],$currentyear);
+        $total+= $this->Student->getspp($params["nis"]);
+        $total+= $this->Student->getbimbel($params["nis"]);
+        $total+= $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
+        
+        $_SESSION["totaltagihan"] = $total;
+        //$_SESSION["dupsbremain"] = $_SESSION["totaltagihan"] - $_SESSION["dupsbpaid"];
+        
+        $remain = 0;
+        $remain+= $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
+        $remain+= $this->Student->getspp($params["nis"]);
+        $remain+= $this->Student->getbimbel($params["nis"]);
+        $remain-=$params["spp"];
+        $remain-=$params["bimbel"];
+        $remain-=$params["book"];
+        $remain-=removedot($params["psb"]);
+        $_SESSION["tagihanremain"] = $remain;
+        $_SESSION["sppremain"] = $this->Mcashier->getsppremain($params["nis"])["tagihan"];
+        $_SESSION["bimbelremain"] = $this->Mcashier->getbimbelremain($params["nis"])["tagihan"];
+        $_SESSION["dupsbremain"] = $this->Mcashier->getdupsbremain($params["nis"],$currentyear) - removedot($params["psb"]);
+        $_SESSION["bookpaymentremain"] = $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
         if(isset($params["sppcheckbox"])){
             $_SESSION["sppcheckbox"] = "1";
         }else{
@@ -130,6 +152,8 @@ class Cashier extends CI_Controller{
             "bimbel"=>$_SESSION["bimbel"],
             "dupsbremain"=>$_SESSION["dupsbremain"],
             "dupsbpaid"=>$_SESSION["dupsbpaid"],
+            "bookpaymentremain"=>$_SESSION["bookpaymentremain"],
+            "bookpaymentpaid"=>$_SESSION["bookpaymentpaid"],
             "allpaid"=>$_SESSION["allpaid"],
             "totaltagihan"=>$_SESSION["totaltagihan"],
             "total"=>$_SESSION["total"],
@@ -141,7 +165,9 @@ class Cashier extends CI_Controller{
             "sppcheckbox"=>$_SESSION["sppcheckbox"],
             "role"=>$this->User->getrole(),
             "periodmonths"=>getperiodmonths(),
-            "tagihanremain"=>$_SESSION["tagihanremain"]
+            "tagihanremain"=>$_SESSION["tagihanremain"],
+            "sppremain"=>$_SESSION["sppremain"],
+            "bimbelremain"=>$_SESSION["bimbelremain"]
         );
         if($DEBUG){
             echo "SPP : ". $_SESSION["spp"] . "<br />";
@@ -257,6 +283,8 @@ class Cashier extends CI_Controller{
             "cashpay"=>$_SESSION["cashpay"],
             "dupsbremain"=>$_SESSION["dupsbremain"],
             "dupsbpaid"=>$_SESSION["dupsbpaid"],
+            "bookpaymentremain"=>$_SESSION["bookpaymentremain"],
+            "bookpaymentpaid"=>$_SESSION["bookpaymentpaid"],
             "totaltagihan"=>$_SESSION["totaltagihan"],
             "bimbel"=>$_SESSION["bimbel"],
             "total"=>$_SESSION["total"],
@@ -265,7 +293,9 @@ class Cashier extends CI_Controller{
             "monthsarray"=>$this->dates->getmonthsarray(),
             "role"=>$this->User->getrole(),
             "periodmonths"=>getperiodmonths(),
-            "tagihanremain"=>$_SESSION["tagihanremain"]
+            "tagihanremain"=>$_SESSION["tagihanremain"],
+            "sppremain"=>$_SESSION["sppremain"],
+            "bimbelremain"=>$_SESSION["bimbelremain"]
         );
         $params["topaid"] = $_SESSION["total"];
         $this->load->view("cashiers/kwitansi",$params);

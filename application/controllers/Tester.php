@@ -58,4 +58,9 @@ class Tester extends CI_Controller{
             echo "tidak sukses";
         };
     }
+    function dupsbremain(){
+        $this->load->model("Mcashier");
+        echo "060477 -> " . $this->Mcashier->getdupsbremain("060477","2016").PHP_EOL;
+        echo "060412 -> " . $this->Mcashier->getdupsbremain("060412","2016").PHP_EOL;
+    }
 }

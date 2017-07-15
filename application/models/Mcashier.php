@@ -23,6 +23,26 @@ class Mcashier extends CI_Model{
         }
         return $que->result()[0]->amnt;
     }
+    function getbookpaymentremain($nis,$year){
+        $ci = & get_instance();
+        $sql = "select A.nis,case when A.amnt is null then B.amount else (B.amount - A.amnt) end remain from ";
+        $sql.= "(select a.nis,sum(amount)amnt from students a ";
+        $sql.= "left outer join (select nis,amount from bookpayment where year='".$year."') b on b.nis=a.nis where a.nis='".$nis."') A ";
+        $sql.= "left outer join ";
+        $sql.= "(select a.nis,amount from studentshistory a ";
+        $sql.= "left outer join bookpaymentgroups b on b.id=a.bookpaymentgroup_id where a.nis='".$nis."' and a.year='".$year."') B on B.nis=A.nis ";
+        $que = $ci->db->query($sql);
+        return $que->result()[0]->remain;
+    }
+    function getbookpaymentpaid($nis,$year){
+        $sql = "select sum(amount)amnt from bookpayment a where nis='".$nis."' and year='".$year."' ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        if($que->num_rows()===0){
+            return 0;
+        }
+        return $que->result()[0]->amnt;
+    }
     function getspppaid($nis,$year){
         $sql = "select sum(amount)amnt from spp a where nis='".$nis."' and cyear='".$year."' ";
         $ci = & get_instance();
@@ -73,13 +93,12 @@ class Mcashier extends CI_Model{
     function getsppremain($nis){
         $maxym = $this->getsppmaxyearmonth($nis);
         $spp = $this->getspp($nis);
-        echo "SPP " . $spp . "<br />";
         if($maxym["maxyear"]===date("Y")){
             if($maxym["maxmonth"]<date("m")){
                 $tagihan = $spp*(removezero(date("m"))-removezero($maxym["maxmonth"]));
             }
             else{
-                $tagihan = -1;
+                $tagihan = 0;
             }
         }else if($maxym["maxyear"]<date("Y")){
             $count = ((date("Y")-$maxym["maxyear"])*12)-$maxym["maxmonth"] + date("m");
@@ -88,7 +107,7 @@ class Mcashier extends CI_Model{
         }else{
             echo $maxym["maxyear"] . "<br />";
             echo date("Y") . "<br />";
-            $tagihan = -2;
+            $tagihan = 0;
         }
         return array("tagihan"=>$tagihan);
     }
@@ -97,5 +116,39 @@ class Mcashier extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result()[0]->amount;
+    }
+    function getbimbelmaxyearmonth($nis){
+        $sql = "select max(pyear)mpyear,max(pmonth)mpmonth from bimbel where nis='".$nis."'";
+        $ci = & get_instance();
+        $res = $ci->db->query($sql);
+        $out = $res->result();
+        return array("maxyear"=>$out[0]->mpyear,"maxmonth"=>$out[0]->mpmonth);
+    }
+    function getbimbel($nis){
+        $sql = "select nis,amount from students a left outer join bimbelgroups b on b.id=a.bimbelgroup_id where nis='".$nis."' ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return $que->result()[0]->amount;
+    }
+    function getbimbelremain($nis){
+        $maxym = $this->getbimbelmaxyearmonth($nis);
+        $bimbel = $this->getbimbel($nis);
+        if($maxym["maxyear"]===date("Y")){
+            if($maxym["maxmonth"]<date("m")){
+                $tagihan = $bimbel*(removezero(date("m"))-removezero($maxym["maxmonth"]));
+            }
+            else{
+                $tagihan = 0;
+            }
+        }else if($maxym["maxyear"]<date("Y")){
+            $count = ((date("Y")-$maxym["maxyear"])*12)-$maxym["maxmonth"] + date("m");
+            $COMMENT = "BANYAKNYA BULAN = SELISIH TAHUN x 12, DITAMBAH BULAN SAAT INI DIKURANGI BULAN TERAKHIR PEMBARAYARAN";
+            $tagihan = $bimbel*$count;
+        }else{
+            echo $maxym["maxyear"] . "<br />";
+            echo date("Y") . "<br />";
+            $tagihan = 0;
+        }
+        return array("tagihan"=>$tagihan);
     }
 }

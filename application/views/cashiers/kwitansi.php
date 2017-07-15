@@ -15,22 +15,33 @@
         <tr><td>Sejumlah Uang</td><td>: <?php echo "Rp. " . number_format($topaid);?></td></tr>
         <tr><td class="line" colspan=6></td</tr>
 
-        <tr><td class="centeraligned bold">No</td><td colspan=3 class="centeraligned  bold">Keterangan</td><td colspan=2 class="centeraligned bold">Jumlah</td></tr>
+        <tr><td class="centeraligned bold">No</td><td colspan=3 class="centeraligned  bold">Keterangan</td>
+        <td colspan=2 class="centeraligned bold">Jumlah</td>
+        </tr>
 
         <tr><td class="line" colspan=6></td</tr>
         <?php $counter = 1;?>
         <?php if($spp){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td>
+        <td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td>
+        <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td>
+        </tr>
         <?php 
         $counter++;
         }?>
         <?php if($bimbel){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Bimbel <?php echo $monthsarray[$bimbelfrstmonth] . " " . $bimbelfrstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td>
+        <td colspan=3>Bimbel <?php echo $monthsarray[$bimbelfrstmonth] . " " . $bimbelfrstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td>
+        <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td>
+        </tr>
         <?php 
         $counter++;
         }?>
         <?php if($book){?>
-        <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>Buku</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($book);?></td></tr>
+        <tr><td class="centeraligned number"><?php echo $counter;?></td>
+        <td colspan=3>Buku</td>
+        <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($book);?></td>
+        </tr>
         <?php 
         $counter++;
         }?>
@@ -48,11 +59,14 @@
             <td colspan=2>&nbsp;</td><td>TOTAL</td>
             <td class="rightaligned number"><?php echo number_format($total);?></td>
         </tr>
-        <tr><td>Yang sudah dibayar</td>
-            <td class="rightaligned number"><?php echo "Rp. " .  number_format($allpaid);?></td><td colspan=2>&nbsp;</td><td></td><td></td>
+        <tr><td>Yang dibayar</td>
+            <td class="rightaligned number"><?php echo "Rp. " .  number_format($total);?></td>
+            <td colspan=2>&nbsp;</td><td></td><td></td>
         </tr>
         <tr>
-            <td>Sisa Tagihan</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($tagihanremain);?></td><td colspan=2>&nbsp;</td><td></td><td></td>
+            <td>Sisa Tagihan</td>
+            <td class="rightaligned number"><?php echo  "Rp. " . number_format($tagihanremain);?></td>
+            <td colspan=2>&nbsp;</td><td></td><td></td>
         </tr>
         <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
         <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td colspan=2 class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td></tr>
