@@ -53,28 +53,60 @@
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
         <tr><td class="line" colspan=6></td</tr>
-        <tr>
-            <td>Total Tagihan</td>
-            <td class="rightaligned number"><?php echo "Rp. " .  number_format($totaltagihan);?></td>
-            <td colspan=2>&nbsp;</td><td>TOTAL</td>
-            <td class="rightaligned number"><?php echo number_format($total);?></td>
-        </tr>
-        <tr><td>Yang dibayar</td>
-            <td class="rightaligned number"><?php echo "Rp. " .  number_format($total);?></td>
-            <td colspan=2>&nbsp;</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>Sisa Tagihan</td>
-            <td class="rightaligned number"><?php echo  "Rp. " . number_format($tagihanremain);?></td>
-            <td colspan=2>&nbsp;</td><td></td><td></td>
-        </tr>
-        <tr><td>Status</td><td>Belum Lunas</td><td colspan=2>&nbsp;</td><td></td><td></td></tr>
-        <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td colspan=2 class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td></tr>
-        <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
-        <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
-        <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td>
-            <td colspan=2 class="centeraligned"><?php echo $_SESSION["username"];?></td>
-        </tr>
+                <tr>
+                    <td>Total Tagihan</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($totaltagihan);?></td>
+                    <td colspan=2>&nbsp;</td><td>TOTAL</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($total);?></td>
+                </tr>
+                <tr><td>Yang dibayar</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($total);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr><td colspan=2 class="line"></td><td colspan=3></td></tr>
+                <tr>
+                    <td>Sisa Tagihan SPP</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . ($sppremain);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Sisa Tagihan Bimbel</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bimbelremain);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Sisa Tagihan DU/PSB</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($dupsbremain);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Sisa Tagihan Buku</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($bookpaymentremain-$book);?></td>
+                    <td colspan=2>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr><td colspan=2 class="line"></td><td colspan=3></td></tr>
+                <tr>
+                    <td>Total Sisa Tagihan</td>
+                    <td class="rightaligned number">
+                        <?php echo  "Rp. " . number_format($sppremain+$bimbelremain+$dupsbremain+$bookpaymentremain);?>
+                    </td>
+                    <td colspan=2></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td><td></td></tr>
+                <tr><td><b>Catatan:</b></td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
+                <tr><td colspan=2>* Disimpan sebagai bukti pembayaran yang sah</td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
     </tbody>
 </table>
 <script type="text/javascript" src="/assets/js/kwitansi.js"></script>
