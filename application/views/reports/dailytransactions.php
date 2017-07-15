@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/assets/css/najma.reports.css" />
     </head>
     <body>
+        <div class="topnavcenter"><a href="/reports"><img src="/assets/images/home16.png" /></a></div>
         <h1>Laporan Transaksi Harian</h1>
         <h3>Tanggal <?php echo date("d")." ".$humanmonth[removezero(date("m"))]." ".date("Y");?></h3>
         <table class="commonreport">
