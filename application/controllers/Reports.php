@@ -105,6 +105,7 @@ class Reports extends CI_Controller{
             "breadcrumb" => array(1=>"Laporan",2=>"Rekap Tertanggung"),
             "formtitle"=>"Rekap Tertanggung",
             "feedData"=>"reports",
+            "students"=>$this->report->gettertanggung(),
             "err_message"=>"",
             "role"=>$this->User->getrole()
         );
