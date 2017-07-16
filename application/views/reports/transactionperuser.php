@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="/assets/css/najma.reports.css" />
     </head>
     <body>
+        <div class="topnavcenter"><a href="/reports"><img src="/assets/images/home16.png" /></a></div>
         <h1>Laporan Rekap Transaksi Per Petugas</h1>
         <h3>
         <form action="/reports/filtertransactionperuser" method="post">
