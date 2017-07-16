@@ -182,11 +182,12 @@ class Report extends CI_Model{
     }
     function gettertanggung(){
         $ci = & get_instance();
+        $enddate = date("Y-m-d");
         $sql = "select a.name,a.nis,";
-        $sql.= "case when b.mdate is null then c.amount when timestampdiff(month,b.mdate,'2017-01-01')<0 then '0' ";
-        $sql.= "else timestampdiff(month,b.mdate,'2017-01-01')*c.amount end spp, ";
-        $sql.= "case when d.mdate is null then e.amount when timestampdiff(month,d.mdate,'2017-01-01')<0 then '0' ";
-        $sql.= "else timestampdiff(month,d.mdate,'2017-01-01')*e.amount end bimbel, ";
+        $sql.= "case when b.mdate is null then c.amount when timestampdiff(month,b.mdate,'".$enddate."')<0 then '0' ";
+        $sql.= "else timestampdiff(month,b.mdate,'".$enddate."')*c.amount end spp, ";
+        $sql.= "case when d.mdate is null then e.amount when timestampdiff(month,d.mdate,'".$enddate."')<0 then '0' ";
+        $sql.= "else timestampdiff(month,d.mdate,'".$enddate."')*e.amount end bimbel, ";
         $sql.= "case when f.amnt is null then g.amount else g.amount-f.amnt end dupsb, ";
         $sql.= "case when h.amnt is null then i.amount else i.amount-h.amnt end book ";
         $sql.= "from studentshistory a ";
