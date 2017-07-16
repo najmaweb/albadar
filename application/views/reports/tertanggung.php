@@ -6,7 +6,7 @@
     <body>
         <div class="topnavcenter"><a href="/reports"><img src="/assets/images/home16.png" /></a></div>
         <h1><?php echo $formtitle;?></h1>
-        <h3>Tanggal 1 Juli 2017</h3>
+        <h3>Tanggal <?php echo date("d")." ".$humanmonth[removezero(date("m"))]." ".date("Y");?></h3>
         <table class="commonreport">
             <thead>
                 <tr><th>No</th><th>Siswa</th><th>SPP</th><th>DU</th><th>Buku</th><th>Bimbel</th></tr>
