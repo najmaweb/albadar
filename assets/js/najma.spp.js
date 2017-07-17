@@ -24,12 +24,16 @@ validate = function(){
 }
 filltotal = function(){
     validate();
-    var total = parseInt(removeCommas($("#spp_").val()))+parseInt(removeCommas($("#psb").val()))+parseInt(removeCommas($("#book").val()))+parseInt(removeCommas($("#bimbel").val()));
+    var total = parseInt(removeCommas($("#spp_").val()))
+        +parseInt(removeCommas($("#psb").val()))
+        +parseInt(removeCommas($("#book").val()))
+        +parseInt(removeCommas($("#bimbel").val()));
     $("#total").val(numberWithCommas(total));
 }
 fillreturnmoney = function(){
     validate();
-    $("#returnmoney").val(numberWithCommas(parseInt(removeCommas($("#cashpay").val()))-parseInt(removeCommas($("#total").val()))));
+    $("#returnmoney").val(numberWithCommas(parseInt(removeCommas($("#cashpay").val()))
+        -parseInt(removeCommas($("#total").val()))));
 }
 togglespp = function(){
     if($("#sppcheckbox").prop("checked")){
@@ -131,8 +135,12 @@ $.ajax({
                     $("#book").val(numberWithCommas(res.bookremain));
                     $("#sppfrstmonth").val(res.sppmaxmonth);
                     $("#sppfrstyear").val(res.sppmaxyear);
+                    $("#sppnextmonth").val(res.sppmaxmonth);
+                    $("#sppnextyear").val(res.sppmaxyear);
                     $("#bimbelfrstmonth").val(res.bimbelmaxmonth);
                     $("#bimbelfrstyear").val(res.bimbelmaxyear);
+                    $("#bimbelnextmonth").val(res.bimbelmaxmonth);
+                    $("#bimbelnexttyear").val(res.bimbelmaxyear);
                     filltotal();
                     fillreturnmoney();
                     $(".sppperiod").change();
@@ -201,4 +209,3 @@ $(".sppperiod").adjustval({
     shownval: $("#spp_"),
     orival: $("#orispp")
 });
-//$('[data-toggle="tooltip"]').tooltip();
