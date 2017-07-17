@@ -9,6 +9,7 @@ class Grades extends CI_Controller{
         $this->load->model("User");
     }
     function index(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Daftar"),
             "formtitle"=>"Daftar Kelas",
@@ -19,6 +20,7 @@ class Grades extends CI_Controller{
         $this->load->view("grades/grades",$data);
     }
     function add(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Penambahan"),
             "formtitle"=>"Penambahan Kelas",
@@ -31,6 +33,7 @@ class Grades extends CI_Controller{
         $this->load->view("grades/add",$data);        
     }
     function edit(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Edit"),
             "formtitle"=>"Edit Kelas",
@@ -44,16 +47,19 @@ class Grades extends CI_Controller{
         $this->load->view("grades/edit",$data);        
     }
     function remove(){
+        session_start();
         $id = $this->uri->segment(3);
         $this->Grade->remove($id);
         redirect("../../");
     }
     function save(){
+        session_start();
         $params = $this->input->post();
         $this->Grade->save($params);
         redirect("../index");
     }
     function update(){
+        session_start();
         $params = $this->input->post();
         $this->Grade->update($params);
         $this->Grade->updatesppall($params);

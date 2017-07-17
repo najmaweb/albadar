@@ -11,6 +11,7 @@ class Students extends CI_Controller{
         $this->load->helper("datetime");
     }
     function index(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Daftar"),
             "formtitle"=>"Daftar Siswa",
@@ -21,6 +22,7 @@ class Students extends CI_Controller{
         $this->load->view("students/students",$data);
     }
     function add(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Penambahan"),
             "formtitle"=>"Penambahan Siswa",
@@ -33,6 +35,7 @@ class Students extends CI_Controller{
         $this->load->view("students/add",$data);        
     }
     function edit(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Edit"),
             "formtitle"=>"Edit siswa",
@@ -46,6 +49,7 @@ class Students extends CI_Controller{
         $this->load->view("students/edit",$data);        
     }
     function getjson(){
+        session_start();
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,a.nis,b.name grade,c.amount spp from students a ";
         $sql.= "left outer join grades b on b.id=a.grade_id ";
@@ -59,6 +63,7 @@ class Students extends CI_Controller{
 		echo '{"out":['.implode(",",$arr).']}';
     }
     function getsppstatus(){
+        session_start();
         $des = "MENGEMBALIKAN STATUS BELUM PERNAH MEMBAYAR JIKA JUMLAH 0";
         $des.= "MENGEMBALIKAN STATUS TAHUNBULAN TERAKHIR JIKA JUMLAH > 0";
         $nis = $this->uri->segment(3);
@@ -78,6 +83,7 @@ class Students extends CI_Controller{
         }
     }
     function getproperties(){
+        session_start();
         $nis = $this->uri->segment(3);
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
@@ -124,16 +130,19 @@ class Students extends CI_Controller{
         echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'","bookremain":"'.$res->bookremain.'","sppmaxyear":"'.$sppmaxyear.'","sppmaxmonth":"'.$sppmaxmonth.'","bimbelmaxyear":"'.$bimbelmaxyear.'","bimbelmaxmonth":"'.$bimbelmaxmonth.'"}';
     }
     function remove(){
+        session_start();
         $id = $this->uri->segment(3);
         $this->Student->remove($id);
         redirect("../../");
     }
     function save(){
+        session_start();
         $params = $this->input->post();
         $this->Student->save($params);
         redirect("../index");
     }
     function update(){
+        session_start();
         $params = $this->input->post();
         echo $this->Student->update($params);
         redirect("../index");

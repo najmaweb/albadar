@@ -6,6 +6,7 @@ class Bimbelgroups extends CI_Controller{
         $this->load->model("User");
     }
     function index(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Grup Biaya Bimbel",2=>"Daftar"),
             "formtitle"=>"Daftar Grup Biaya Bimbel",
@@ -16,6 +17,7 @@ class Bimbelgroups extends CI_Controller{
         $this->load->view("bimbelgroups/bimbelgroup",$data);
     }
     function add(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Grup Biaya Bimbel",2=>"Penambahan"),
             "formtitle"=>"Penambahan Grup Bimbel",
@@ -26,6 +28,7 @@ class Bimbelgroups extends CI_Controller{
         $this->load->view("bimbelgroups/add",$data);        
     }
     function edit(){
+        session_start();
         $data = array(
             "breadcrumb" => array(1=>"Grup SPP",2=>"Edit"),
             "formtitle"=>"Edit Grup Bimbel",
@@ -36,16 +39,19 @@ class Bimbelgroups extends CI_Controller{
         $this->load->view("bimbelgroups/edit",$data);        
     }
     function remove(){
+        session_start();
         $id = $this->uri->segment(3);
         $this->Bimbelgroup->remove($id);
         redirect("../../");
     }
     function save(){
+        session_start();
         $params = $this->input->post();
         $this->Bimbelgroup->save($params);
         redirect("../index");
     }
     function update(){
+        session_start();
         $params = $this->input->post();
         echo $this->Bimbelgroup->update($params);
         redirect("../index");
