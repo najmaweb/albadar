@@ -7,7 +7,13 @@
 <table id="rpt" width=100%>
     <thead>
         <tr><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td></tr>
-        <tr><td class="image" colspan=2><img src="/assets/images/logo100x500.png"></td><td colspan=2 >KWITANSI</td><td id="nokwitansi" colspan=2 >No. EL/06/17/0001</td></tr>
+        <tr><td class="image" colspan=2>
+        <?php $showlogo = false;?>
+        <?php if($showlogo){?>
+        <img src="/assets/images/logo100x500.png">
+        <?php }?>
+        </td>
+        <td colspan=2 >KWITANSI</td><td id="nokwitansi" colspan=2 >No. EL/06/17/0001</td></tr>
     </thead>
     <tbody>
         <tr><td class="line" colspan=6></td</tr>
