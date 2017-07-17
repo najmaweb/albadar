@@ -39,7 +39,7 @@
                                     <a href="/reports/transactionperuser" class="btn">Rekap Per Petugas</a>
                                     </div>
                                     <div class="col-lg-3">
-                                    <a href="/reports/sppbimbel" class="btn">Rekap SPP &amp; Bimbel</a>
+                                    <a href="/reports/dailyrekapperuser" class="btn">Rekap Harian Per Petugas</a>
                                     </div>
                                     <div class="col-lg-3">
                                     <a href="/reports/dubuku" class="btn">Rekap DU &amp; Buku</a>

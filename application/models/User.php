@@ -15,6 +15,9 @@ class User extends CI_Model{
         $salted = $upassword.$salt;
         return array("salt"=>$salt,"password"=>hash("sha256",$salted));
     }
+    function getarray(){
+        return array("all"=>"Semua","puji"=>"Puji","risma"=>"Risma");
+    }
     function getUser($id){
         $sql = "select a.id,a.nname,a.fname,a.mname,a.lname,a.password,a.email from users a ";
         $sql.= "where a.id=".$id;

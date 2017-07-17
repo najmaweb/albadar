@@ -4,6 +4,18 @@ class Report extends CI_Model{
         parent::__construct();
         $this->load->library("Dates");
     }
+    function dailyrekapperuser(){
+        $ci = & get_instance();
+        $sql = "select nname,sum(b.amount)spp,sum(c.amount)bimbel,sum(d.amount)dupsb,sum(e.amount)bookpayment from users a ";
+        $sql.= "left outer join spp b on b.createuser=a.nname ";
+        $sql.= "left outer join bimbel c on c.createuser=a.nname ";
+        $sql.= "left outer join dupsb d on d.createuser=a.nname ";
+        $sql.= "left outer join bookpayment e on e.createuser=a.nname ";
+        $sql.= "group by nname ";
+        $que = $ci->db->query($sql);
+        $res = $que->result();
+        return $res;
+    }
     function getdailytransaction(){
         $montharray = $this->dates->getmonthsarray();
         $sql = "select jam,uraian,amount,createuser from ( ";
