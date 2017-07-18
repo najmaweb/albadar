@@ -140,7 +140,7 @@ $.ajax({
                     $("#bimbelfrstmonth").val(res.bimbelmaxmonth);
                     $("#bimbelfrstyear").val(res.bimbelmaxyear);
                     $("#bimbelnextmonth").val(res.bimbelmaxmonth);
-                    $("#bimbelnexttyear").val(res.bimbelmaxyear);
+                    $("#bimbelnextyear").val(res.bimbelmaxyear);
                     filltotal();
                     fillreturnmoney();
                     $(".sppperiod").change();
