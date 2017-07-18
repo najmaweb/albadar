@@ -5,6 +5,8 @@ class Fees extends CI_Controller{
         $this->load->model("User");
     }
     function index(){
+        session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Biaya Pendidikan"),
             "formtitle"=>"Biaya Pendidikan",

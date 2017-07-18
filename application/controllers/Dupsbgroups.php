@@ -7,6 +7,7 @@ class Dupsbgroups extends CI_Controller{
     }
     function index(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Grup Dupsb",2=>"Daftar"),
             "formtitle"=>"Daftar Grup Dupsb",
@@ -18,6 +19,7 @@ class Dupsbgroups extends CI_Controller{
     }
     function add(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Grup Dupsb",2=>"Penambahan"),
             "formtitle"=>"Penambahan Grup Dupsb",
@@ -29,6 +31,7 @@ class Dupsbgroups extends CI_Controller{
     }
     function edit(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Grup Dupsb",2=>"Edit"),
             "formtitle"=>"Edit Grup Dupsb",
@@ -40,18 +43,21 @@ class Dupsbgroups extends CI_Controller{
     }
     function remove(){
         session_start();
+        checklogin();
         $id = $this->uri->segment(3);
         $this->Dupsbgroup->remove($id);
         redirect("../../");
     }
     function save(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         $this->Dupsbgroup->save($params);
         redirect("../index");
     }
     function update(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         echo $this->Dupsbgroup->update($params);
         redirect("../index");

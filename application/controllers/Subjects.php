@@ -5,6 +5,8 @@ class Subjects extends CI_Controller{
         $this->load->model("User");
     }
     function index(){
+        session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Mapel",2=>"Daftar"),
             "formtitle"=>"Daftar Mata Pelajaran",

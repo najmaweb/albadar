@@ -4,25 +4,28 @@ class Users extends CI_Controller{
         parent::__construct();
         $this->load->model("User");
         $this->load->model("Grade");
-        $this->load->model("User");
+        $this->load->helper("Login");
         $this->load->model("Sppgroup");
         $this->load->model("Dupsbgroup");
         $this->load->library("Dates");
     }
     function changeuserpassword(){
         session_start();
+        checklogin();
         $userid = $this->uri->segment(3);
         $password = $this->uri->segment(4);
         $this->User->changepassword($userid,$password);
     }
     function login(){
         session_start();
+        checklogin();
         $email = $this->uri->segment(3);
         $password = $this->uri->segment(4);
         echo $this->User->login("risma@gmail.com",$password);
     }
     function index(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Daftar"),
             "formtitle"=>"Daftar Siswa",
@@ -34,6 +37,7 @@ class Users extends CI_Controller{
     }
     function add(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Penambahan"),
             "formtitle"=>"Penambahan Siswa",
@@ -47,6 +51,7 @@ class Users extends CI_Controller{
     }
     function edit(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Edit"),
             "formtitle"=>"Edit siswa",
@@ -61,6 +66,7 @@ class Users extends CI_Controller{
     }
     function getjson(){
         session_start();
+        checklogin();
         $year = $this->dates->getcurrentyear();
         $sql = "select a.id,a.name,email from users a ";
         $que = $this->db->query($sql);
@@ -73,18 +79,21 @@ class Users extends CI_Controller{
     }
     function remove(){
         session_start();
+        checklogin();
         $id = $this->uri->segment(3);
         $this->User->remove($id);
         redirect("../../");
     }
     function save(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         $this->User->save($params);
         redirect("../index");
     }
     function update(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         echo $this->User->update($params);
         redirect("../index");

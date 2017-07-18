@@ -7,6 +7,7 @@ class Sppgroups extends CI_Controller{
     }
     function index(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Grup SPP",2=>"Daftar"),
             "formtitle"=>"Daftar Grup SPP",
@@ -18,6 +19,7 @@ class Sppgroups extends CI_Controller{
     }
     function add(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Grup SPP",2=>"Penambahan"),
             "formtitle"=>"Penambahan Grup SPP",
@@ -29,6 +31,7 @@ class Sppgroups extends CI_Controller{
     }
     function edit(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Grup SPP",2=>"Edit"),
             "formtitle"=>"Edit Grup SPP",
@@ -40,18 +43,21 @@ class Sppgroups extends CI_Controller{
     }
     function remove(){
         session_start();
+        checklogin();
         $id = $this->uri->segment(3);
         $this->Sppgroup->remove($id);
         redirect("../../");
     }
     function save(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         $this->Sppgroup->save($params);
         redirect("../index");
     }
     function update(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         echo $this->Sppgroup->update($params);
         redirect("../index");

@@ -206,11 +206,12 @@ class Cashier extends CI_Controller{
     }
     function saveall(){
         $params = $this->input->post();
+        session_start();
+        checklogin();
         $this->savebimbel($params);
         $this->savespp($params);
     }
     function savebimbel($params){
-        session_start();
         $montharray = getmontharray($params["bimbelfrstmonth"],$params["bimbelfrstyear"],$params["bimbelnextmonth"],$params["bimbelnextyear"]);
         foreach($montharray as $monthyear){
             $month = substr($monthyear,0,2);
@@ -288,6 +289,7 @@ class Cashier extends CI_Controller{
     }
     function kwitansi(){
         session_start();
+        checklogin();
         $params = array(
             "allpaid"=>$_SESSION["allpaid"],
             "sppfrstmonth"=>$_SESSION["sppfrstmonth"],

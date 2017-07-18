@@ -10,6 +10,7 @@ class Grades extends CI_Controller{
     }
     function index(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Daftar"),
             "formtitle"=>"Daftar Kelas",
@@ -21,6 +22,7 @@ class Grades extends CI_Controller{
     }
     function add(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Penambahan"),
             "formtitle"=>"Penambahan Kelas",
@@ -34,6 +36,7 @@ class Grades extends CI_Controller{
     }
     function edit(){
         session_start();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Kelas",2=>"Edit"),
             "formtitle"=>"Edit Kelas",
