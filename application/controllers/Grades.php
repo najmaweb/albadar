@@ -51,18 +51,21 @@ class Grades extends CI_Controller{
     }
     function remove(){
         session_start();
+        checklogin();
         $id = $this->uri->segment(3);
         $this->Grade->remove($id);
         redirect("../../");
     }
     function save(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         $this->Grade->save($params);
         redirect("../index");
     }
     function update(){
         session_start();
+        checklogin();
         $params = $this->input->post();
         $this->Grade->update($params);
         $this->Grade->updatesppall($params);
