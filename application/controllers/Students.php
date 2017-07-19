@@ -113,27 +113,50 @@ class Students extends CI_Controller{
         $sql.= "where a.nis = '".$nis."' ";
         $sql.= "and a.year='" . $year . "' ";
         $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount,f.pyear,f.pmonth,g.pyear,g.pmonth,dupsbpaid,j.bookpaymentpaid,i.amount,j.amount ";
-
         $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel group by nis) a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
         $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel where nis='060477') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='060477' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
-        $res = $que->result()[0];
-        if($res->sppmaxmonth==12){
-            $sppmaxmonth = 1;
-            $sppmaxyear = $res->sppmaxyear + 1;
+        if($que->num_rows()===0){
+            $spp = $this->Student->getspp($nis);
+            $bimbel = $this->Student->getbimbel($nis);
+            $dupsb = $this->Student->getdupsb($nis);
+            $book = $this->Student->getbook($nis);
+            $out = '{"spp":"'.$spp.'",';
+            $out.= '"bimbel":"'.$bimbel.'",';
+            $out.= '"dupsbremain":"'.$dupsb.'",';
+            $out.= '"bookremain":"'.$book.'",';
+            $out.= '"sppmaxyear":"'.$this->Setting->getcurrentyear().'",';
+            $out.= '"sppmaxmonth":"07",';
+            $out.= '"bimbelmaxyear":"'.$this->Setting->getcurrentyear().'",';
+            $out.= '"bimbelmaxmonth":"07"}';
+            echo $out;
         }else{
-            $sppmaxmonth = addzero($res->sppmaxmonth+1);
-            $sppmaxyear = addzero($res->sppmaxyear);
+            $res = $que->result()[0];
+            if($res->sppmaxmonth==12){
+                $sppmaxmonth = 1;
+                $sppmaxyear = $res->sppmaxyear + 1;
+            }else{
+                $sppmaxmonth = addzero($res->sppmaxmonth+1);
+                $sppmaxyear = addzero($res->sppmaxyear);
+            }
+            if($res->bimbelmaxmonth==12){
+                $bimbelmaxmonth = 1;
+                $bimbelmaxyear = $res->bimbelmaxyear + 1;
+            }else{
+                $bimbelmaxmonth = addzero($res->bimbelmaxmonth+1);
+                $bimbelmaxyear = addzero($res->bimbelmaxyear);
+            }
+            $out = '{"spp":"'.$res->spp.'",';
+            $out.= '"bimbel":"'.$res->bimbel.'",';
+            $out.= '"dupsbremain":"'.$res->dupsbremain.'",';
+            $out.= '"bookremain":"'.$res->bookremain.'",';
+            $out.= '"sppmaxyear":"'.$sppmaxyear.'",';
+            $out.= '"sppmaxmonth":"'.$sppmaxmonth.'",';
+            $out.= '"bimbelmaxyear":"'.$bimbelmaxyear.'",';
+            $out.= '"bimbelmaxmonth":"'.$bimbelmaxmonth.'"}';
+            echo $out;
         }
-        if($res->bimbelmaxmonth==12){
-            $bimbelmaxmonth = 1;
-            $bimbelmaxyear = $res->bimbelmaxyear + 1;
-        }else{
-            $bimbelmaxmonth = addzero($res->bimbelmaxmonth+1);
-            $bimbelmaxyear = addzero($res->bimbelmaxyear);
-        }
-        echo '{"spp":"'.$res->spp.'","bimbel":"'.$res->bimbel.'","dupsbremain":"'.$res->dupsbremain.'","bookremain":"'.$res->bookremain.'","sppmaxyear":"'.$sppmaxyear.'","sppmaxmonth":"'.$sppmaxmonth.'","bimbelmaxyear":"'.$bimbelmaxyear.'","bimbelmaxmonth":"'.$bimbelmaxmonth.'"}';
     }
     function remove(){
         session_start();
