@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tentang Aplikasi Academicsi</title>
+        <title>Tentang Aplikasi AlBadar</title>
         <?php $this->load->view("commons/headcontent");?>
         <!-- Custom styles -->
         <?php $this->load->view("commons/aboutcss");?>
@@ -21,11 +21,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="page-header bootstrap-admin-content-title">
-                                <h1>Tentang Aplikasi Academicsi</h1>
-                                <a href="https://github.com/meritoo/Bootstrap-3-Admin-Theme" class="action btn">
+                                <h1>Tentang Aplikasi AlBadar</h1>
+                                <a href="https://github.com/najmaweb/albadar" class="action btn">
                                     Go to GitHub &raquo;
                                 </a>
-                                <a href="https://github.com/meritoo/Bootstrap-3-Admin-Theme/archive/master.zip" class="action">
+                                <a href="https://github.com/najmaweb/albadar/archive/master.zip" class="action">
                                     <button class="btn btn-success">Download (.zip)</button>
                                 </a>
                             </div>
@@ -55,10 +55,10 @@
                                 <div class="bootstrap-admin-panel-content">
                                     <ul>
                                         <li>
-                                            <a href="https://github.com/meritoo/Bootstrap-3-Admin-Theme" target="_blank">Github Repository</a>
+                                            <a href="https://github.com/najmaweb/albadar" target="_blank">Github Repository</a>
                                         </li>
                                         <li>
-                                            <a href="https://github.com/meritoo/Bootstrap-3-Admin-Theme/archive/master.zip">Download (.zip package)</a>
+                                            <a href="https://github.com/najmaweb/albadar/archive/master.zip">Download (.zip package)</a>
                                         </li>
                                         <li>
                                             License: MIT (see below)
@@ -107,7 +107,7 @@
                             <a href="http://getbootstrap.com" target="_blank">Bootstrap 3.x</a>
                         </div>
                         <div class="col-md-6">
-                            <a href="http://www.meritoo.pl" target="_blank">Meritoo.pl</a>
+                            <a href="http://www.najma.web.id" target="_blank">najma.web.id</a>
                         </div>
                     </div>
                 </div>
