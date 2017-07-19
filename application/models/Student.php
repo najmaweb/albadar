@@ -61,5 +61,21 @@ class Student extends CI_Model{
         $que = $ci->db->query($sql);
         $res = $que->result();
         return $res[0]->amount;
-    }    
+    }
+    function getdupsb($nis){
+        $sql = "select b.amount from students a left outer join dupsbgroups b on b.id=a.dupsbgroup_id ";
+        $sql.= "where nis='".$nis."'";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        $res = $que->result();
+        return $res[0]->amount;
+    }
+    function getbook($nis){
+        $sql = "select b.amount from studentshistory a left outer join bookpaymentgroups b on b.id=a.bookpaymentgroup_id ";
+        $sql.= "where nis='".$nis."'";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        $res = $que->result();
+        return $res[0]->amount;
+    }
 }
