@@ -2,6 +2,7 @@
 class Mcashier extends CI_Model{
     function __construct(){
         parent::__construct();
+        $this->load->model("Setting");
     }
     function getdupsbremain($nis,$year){
         $ci = & get_instance();
@@ -84,7 +85,13 @@ class Mcashier extends CI_Model{
         return $que->result()[0]->amnt;
     }
     function getsppmaxyearmonth($nis){
-        $sql = "select max(pyear)mpyear,max(pmonth)mpmonth from spp where nis='".$nis."'";
+        $thisyear = $this->Setting->getcurrentyear();
+        $sql = "select ";
+        $sql.= "case when mpyear is null then '".$thisyear."' else mpyear end mpyear, ";
+        $sql.= "case when mpmonth is null then '07' else mpmonth end mpmonth ";
+        $sql.= "from ";
+        $sql.= "(select max(pyear)mpyear,max(pmonth)mpmonth from spp where nis='".$nis."' ) X ";
+        
         $ci = & get_instance();
         $res = $ci->db->query($sql);
         $out = $res->result();
@@ -108,6 +115,22 @@ class Mcashier extends CI_Model{
             $tagihan = 0;
         }
         return array("tagihan"=>$tagihan);
+    }
+    function getcurrsppbill($nis){
+        $maxym = $this->getsppmaxyearmonth($nis);
+        $spp = $this->getspp($nis);
+        if($maxym["maxyear"]>date("Y")){
+            $tagihan = 0;
+        }elseif($maxym["maxyear"]===date("Y")){
+            if($maxym["maxmonth"]>date("m")){
+                $tagihan = 0;
+            }else{
+                $tagihan = $spp;
+            }
+        }else{
+            $tagihan = $spp;
+        }
+        return $tagihan;
     }
     function getspp($nis){
         $sql = "select nis,amount from students a left outer join sppgroups b on b.id=a.sppgroup_id where nis='".$nis."' ";
