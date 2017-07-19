@@ -105,9 +105,11 @@ class Cashier extends CI_Controller{
         
         $dupsbremain = $this->Mcashier->getdupsbremain($params["nis"],$currentyear);
         $bookpaymentremain = $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
-        $sppremain = $this->Mcashier->getsppremain($params["nis"]);
-        $bimbelremain = $this->Mcashier->getbimbelremain($params["nis"]);
-        $_SESSION["totaltagihan"] = $dupsbremain+$bookpaymentremain+$sppremain["tagihan"]+$bimbelremain["tagihan"];
+        //$currentsppbill = $this->Mcashier->getcurrsppbill($params["nis"]);
+        $sppremain = $this->Mcashier->getsppremain($params["nis"])["tagihan"];
+        $bimbelremain = $this->Mcashier->getbimbelremain($params["nis"])["tagihan"];
+        $currentsppbill = $this->Mcashier->getcurrsppbill($params["nis"]);
+        $_SESSION["totaltagihan"] = $dupsbremain+$bookpaymentremain+$sppremain+$bimbelremain;
         
         $remain = 0;
         $remain+= $this->Mcashier->gettotaltagihan($params["nis"],$currentyear);
@@ -118,8 +120,8 @@ class Cashier extends CI_Controller{
         $remain-=$params["book"];
         $remain-=removedot($params["psb"]);
         $_SESSION["tagihanremain"] = $remain;
-        $_SESSION["sppremain"] = $this->Mcashier->getsppremain($params["nis"])["tagihan"];
-        $_SESSION["bimbelremain"] = $this->Mcashier->getbimbelremain($params["nis"])["tagihan"];
+        $_SESSION["sppremain"] = $sppremain;
+        $_SESSION["bimbelremain"] = $bimbelremain;
         $_SESSION["dupsbremain"] = $this->Mcashier->getdupsbremain($params["nis"],$currentyear) - removedot($params["psb"]);
         $_SESSION["bookpaymentremain"] = $this->Mcashier->getbookpaymentremain($params["nis"],$currentyear);
         if(isset($params["sppcheckbox"])){
