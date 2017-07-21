@@ -127,7 +127,7 @@ $.ajax({
                     $("#spp").val(res.spp);
                     $("#orispp").val(res.spp);
                     $("#bimbel_").val(numberWithCommas(res.bimbel));
-                    $("#bimbel").val(res.bimbel);
+                    $("#bimbel").val(numberWithCommas(res.bimbel));
                     $("#oribimbel").val(res.bimbel);
                     $("#psb_").val(numberWithCommas(res.dupsbremain));
                     $("#psb").val(numberWithCommas(res.dupsbremain));
