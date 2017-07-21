@@ -4,9 +4,6 @@
         <li class="<?php echo ($feedData==='about')?'active':'';?>">
             <a href="/about"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
         </li>
-        <li class="<?php echo ($feedData==='dashboard')?'active':'';?>">
-            <a href="/dashboard"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
-        </li>
         <li class="<?php echo ($feedData==='kelas')?'active':'';?>">
             <a href="/grades"><i class="glyphicon glyphicon-chevron-right"></i> Kelas</a>
         </li>
