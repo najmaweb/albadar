@@ -67,4 +67,16 @@ class Tester extends CI_Controller{
         $this->load->model("Mcashier");
         echo $this->Mcashier->getbookpaymentremain("060477","2016").PHP_EOL;
     }
+    function getcurrrsppbill(){
+        $this->load->model("Mcashier");
+        $nis = "060606";
+        $currentsppbill = $this->Mcashier->getcurrsppbill($nis);
+        echo $currentsppbill;
+    }
+    function showsessions(){
+        session_start();
+        foreach($_SESSION as $key=>$val){
+            echo $key . " and " . $val . "<br />";
+        }
+    }
 }
