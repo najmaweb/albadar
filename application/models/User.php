@@ -16,7 +16,15 @@ class User extends CI_Model{
         return array("salt"=>$salt,"password"=>hash("sha256",$salted));
     }
     function getarray(){
-        return array("all"=>"Semua","puji"=>"Puji","risma"=>"Risma");
+        $out = array();
+        $sql = "select id,nname from users ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        $out["all"] = "Semua";
+        foreach($que->result() as $res){
+            $out[$res->nname] = $res->nname;
+        }
+        return $out;
     }
     function getUser($id){
         $sql = "select a.id,a.nname,a.fname,a.mname,a.lname,a.password,a.email from users a ";
