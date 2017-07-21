@@ -2,6 +2,7 @@
 class Students extends CI_Controller{
     function __construct(){
         parent::__construct();
+        $this->load->model("Mcashier");
         $this->load->model("Student");
         $this->load->model("Grade");
         $this->load->model("User");
@@ -120,7 +121,7 @@ class Students extends CI_Controller{
         if($que->num_rows()===0){
             $spp = $this->Student->getspp($nis);
             $bimbel = $this->Student->getbimbel($nis);
-            $dupsb = $this->Student->getdupsb($nis);
+            $dupsb = $this->Mcashier->getdupsbremain($nis,$year);
             $book = $this->Student->getbook($nis);
             $out = '{"spp":"'.$spp.'",';
             $out.= '"bimbel":"'.$bimbel.'",';
