@@ -11,7 +11,7 @@ class Teachers extends CI_Controller{
             "breadcrumb" => array(1=>"Guru",2=>"Daftar"),
             "formtitle"=>"Daftar Guru",
             "feedData"=>"subject",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("teachers/teachers",$data);
     }

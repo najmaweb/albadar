@@ -11,7 +11,7 @@ class Fees extends CI_Controller{
             "breadcrumb" => array(1=>"Siswa",2=>"Biaya Pendidikan"),
             "formtitle"=>"Biaya Pendidikan",
             "feedData"=>"fees",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("fees/fees",$data);
     }

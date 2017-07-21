@@ -31,7 +31,7 @@ class Users extends CI_Controller{
             "formtitle"=>"Daftar Siswa",
             "feedData"=>"siswa",
             "objs"=>$this->User->getUsers(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("users/users",$data);
     }
@@ -45,7 +45,7 @@ class Users extends CI_Controller{
             "Users"=>$this->User->getUsers(),
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("users/add",$data);        
     }
@@ -60,7 +60,7 @@ class Users extends CI_Controller{
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
             "dupsbgroups"=>$this->Dupsbgroup->getDupsbgrouparray(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("users/edit",$data);        
     }

@@ -19,7 +19,7 @@ class Settings extends CI_Controller{
             "formtitle"=>"Setting",
             "feedData"=>"settings",
             "currentyear"=>$this->Setting->getcurrentyear(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("commons/settings",$data);
     }

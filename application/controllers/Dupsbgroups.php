@@ -13,7 +13,7 @@ class Dupsbgroups extends CI_Controller{
             "formtitle"=>"Daftar Grup Dupsb",
             "feedData"=>"Dupsbgroup",
             "objs" => $this->Dupsbgroup->getDupsbgroups(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("dupsbgroups/dupsbgroup",$data);
     }
@@ -25,7 +25,7 @@ class Dupsbgroups extends CI_Controller{
             "formtitle"=>"Penambahan Grup Dupsb",
             "feedData"=>"Dupsbgroup",
             "Dupsbgroups"=>$this->Dupsbgroup->getDupsbgroups(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("dupsbgroups/add",$data);        
     }
@@ -37,7 +37,7 @@ class Dupsbgroups extends CI_Controller{
             "formtitle"=>"Edit Grup Dupsb",
             "feedData"=>"Dupsbgroup",
             "obj"=>$this->Dupsbgroup->getDupsbgroup($this->uri->segment(3)),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("dupsbgroups/edit",$data);        
     }

@@ -6,7 +6,10 @@
 <body>
 <table id="rpt" width=100%>
     <thead>
-        <tr><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td><td width="16%"></td></tr>
+        <tr>
+            <td width="16%"></td><td width="16%"></td><td width="16%"></td>
+            <td width="16%"></td><td width="16%"></td><td width="16%"></td>
+        </tr>
         <tr><td class="image" colspan=2>
         <?php $showlogo = false;?>
         <?php if($showlogo){?>
@@ -17,7 +20,11 @@
     </thead>
     <tbody>
         <tr><td class="line" colspan=6></td</tr>
-        <tr><td>Telah terima dari</td><td>: <?php echo substr($studentname,0,15);?> - <?php echo $grade;?></td><td id="terbilang" rowspan="2" colspan="4"><?php echo humanize(terbilang((string) $total)) . " Rupiah";?></td></tr>
+        <tr>
+            <td>Telah terima dari</td>
+            <td>: <?php echo substr($studentname,0,15);?> - <?php echo $grade;?></td>
+            <td id="terbilang" rowspan="2" colspan="4"><?php echo humanize(terbilang((string) $total)) . " Rupiah";?></td>
+        </tr>
         <tr><td>Sejumlah Uang</td><td>: <?php echo "Rp. " . number_format($topaid);?></td></tr>
         <tr><td class="line" colspan=6></td</tr>
 
@@ -29,24 +36,24 @@
         <?php $counter = 1;?>
         <?php if($spp){?>
         <tr><td class="centeraligned number"><?php echo $counter;?></td>
-        <td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td>
-        <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td>
+            <td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td>
+            <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td>
         </tr>
         <?php 
         $counter++;
         }?>
         <?php if($bimbel){?>
         <tr><td class="centeraligned number"><?php echo $counter;?></td>
-        <td colspan=3>Bimbel <?php echo $monthsarray[$bimbelfrstmonth] . " " . $bimbelfrstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td>
-        <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td>
+            <td colspan=3>Bimbel <?php echo $monthsarray[$bimbelfrstmonth] . " " . $bimbelfrstyear?> - <?php echo $monthsarray[$bimbelnextmonth] . " " . $bimbelnextyear;?> (<?php echo $bimbelmonthcount?> bulan)</td>
+            <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($bimbel);?></td>
         </tr>
         <?php 
         $counter++;
         }?>
         <?php if($book){?>
         <tr><td class="centeraligned number"><?php echo $counter;?></td>
-        <td colspan=3>Buku</td>
-        <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($book);?></td>
+            <td colspan=3>Buku</td>
+            <td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($book);?></td>
         </tr>
         <?php 
         $counter++;

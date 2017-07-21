@@ -13,7 +13,7 @@ class Bimbelgroups extends CI_Controller{
             "formtitle"=>"Daftar Grup Biaya Bimbel",
             "feedData"=>"bimbelgroup",
             "objs" => $this->Bimbelgroup->getbimbelgroups(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("bimbelgroups/bimbelgroup",$data);
     }
@@ -25,7 +25,7 @@ class Bimbelgroups extends CI_Controller{
             "formtitle"=>"Penambahan Grup Bimbel",
             "feedData"=>"bimbelgroup",
             "bimbelgroups"=>$this->Bimbelgroup->getbimbelgroups(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("bimbelgroups/add",$data);        
     }
@@ -37,7 +37,7 @@ class Bimbelgroups extends CI_Controller{
             "formtitle"=>"Edit Grup Bimbel",
             "feedData"=>"bimbelgroup",
             "obj"=>$this->Bimbelgroup->getbimbelgroup($this->uri->segment(3)),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("bimbelgroups/edit",$data);        
     }

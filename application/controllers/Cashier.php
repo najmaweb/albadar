@@ -21,7 +21,7 @@ class Cashier extends CI_Controller{
             "curmonth"=>date('m'),
             "curyear"=>date("Y"),
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
         );
         $this->load->view("cashiers/spp",$data);
     }
@@ -172,7 +172,7 @@ class Cashier extends CI_Controller{
             "orispp"=>$_SESSION["orispp"],
             "oribimbel"=>$_SESSION["oribimbel"],
             "sppcheckbox"=>$_SESSION["sppcheckbox"],
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "periodmonths"=>getperiodmonths(),
             "tagihanremain"=>$_SESSION["tagihanremain"],
             "sppremain"=>$_SESSION["sppremain"],
@@ -198,7 +198,7 @@ class Cashier extends CI_Controller{
                 "curmonth"=>date('m'),
                 "curyear"=>date("Y"),
                 "err_message"=>" (".$err_msg.")",
-                "role"=>$this->User->getrole(),
+                "role"=>$this->User->getrole($_SESSION["userid"]),
             );
             $this->load->view("cashiers/spp",$data);
         }else{
@@ -319,7 +319,7 @@ class Cashier extends CI_Controller{
             "sppmonthcount"=>$_SESSION["sppmonthcount"],
             "bimbelmonthcount"=>$_SESSION["bimbelmonthcount"],
             "monthsarray"=>$this->dates->getmonthsarray(),
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "periodmonths"=>getperiodmonths(),
             "tagihanremain"=>$_SESSION["tagihanremain"],
             "sppremain"=>$_SESSION["sppremain"],

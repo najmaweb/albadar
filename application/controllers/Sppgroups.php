@@ -13,7 +13,7 @@ class Sppgroups extends CI_Controller{
             "formtitle"=>"Daftar Grup SPP",
             "feedData"=>"sppgroup",
             "objs" => $this->Sppgroup->getsppgroups(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("sppgroups/sppgroup",$data);
     }
@@ -25,7 +25,7 @@ class Sppgroups extends CI_Controller{
             "formtitle"=>"Penambahan Grup SPP",
             "feedData"=>"sppgroup",
             "sppgroups"=>$this->Sppgroup->getsppgroups(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("sppgroups/add",$data);        
     }
@@ -37,7 +37,7 @@ class Sppgroups extends CI_Controller{
             "formtitle"=>"Edit Grup SPP",
             "feedData"=>"sppgroup",
             "obj"=>$this->Sppgroup->getsppgroup($this->uri->segment(3)),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("sppgroups/edit",$data);        
     }

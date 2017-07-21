@@ -20,7 +20,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Laporan-laporan",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("reports/index",$data);
     }
@@ -39,7 +39,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Harian Per Petugas",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "dailyreports"=>$this->report->dailyrekapperuser(),
             "users"=>$this->User->getarray(),
             "user"=>$user,
@@ -55,7 +55,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Transaksi Harian",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "dailyreports"=>$this->report->getdailytransaction(),
             "humanmonth"=>getperiodmonths()
         );
@@ -78,7 +78,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Transaksi Harian",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "dailyreports"=>$dailyreports,
             "humanmonth"=>getperiodmonths(),
             "month"=>$this->uri->segment(3),
@@ -100,7 +100,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Pembayaran SPP &amp; Bimbel",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "pyear"=>$pyear,
             "spp"=>$spp,
             "bimbel"=>$bimbel,
@@ -117,7 +117,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Pembayaran DU &amp; Buku",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("reports/dubuku",$data);
     }
@@ -131,7 +131,7 @@ class Reports extends CI_Controller{
             "humanmonth"=>getperiodmonths(),
             "students"=>$this->report->gettertanggung(),
             "err_message"=>"",
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("reports/tertanggung",$data);
     }
@@ -146,7 +146,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Pembayaran SPP",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "pyear"=>$pyear,
             "spp"=>$spp,
             "bimbel"=>$bimbel,
@@ -165,7 +165,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Pembayaran Bimbel",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "pyear"=>$pyear,
             "periodmonths"=>getperiodmonths(),
             "objs"=>$this->report->getrekapbimbelperkelas(),
@@ -182,7 +182,7 @@ class Reports extends CI_Controller{
             "formtitle"=>"Rekap Pembayaran Bimbel",
             "feedData"=>"reports",
             "err_message"=>"",
-            "role"=>$this->User->getrole(),
+            "role"=>$this->User->getrole($_SESSION["userid"]),
             "pyear"=>$pyear,
             "periodmonths"=>getperiodmonths(),
             "objs"=>$this->report->getrekapbimbelperkelas()

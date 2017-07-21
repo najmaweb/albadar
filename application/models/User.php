@@ -83,7 +83,14 @@ class User extends CI_Model{
         $que = $ci->db->query($sql);
         return $sql;
     }
-    function getrole(){
-        return "1";
+    function getrole($user_id=0){
+        $sql = "select role from users where id=".$user_id;
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        if($que->num_rows()>0){
+            return $que->result()[0]->role;
+        }else{
+            return "0";
+        }
     }
 }

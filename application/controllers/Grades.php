@@ -16,7 +16,7 @@ class Grades extends CI_Controller{
             "formtitle"=>"Daftar Kelas",
             "feedData"=>"kelas",
             "objs" => $this->Grade->getgrades(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("grades/grades",$data);
     }
@@ -30,7 +30,7 @@ class Grades extends CI_Controller{
             "grades"=>$this->Grade->getgrades(),
             "sppdefault"=>$this->Sppgroup->getsppgrouparray(),
             "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("grades/add",$data);        
     }
@@ -45,7 +45,7 @@ class Grades extends CI_Controller{
             "sppdefault"=>$this->Sppgroup->getsppgrouparray(),
             "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray(),
             "dupsbdefault"=>$this->Dupsbgroup->getDupsbgrouparray(),
-            "role"=>$this->User->getrole()
+            "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("grades/edit",$data);        
     }
