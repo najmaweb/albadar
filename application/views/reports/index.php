@@ -34,7 +34,9 @@
                                     <a href="/reports/dailytransactions" class="btn">Rekap Transaksi Harian</a>
                                     </div>
                                     <div class="col-lg-3">
-                                    <a href="/reports/transactionperuser" class="btn">Rekap Per Petugas</a>
+                                    <a href="/reports/transactionperuser/<?php echo date('m');?>/<?php echo date('Y');?>/all" class="btn">
+                                        Rekap Per Petugas
+                                    </a>
                                     </div>
                                     <div class="col-lg-3">
                                     <a href="/reports/dailyrekapperuser" class="btn">Rekap Harian Per Petugas</a>
