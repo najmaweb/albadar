@@ -23,6 +23,55 @@ class Students extends CI_Controller{
         );
         $this->load->view("students/students",$data);
     }
+    function import(){
+        session_start();
+        checklogin();
+        $data = array(
+            "breadcrumb" => array(1=>"Siswa",2=>"Import CSV"),
+            "formtitle"=>"Import Siswa",
+            "feedData"=>"siswa",
+            "objs"=>$this->Student->getStudents(),
+            "role"=>$this->User->getrole($_SESSION["userid"])
+        );
+        $this->load->view("students/import",$data);
+    }
+    function importcsv(){
+        session_start();
+        $params = $this->input->post();
+        if(isset($_POST["submit"]))
+        {
+            $file = $_FILES['file']['tmp_name'];
+            $handle = fopen($file, "r");
+            $c = 0;
+            $objarr = array();
+            while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+            {
+                $year = $filesop[0];
+    			$nis = $filesop[1];
+                $name = $filesop[2];
+    			$grade_id = $filesop[3];
+    			$sppgroup_id = $filesop[4];
+    			$bimbelgroup_id = $filesop[5];
+    			$dupsbgroup_id = $filesop[6];
+    			$bookpaymentgroup_id = $filesop[7];
+                array_push($objarr,array(
+                    "year"=>$year,"nis"=>$nis,
+                    "name"=>$name,"grade_id"=>$grade_id,
+                    "sppgroup_id"=>$sppgroup_id,"bimbelgroup_id"=>$bimbelgroup_id,
+                    "dupsbgroup_id"=>$dupsbgroup_id,"bookpaymentgroup_id"=>$bookpaymentgroup_id,
+                )
+                );
+                $c = $c + 1;
+            }
+            $filesop = fgetcsv($handle, 1000, ",");
+            $data = array(
+                "results" =>$objarr,
+                "role"=>"1",
+                "feedData"=>"siswa"
+            );
+            $this->load->view("students/importresult",$data);
+        }        
+    }
     function add(){
         session_start();
         checklogin();
@@ -97,25 +146,28 @@ class Students extends CI_Controller{
         $sql.= "e.dupsbpaid,j.bookpaymentpaid, ";
         $sql.= "case when e.amount is null then d.amount else (d.amount-e.amount) end  dupsbremain, ";
         $sql.= "case when j.amount is null then i.amount else (i.amount-j.amount) end  bookremain, ";
-        $sql.= "case when f.pyear is null then a.inityear else f.pyear end sppmaxyear,case when f.pmonth is null then a.initmonth else f.pmonth end sppmaxmonth, ";
-        $sql.= "case when g.pyear is null then a.inityear else g.pyear end bimbelmaxyear,case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
+        $sql.= "case when f.pyear is null then a.inityear else f.pyear end sppmaxyear,";
+        $sql.= "case when f.pmonth is null then a.initmonth else f.pmonth end sppmaxmonth, ";
+        $sql.= "case when g.pyear is null then a.inityear else g.pyear end bimbelmaxyear,";
+        $sql.= "case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
         $sql.= "from students a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
-        $sql.= "left outer join (select nis,count(amount) dupsbpaid,sum(amount) amount from dupsb where nis='".$nis."' group by nis) e on e.nis=a.nis ";
-        $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from spp where nis='".$nis."') a left outer join (select nis,pyear,max(pmonth)mmonth from spp where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) f on f.nis=a.nis ";
-        $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from bimbel where nis='".$nis."') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) g on g.nis=a.nis ";
+        $sql.= "left outer join (select nis,count(amount) dupsbpaid,sum(amount) amount from dupsb where nis='".$nis."' and year='".$year."' group by nis) e on e.nis=a.nis ";
+        $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from spp where nis='".$nis."' and cyear='".$year."') a left outer join (select nis,pyear,max(pmonth)mmonth from spp where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) f on f.nis=a.nis ";
+        $sql.= "left outer join (";
+        $sql.= " select a.nis,b.pyear,mmonth pmonth from  (";
+        $sql.= "  select nis,max(pyear)myear from bimbel where nis='".$nis."') a ";
+        $sql.= "  left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='".$nis."' group by nis,pyear) b ";
+        $sql.= "   on b.nis=a.nis and b.pyear=a.myear) g on g.nis=a.nis ";
         $sql.= "left outer join studentshistory h on h.nis=a.nis ";
         $sql.= "left outer join bookpaymentgroups i on i.id=h.bookpaymentgroup_id ";
-        $sql.= "left outer join (select nis,count(amount) bookpaymentpaid,sum(amount) amount from bookpayment where nis='".$nis."' group by nis) j on j.nis=a.nis ";
-
-
+        $sql.= "left outer join (select nis,count(amount) bookpaymentpaid,sum(amount) amount from bookpayment ";
+        $sql.= " where nis='".$nis."' and year='".$year."' group by nis) j on j.nis=a.nis ";
         $sql.= "where a.nis = '".$nis."' ";
-        $sql.= "and a.year='" . $year . "' ";
+        $sql.= "and h.year='" . $year . "' ";
         $sql.= "group by a.id,a.name,b.amount,c.amount,d.amount,f.pyear,f.pmonth,g.pyear,g.pmonth,dupsbpaid,j.bookpaymentpaid,i.amount,j.amount ";
-        $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel group by nis) a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
-        $maxquery = "select a.nis,b.pyear,mmonth from  (select nis,max(pyear)myear from bimbel where nis='060477') a left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='060477' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         if($que->num_rows()===0){
@@ -172,6 +224,26 @@ class Students extends CI_Controller{
         $params = $this->input->post();
         $this->Student->save($params);
         redirect("../index");
+    }
+    function cleanstudenthistory($year,$grade_id){
+        $sql = "delete from studentshistory where year='".$year."' and grade_id='".$grade_id."'";
+        $this->db->query($sql);
+        return $sql;
+    }
+    function savefromcsv(){
+        $params = $this->input->post();
+        if(isset($_POST["btnsavedata"])){
+            $year = $params["year"][0];
+            $grade_id = $params["grade_id"][0];
+            $this->cleanstudenthistory($year,$grade_id);
+            for($c=0;$c<count($params["name"]);$c++){
+                $sql = "insert into studentshistory "; 
+                $sql.= "(year,nis,name,grade_id,sppgroup_id,bimbelgroup_id,dupsbgroup_id,bookpaymentgroup_id) ";
+                $sql.= "values ";
+                $sql.= "('".$params["year"][$c]."','".$params["nis"][$c]."','".str_replace("'","''",$params["name"][$c])."','".$params["grade_id"][$c]."','".$params["sppgroup_id"][$c]."','".$params["bimbelgroup_id"][$c]."','".$params["dupsbgroup_id"][$c]."','".$params["bookpaymentgroup_id"][$c]."')";
+                $this->db->query($sql);
+            }
+        }
     }
     function update(){
         session_start();
