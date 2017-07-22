@@ -12,7 +12,8 @@ class Student extends CI_Model{
         return $que->result()[0];
     }
     function getStudents(){
-        $sql = "select a.id,a.name,a.nis,a.description,b.name grade,c.name sppgroup,c.amount sppamount,d.name dupsb from students a " ;
+        $sql = "select a.id,a.name,a.nis,a.description,b.name grade,";
+        $sql.= "c.name sppgroup,c.amount sppamount,d.name dupsb from studentshistory a " ;
         $sql.= "left outer join grades b on b.id=a.grade_id ";
         $sql.= "left outer join sppgroups c on c.id=a.sppgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
