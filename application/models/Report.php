@@ -7,10 +7,10 @@ class Report extends CI_Model{
     function dailyrekapperuser(){
         $ci = & get_instance();
         $sql = "select nname,sum(b.amount)spp,sum(c.amount)bimbel,sum(d.amount)dupsb,sum(e.amount)bookpayment from users a ";
-        $sql.= "left outer join spp b on b.createuser=a.nname ";
-        $sql.= "left outer join bimbel c on c.createuser=a.nname ";
-        $sql.= "left outer join dupsb d on d.createuser=a.nname ";
-        $sql.= "left outer join bookpayment e on e.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,amount from spp where cyear=".$ci->setting->getcurrentyear().") b on b.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,amount from bimbel where cyear=".$ci->setting->getcurrentyear().") c on c.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,amount from dupsb where year=".$ci->setting->getcurrentyear().") d on d.createuser=a.nname ";
+        $sql.= "left outer join (select createuser,amount from bookpayment where year=".$ci->setting->getcurrentyear().") e on e.createuser=a.nname ";
         $sql.= "group by nname ";
         $que = $ci->db->query($sql);
         $res = $que->result();
