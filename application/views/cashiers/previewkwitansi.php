@@ -55,7 +55,10 @@
                 <tr><td class="line" colspan=6></td</tr>
                 <?php $counter = 1;?>
                 <?php if($spp){?>
-                <tr><td class="centeraligned number"><?php echo $counter;?></td><td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td></tr>
+                <tr>
+                    <td class="centeraligned number"><?php echo $counter;?></td>
+                    <td colspan=3>SPP <?php echo $monthsarray[$sppfrstmonth] . " " . $sppfrstyear?> - <?php echo $monthsarray[$sppnextmonth] . " " . $sppnextyear;?> (<?php echo $sppmonthcount?> bulan)</td><td colspan=2 class="rightaligned number"><?php echo  "Rp. " . number_format($spp);?></td>
+                </tr>
                 <?php 
                 $counter++;
                 }?>
@@ -80,8 +83,11 @@
                 <tr><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td><td colspan=2>&nbsp;</td></tr>
                 <tr><td class="line" colspan=6></td</tr>
                 <tr>
-                    <td>Total Tagihan</td><td class="rightaligned number"><?php echo  "Rp. " . number_format($totaltagihan);?></td>
-                    <td colspan=2>&nbsp;</td><td>TOTAL</td>
+                    <td>Total Tagihan</td>
+                    <td class="rightaligned number"><?php echo  "Rp. " . number_format($totaltagihan);?></td>
+                    <td><?php echo " = " .  number_format($sppremain) . "+" . number_format($bimbelremain) . "+" . number_format($dupsbremain) . "+" . number_format($bookpaymentremain) ?></td>
+                    <td></td>
+                    <td>TOTAL</td>
                     <td class="rightaligned number"><?php echo  "Rp. " . number_format($total);?></td>
                 </tr>
                 <tr><td>Yang dibayar</td>
