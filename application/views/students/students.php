@@ -25,7 +25,9 @@
                             <div class="panel panel-default">
                                 <div class="head panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title">Daftar Siswa</div>
-                                    <button class="xright btn btn-sm btn-default" id="addstudent"><i class="glyphicon glyphicon-plus"></i> Penambahan</button>
+                                    <button class="xright btn btn-sm btn-default" id="addstudent">
+                                        <i class="glyphicon glyphicon-plus"></i> Penambahan
+                                    </button>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
                                     <table class="table table-striped table-bordered" id="tblstudent">
