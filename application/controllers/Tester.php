@@ -45,7 +45,7 @@ class Tester extends CI_Controller{
     function getsppremain(){
         $this->load->model("Mcashier");
         $nis = $this->uri->segment(3);
-        echo $this->Mcashier->getsppremain($nis);
+        echo $this->Mcashier->getsppremain($nis)["tagihan"];
     }
     function changepassword(){
         $COMMENT = "INTERFACE FOR CHANGE PASSWORD ";
@@ -67,9 +67,9 @@ class Tester extends CI_Controller{
         $this->load->model("Mcashier");
         echo $this->Mcashier->getbookpaymentremain("060477","2016").PHP_EOL;
     }
-    function getcurrrsppbill(){
+    function getcurrsppbill(){
         $this->load->model("Mcashier");
-        $nis = "060606";
+        $nis = $this->uri->segment(3);//"060606";
         $currentsppbill = $this->Mcashier->getcurrsppbill($nis);
         echo $currentsppbill;
     }
