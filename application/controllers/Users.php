@@ -29,7 +29,7 @@ class Users extends CI_Controller{
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Daftar"),
             "formtitle"=>"Daftar Siswa",
-            "feedData"=>"siswa",
+            "feedData"=>"user",
             "objs"=>$this->User->getUsers(),
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
@@ -41,7 +41,7 @@ class Users extends CI_Controller{
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Penambahan"),
             "formtitle"=>"Penambahan Siswa",
-            "feedData"=>"siswa",
+            "feedData"=>"user",
             "Users"=>$this->User->getUsers(),
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
@@ -55,7 +55,7 @@ class Users extends CI_Controller{
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Edit"),
             "formtitle"=>"Edit siswa",
-            "feedData"=>"siswa",
+            "feedData"=>"user",
             "obj"=>$this->User->getUser($this->uri->segment(3)),
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),

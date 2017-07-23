@@ -29,7 +29,7 @@
             <a href="/settings"><i class="glyphicon glyphicon-chevron-right"></i> Setting</a>
         </li>
         <?php if($role==="1"){?>
-        <li class="<?php echo ($feedData==='users')?'active':'';?>">
+        <li class="<?php echo ($feedData==='user')?'active':'';?>">
             <a href="/users"><i class="glyphicon glyphicon-chevron-right"></i> User</a>
         </li>
         <?php }?>
