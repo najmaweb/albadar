@@ -248,7 +248,16 @@ class Students extends CI_Controller{
                 $sql = "insert into studentshistory "; 
                 $sql.= "(year,nis,name,grade_id,sppgroup_id,bimbelgroup_id,dupsbgroup_id,bookpaymentgroup_id) ";
                 $sql.= "values ";
-                $sql.= "('".$params["year"][$c]."','".$params["nis"][$c]."','".str_replace("'","''",$params["name"][$c])."','".$params["grade_id"][$c]."','".$params["sppgroup_id"][$c]."','".$params["bimbelgroup_id"][$c]."','".$params["dupsbgroup_id"][$c]."','".$params["bookpaymentgroup_id"][$c]."')";
+                $sql.= "(";
+                $sql.= "'".$params["year"][$c]."',";
+                $sql.= "'".$params["nis"][$c]."',";
+                $sql.= "'".str_replace("'","''",$params["name"][$c])."',";
+                $sql.= "'".$params["grade_id"][$c]."',";
+                $sql.= "'".$params["sppgroup_id"][$c]."',";
+                $sql.= "'".$params["bimbelgroup_id"][$c]."',";
+                $sql.= "'".$params["dupsbgroup_id"][$c]."',";
+                $sql.= "'".$params["bookpaymentgroup_id"][$c]."'";
+                $sql.= ")";
                 $this->db->query($sql);
             }
         }
