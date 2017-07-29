@@ -16,10 +16,8 @@
             <div class="row">
                 <!-- left, vertical navbar -->
                 <?php $this->load->view("commons/horizontalmenu");?>
-
                 <!-- content -->
                 <div class="col-md-10">
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
@@ -27,6 +25,9 @@
                                     <div class="text-muted bootstrap-admin-box-title">Daftar Siswa</div>
                                     <button class="xright btn btn-sm btn-default" id="addstudent">
                                         <i class="glyphicon glyphicon-plus"></i> Penambahan
+                                    </button>
+                                    <button class="xright btn btn-sm btn-default" id="importstudent">
+                                        <i class="glyphicon glyphicon-plus"></i> Import
                                     </button>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
@@ -71,7 +72,6 @@
                 </div>
             </div>
         </div>
-
         <!-- footer -->
         <?php $this->load->view("commons/footer");?>
         <?php $this->load->view("commons/assets");?>
@@ -97,6 +97,9 @@
             } );
             $("#addstudent").click(function(){
                 window.location.href = "/students/add";
+            });
+            $("#importstudent").click(function(){
+                window.location.href = "/students/import";
             });
         </script>
     </body>

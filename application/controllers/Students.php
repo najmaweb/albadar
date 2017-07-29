@@ -211,6 +211,14 @@ class Students extends CI_Controller{
             echo $out;
         }
     }
+    function importfinished(){
+        $data = array(
+            "info1"=>"Anda telah mengimport",
+            "info2"=>"File csv siswa",
+            "redirect"=>"../../students"
+        );
+        $this->load->view("students/info",$data);
+    }
     function remove(){
         session_start();
         checklogin();
@@ -244,6 +252,7 @@ class Students extends CI_Controller{
                 $this->db->query($sql);
             }
         }
+        redirect("../../students/importfinished");
     }
     function update(){
         session_start();
