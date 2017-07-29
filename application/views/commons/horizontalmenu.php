@@ -14,7 +14,7 @@
             <a href="/Bimbelgroups"><i class="glyphicon glyphicon-chevron-right"></i> Grup Bimbel</a>
         </li>
         <li class="<?php echo ($feedData==='dupsbgroup')?'active':'';?>">
-            <a href="/Dupsbgroups"><i class="glyphicon glyphicon-chevron-right"></i> Grup DU/PSB</aDupsb
+            <a href="/Dupsbgroups"><i class="glyphicon glyphicon-chevron-right"></i> Grup DU/PSB</a>
         </li>
         <li class="<?php echo ($feedData==='siswa')?'active':'';?>">
             <a href="/students"><i class="glyphicon glyphicon-chevron-right"></i> Siswa</a>
