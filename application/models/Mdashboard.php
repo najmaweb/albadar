@@ -33,7 +33,6 @@ class Mdashboard extends CI_Model{
         $sql = "select count(a.id)tot,count(b.id)byr from studentshistory a ";
         $sql.= "left outer join dupsb b on b.nis=a.nis ";
         $sql.= "where a.year='".$curyear."' and b.year='".$curyear."'";
-        echo $sql;
         $que = $ci->db->query($sql);
         $res = $que->result()[0];
         return array("tot"=>$res->tot,"byr"=>$res->byr);
