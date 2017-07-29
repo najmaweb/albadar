@@ -4,7 +4,7 @@ class Student extends CI_Model{
         parent::__construct();
     }
     function getStudent($id){
-        $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.description from students a ";
+        $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.description from studentshistory a ";
         $sql.= "right outer join settings b on b.currentyear=a.year ";
         $sql.= "where a.id=".$id;
         $ci = & get_instance();
@@ -29,6 +29,16 @@ class Student extends CI_Model{
         return $sql;
     }
     function save($params){
+        $sql = "insert into studentshistory (name,nis,grade_id,sppgroup_id,description) ";
+        $sql.= "values ";
+        $sql.= "('".$params['name']."',";
+        $sql.= "'".$params['nis']."',";
+        $sql.= "'".$params['grade_id']."',";
+        $sql.= "'".$params['sppgroup_id']."',";
+        $sql.= "'".$params['description']."') ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+
         $sql = "insert into students (name,nis,grade_id,sppgroup_id,description) ";
         $sql.= "values ";
         $sql.= "('".$params['name']."',";
@@ -42,11 +52,21 @@ class Student extends CI_Model{
     }
     function update($params){
         $sql = "update students set name= '".$params["name"]."',description='".$params["description"]."', ";
-        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",grade_id=".$params["grade_id"].",nis='".$params["nis"]."' ";
+        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",";
+        $sql.= "grade_id=".$params["grade_id"].",nis='".$params["nis"]."' ";
         $sql.= "where ";
         $sql.= "id='".$params['id']."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
+
+        $sql = "update studentshistory set name= '".$params["name"]."',description='".$params["description"]."', ";
+        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",";
+        $sql.= "grade_id=".$params["grade_id"].",nis='".$params["nis"]."' ";
+        $sql.= "where ";
+        $sql.= "id='".$params['id']."' ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+
         return $sql;
     }
     function getspp($nis){
