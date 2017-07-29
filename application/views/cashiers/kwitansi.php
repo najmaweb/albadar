@@ -10,13 +10,22 @@
             <td width="16%"></td><td width="16%"></td><td width="16%"></td>
             <td width="16%"></td><td width="16%"></td><td width="16%"></td>
         </tr>
-        <tr><td class="image" colspan=2>
-        <?php $showlogo = false;?>
-        <?php if($showlogo){?>
-        <img src="/assets/images/logo100x500.png">
-        <?php }?>
-        </td>
-        <td colspan=2 >KWITANSI</td><td id="nokwitansi" colspan=2 >No. EL/06/17/0001</td></tr>
+        <tr>
+            <td class="image" colspan=2>
+                <?php $showlogo = false;?>
+                <?php if($showlogo){?>
+                <img src="/assets/images/logo100x500.png">
+                <?php }?>
+            </td>
+            <td colspan=2 >KWITANSI</td>
+            <td id="nokwitansi" colspan=2 >No. EL/06/17/0001</td>
+        </tr>
+                <tr id="identity">
+                    <td></td><td></td>
+                    <td colspan=2>YPS El Haq, RT 06 RW 01 Banjarsari Buduran Sidoarjo (031) 801 2710</td>
+                    <td></td><td></td>
+                </tr>
+        
     </thead>
     <tbody>
         <tr><td class="line" colspan=6></td</tr>
