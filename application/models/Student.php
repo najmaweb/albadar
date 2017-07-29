@@ -4,7 +4,8 @@ class Student extends CI_Model{
         parent::__construct();
     }
     function getStudent($id){
-        $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.description from studentshistory a ";
+        $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.description ";
+        $sql.= "from studentshistory a ";
         $sql.= "right outer join settings b on b.currentyear=a.year ";
         $sql.= "where a.id=".$id;
         $ci = & get_instance();
@@ -70,21 +71,26 @@ class Student extends CI_Model{
         return $sql;
     }
     function getspp($nis){
-        $sql = "select a.nis,amount from students a left outer join sppgroups b on b.id=a.sppgroup_id where a.nis='".$nis."' ";
+        $sql = "select a.nis,amount from students a ";
+        $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
+        $sql.= "where a.nis='".$nis."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
         return $res[0]->amount;
     }    
     function getbimbel($nis){
-        $sql = "select a.nis,amount from students a left outer join bimbelgroups b on b.id=a.bimbelgroup_id where a.nis='".$nis."' ";
+        $sql = "select a.nis,amount from students a ";
+        $sql.= "left outer join bimbelgroups b on b.id=a.bimbelgroup_id ";
+        $sql.= "where a.nis='".$nis."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         $res = $que->result();
         return $res[0]->amount;
     }
     function getdupsb($nis){
-        $sql = "select b.amount from students a left outer join dupsbgroups b on b.id=a.dupsbgroup_id ";
+        $sql = "select b.amount from students a ";
+        $sql.= "left outer join dupsbgroups b on b.id=a.dupsbgroup_id ";
         $sql.= "where nis='".$nis."'";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
@@ -92,7 +98,8 @@ class Student extends CI_Model{
         return $res[0]->amount;
     }
     function getbook($nis){
-        $sql = "select b.amount from studentshistory a left outer join bookpaymentgroups b on b.id=a.bookpaymentgroup_id ";
+        $sql = "select b.amount from studentshistory a ";
+        $sql.= "left outer join bookpaymentgroups b on b.id=a.bookpaymentgroup_id ";
         $sql.= "where nis='".$nis."'";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
