@@ -112,7 +112,15 @@ class Students extends CI_Controller{
         $res = $que->result();
         $arr = array();
 		foreach($res as $obj){
-			array_push($arr,'{"value":"'.$obj->nis.' '.$obj->name.'('.$obj->grade.')","data":"'.$obj->id.'","nis":"'.$obj->nis.'","spp":"'.$obj->spp.'","name":"'.$obj->name.'","grade":"'.$obj->grade.'"}');
+            $str = '{';
+            $str.= '"value":"'.$obj->nis.' '.$obj->name.'('.$obj->grade.')",';
+            $str.= '"data":"'.$obj->id.'",';
+            $str.= '"nis":"'.$obj->nis.'",';
+            $str.= '"spp":"'.$obj->spp.'",';
+            $str.= '"name":"'.$obj->name.'",';
+            $str.= '"grade":"'.$obj->grade.'"';
+            $str.= '}';
+			array_push($arr,$str);
 		}
 		echo '{"out":['.implode(",",$arr).']}';
     }
