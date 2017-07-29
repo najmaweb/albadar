@@ -90,7 +90,14 @@
                 <tr>
                     <td>Total Tagihan</td>
                     <td class="rightaligned number"><?php echo  "Rp. " . number_format($totaltagihan);?></td>
-                    <td><?php echo " = " .  number_format($sppremain) . "+" . number_format($bimbelremain) . "+" . number_format($dupsbremain) . "+" . number_format($bookpaymentremain) ?></td>
+                    <td>
+                    <?php 
+                    $SHOWDETAIL = FALSE;
+                    if($SHOWDETAIL){
+                        echo " = " .  number_format($sppremain) . "+" . number_format($bimbelremain) . "+" . number_format($dupsbremain) . "+" . number_format($bookpaymentremain) ;
+                    }
+                    ?>
+                    </td>
                     <td></td>
                     <td>TOTAL</td>
                     <td class="rightaligned number"><?php echo  "Rp. " . number_format($total);?></td>
