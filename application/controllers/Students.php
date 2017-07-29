@@ -159,6 +159,7 @@ class Students extends CI_Controller{
         $sql.= "case when g.pyear is null then a.inityear else g.pyear end bimbelmaxyear,";
         $sql.= "case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
         $sql.= "from students a ";
+        $sql.= "left outer join (select id,name,nis,year,bookpaymentgroup_id from studentshistory where year='$year') h on h.nis=a.nis ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
@@ -169,7 +170,6 @@ class Students extends CI_Controller{
         $sql.= "  select nis,max(pyear)myear from bimbel where nis='".$nis."') a ";
         $sql.= "  left outer join (select nis,pyear,max(pmonth)mmonth from bimbel where nis='".$nis."' group by nis,pyear) b ";
         $sql.= "   on b.nis=a.nis and b.pyear=a.myear) g on g.nis=a.nis ";
-        $sql.= "left outer join studentshistory h on h.nis=a.nis ";
         $sql.= "left outer join bookpaymentgroups i on i.id=h.bookpaymentgroup_id ";
         $sql.= "left outer join (select nis,count(amount) bookpaymentpaid,sum(amount) amount from bookpayment ";
         $sql.= " where nis='".$nis."' and year='".$year."' group by nis) j on j.nis=a.nis ";
@@ -183,14 +183,17 @@ class Students extends CI_Controller{
             $bimbel = $this->Student->getbimbel($nis);
             $dupsb = $this->Mcashier->getdupsbremain($nis,$year);
             $book = $this->Student->getbook($nis);
-            $out = '{"spp":"'.$spp.'",';
+            $out = '{';
+            $out.= '"name":"-",';
+            $out.= '"spp":"'.$spp.'",';
             $out.= '"bimbel":"'.$bimbel.'",';
             $out.= '"dupsbremain":"'.$dupsb.'",';
             $out.= '"bookremain":"'.$book.'",';
             $out.= '"sppmaxyear":"'.$this->Setting->getcurrentyear().'",';
             $out.= '"sppmaxmonth":"07",';
             $out.= '"bimbelmaxyear":"'.$this->Setting->getcurrentyear().'",';
-            $out.= '"bimbelmaxmonth":"07"}';
+            $out.= '"bimbelmaxmonth":"07"';
+            $out.= '}';
             echo $out;
         }else{
             $res = $que->result()[0];
@@ -209,6 +212,7 @@ class Students extends CI_Controller{
                 $bimbelmaxyear = addzero($res->bimbelmaxyear);
             }
             $out = '{"spp":"'.$res->spp.'",';
+            $out.= '"name":"'.$res->name.'",';
             $out.= '"bimbel":"'.$res->bimbel.'",';
             $out.= '"dupsbremain":"'.$res->dupsbremain.'",';
             $out.= '"bookremain":"'.$res->bookremain.'",';
