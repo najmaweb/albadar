@@ -124,6 +124,8 @@ class Report extends CI_Model{
         return $que->result();
     }
     function getrekapsppperkelas(){
+        $ci = & get_instance();
+        $year = $ci->Setting->getcurrentyear();
         $sql = "select nis,name,sum(jun)jun,sum(jul)jul,sum(ags)ags,sum(sep)sep,";
         $sql.= "sum(okt)okt,sum(nop)nop,sum(des)des,sum(jan)jan,";
         $sql.= "sum(feb)feb,sum(mar)mar,sum(apr)apr,sum(mei)mei ";
@@ -140,7 +142,8 @@ class Report extends CI_Model{
         $sql.= ", case a.pmonth when '03' then amount else '0' end mar ";
         $sql.= ", case a.pmonth when '04' then amount else '0' end apr ";
         $sql.= ", case a.pmonth when '05' then amount else '0' end mei ";
-        $sql.= " from spp a right outer join students b on b.nis=a.nis order by a.nis,a.pmonth)x ";
+        $sql.= " from (select * from spp where cyear='".$year."') a right outer join students b on b.nis=a.nis order by a.nis,a.pmonth)x ";
+        $sql.= "";
         $sql.= "group by nis,name";
         $ci = & get_instance();
         $que = $ci->db->query($sql);

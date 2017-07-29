@@ -55,7 +55,6 @@
                 <tr>
                     <td class="number"><?php echo $c;?></td>
                     <td class="left"><?php echo '(' . $obj->nis . ')' . $obj->name;?></td>
-                    <td class="number"><?php echo $obj->jun;?></td>
                     <td class="number"><?php echo $obj->jul;?></td>
                     <td class="number"><?php echo $obj->ags;?></td>
                     <td class="number"><?php echo $obj->sep;?></td>
@@ -67,6 +66,7 @@
                     <td class="number"><?php echo $obj->mar;?></td>
                     <td class="number"><?php echo $obj->apr;?></td>
                     <td class="number"><?php echo $obj->mei;?></td>
+                    <td class="number"><?php echo $obj->jun;?></td>
                 </tr>
                 <?php $c = $c + 1;?>
                 <?php }?>
