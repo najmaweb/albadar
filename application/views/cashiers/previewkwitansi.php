@@ -43,6 +43,11 @@
                 <td colspan=2 >KWITANSI</td>
                 <td id="nokwitansi" colspan=2 >No. EL/06/17/0001</td>
                 </tr>
+                <tr id="identity">
+                    <td></td><td></td>
+                    <td colspan=2>YPS El Haq, RT 06 RW 01 Banjarsari Buduran Sidoarjo (031) 801 2710</td>
+                    <td></td><td></td>
+                </tr>
             </thead>
             <tbody>
                 <tr><td class="line" colspan=6></td</tr>

@@ -42,3 +42,6 @@ table#rpt tbody tr td.bold{
 table#rpt tbody tr td.number{
     padding-right: 15px;
 }
+table#rpt thead #identity td{
+    font-size: 10px;
+}
