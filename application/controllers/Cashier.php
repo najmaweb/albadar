@@ -262,7 +262,7 @@ class Cashier extends CI_Controller{
                 $que = $ci->db->query($sql);
             }
         //}
-        echo $montharray[0];
+        //echo $montharray[0];
         $this->savedupsb($params);
         $this->savepembayaranbuku($params);
         $this->kwitansi($params);
@@ -296,6 +296,7 @@ class Cashier extends CI_Controller{
     function kwitansi(){
         session_start();
         checklogin();
+        $this->load->model("Receipt");
         $params = array(
             "allpaid"=>$_SESSION["allpaid"],
             "sppfrstmonth"=>$_SESSION["sppfrstmonth"],
@@ -327,7 +328,8 @@ class Cashier extends CI_Controller{
             "periodmonths"=>getperiodmonths(),
             "tagihanremain"=>$_SESSION["tagihanremain"],
             "sppremain"=>$_SESSION["sppremain"],
-            "bimbelremain"=>$_SESSION["bimbelremain"]
+            "bimbelremain"=>$_SESSION["bimbelremain"],
+            "kwitansi"=>$this->Receipt->save()
         );
         $params["topaid"] = $_SESSION["total"];
         $this->load->view("cashiers/kwitansi",$params);

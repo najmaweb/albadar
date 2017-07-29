@@ -18,10 +18,11 @@ class Receipt extends CI_Model{
     }
     function save(){
         $ci = & get_instance();
+        $receiptno = $this->create();
         $sql = "insert into receipts (receiptno,rorder,createuser) ";
         $sql.= "values ";
-        $sql.= "('".$this->create()."','".$this->getmax(date("m"))."','puji') ";
+        $sql.= "('".$receiptno."','".$this->getmax(date("m"))."','puji') ";
         $que = $ci->db->query($sql);
-        echo $sql;
+        echo $receiptno;
     }
 }
