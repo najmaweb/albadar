@@ -50,15 +50,15 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="easyPieChart" data-percent="<?php echo $bimbelpercentage;?>" style="width: 110px; height: 110px; line-height: 110px;"><?php echo $bimbelpercentage;?>%<canvas width="110" height="110"></canvas></div>
-                                        <div class="chart-bottom-heading"><span class="label label-info">DU/PSB</span></div>
+                                        <div class="chart-bottom-heading"><span class="label label-info">Bimbel</span></div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="easyPieChart" data-percent="<?php echo $dupsbpercentage;?>" style="width: 110px; height: 110px; line-height: 110px;"><?php echo $dupsbpercentage;?>%<canvas width="110" height="110"></canvas></div>
-                                        <div class="chart-bottom-heading"><span class="label label-info">Buku</span></div>
+                                        <div class="chart-bottom-heading"><span class="label label-info">DU/PSB</span></div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="easyPieChart" data-percent="<?php echo $bookpercentage;?>" style="width: 110px; height: 110px; line-height: 110px;"><?php echo $bookpercentage;?>%<canvas width="110" height="110"></canvas></div>
-                                        <div class="chart-bottom-heading"><span class="label label-info">Bimbel</span></div>
+                                        <div class="chart-bottom-heading"><span class="label label-info">Book</span></div>
                                     </div>
                                 </div>
                             </div>
