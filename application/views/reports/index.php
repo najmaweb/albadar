@@ -42,7 +42,7 @@
                                     <a href="/reports/dailyrekapperuser" class="btn">Rekap Harian Per Petugas</a>
                                     </div>
                                     <div class="col-lg-3">
-                                    <a href="/reports/dubuku" class="btn">Rekap DU &amp; Buku</a>
+                                    <a href="/reports/rekapdu" class="btn">Rekap DU</a>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                     <a href="/reports/filterrekapbimbelperkelas" class="btn">Rekap Bimbel Per Kelas</a>
                                     </div>
                                     <div class="col-lg-3">
-                                    <a href="/reports/dubuku" class="btn">Rekap DU &amp; Buku</a>
+                                    <a href="/reports/rekapbuku" class="btn">Rekap Buku</a>
                                     </div>
                                     <div class="col-lg-3">
                                     <a href="/reports/tertanggung" class="btn">Rekap Tertanggung</a>
