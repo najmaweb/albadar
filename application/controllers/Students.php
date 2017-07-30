@@ -250,6 +250,14 @@ class Students extends CI_Controller{
         $this->db->query($sql);
         return $sql;
     }
+    function checkexist($nis){
+        $sql = "select id from students where nis='".$nis."'";
+        $que = $this->db->query($sql);
+        if($que->num_rows()>0){
+            return true;
+        }
+        return false;
+    }
     function savefromcsv(){
         $params = $this->input->post();
         $this->load->helper("terbilang");
@@ -272,16 +280,32 @@ class Students extends CI_Controller{
                 $sql.= "'".$params["bookpaymentgroup_id"][$c]."'";
                 $sql.= ")";
                 $this->db->query($sql);
-
-
-                $sql = "update students ";
-                $sql.= "set name='".str_replace("'","''",$params["name"][$c])."', ";
-                $sql.= " grade_id='".$params["grade_id"][$c]."', ";
-                $sql.= " sppgroup_id='".$params["sppgroup_id"][$c]."', ";
-                $sql.= " bimbelgroup_id='".$params["bimbelgroup_id"][$c]."', ";
-                $sql.= " dupsbgroup_id='".$params["dupsbgroup_id"][$c]."' ";
-                $sql.= "where nis='".add_trailing_zero($params["nis"][$c],6)."'";
-                $this->db->query($sql);
+                if($this->checkexist(add_trailing_zero($params["nis"][$c],6))){
+                    $sql = "update students ";
+                    $sql.= "set name='".str_replace("'","''",$params["name"][$c])."', ";
+                    $sql.= " grade_id='".$params["grade_id"][$c]."', ";
+                    $sql.= " sppgroup_id='".$params["sppgroup_id"][$c]."', ";
+                    $sql.= " bimbelgroup_id='".$params["bimbelgroup_id"][$c]."', ";
+                    $sql.= " dupsbgroup_id='".$params["dupsbgroup_id"][$c]."' ";
+                    $sql.= "where nis='".add_trailing_zero($params["nis"][$c],6)."'";
+                    $this->db->query($sql);
+                }else{
+                    $sql = "insert into students ";
+                    $sql.= "(name,nis,initmonth,inityear,year,grade_id,sppgroup_id,bimbelgroup_id,dupsbgroup_id) ";
+                    $sql.= "values ";
+                    $sql.= "(";
+                    $sql.= "'".str_replace("'","''",$params["name"][$c])."',";
+                    $sql.= "'".add_trailing_zero($params["nis"][$c],6)."',";
+                    $sql.= "'".add_trailing_zero(date("m"),2)."',";
+                    $sql.= "'".date("Y")."',";
+                    $sql.= "'".date("Y")."',";
+                    $sql.= "'".$params["grade_id"][$c]."',";
+                    $sql.= "'".$params["sppgroup_id"][$c]."',";
+                    $sql.= "'".$params["bimbelgroup_id"][$c]."',";
+                    $sql.= "'".$params["dupsbgroup_id"][$c]."' ";
+                    $sql.= ")";
+                    $this->db->query($sql);
+                }
             }
         }
         redirect("../../students/importfinished");

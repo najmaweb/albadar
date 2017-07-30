@@ -79,4 +79,9 @@ class Tester extends CI_Controller{
             echo $key . " and " . $val . "<br />";
         }
     }
+    function getbimbelremain(){
+        $nis = $this->uri->segment(3);
+        $this->load->model("Mcashier");
+        echo $this->Mcashier->getbimbelremain($nis);
+    }
 }
