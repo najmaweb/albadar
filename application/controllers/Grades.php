@@ -29,6 +29,7 @@ class Grades extends CI_Controller{
             "feedData"=>"kelas",
             "grades"=>$this->Grade->getgrades(),
             "sppdefault"=>$this->Sppgroup->getsppgrouparray(),
+            "dupsbdefault"=>$this->Dupsbgroup->getDupsbgrouparray(),
             "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray(),
             "role"=>$this->User->getrole($_SESSION["userid"])
         );

@@ -36,9 +36,9 @@ class Grade extends CI_Model{
         return $sql;
     }
     function save($params){
-        $sql = "insert into grades (name,sppgroup_id,bimbelgroup_id,description) ";
+        $sql = "insert into grades (name,sppgroup_id,bimbelgroup_id,dupsbgroup_id,description) ";
         $sql.= "values ";
-        $sql.= "('".$params['name']."','".$params['sppgroup_id']."','".$params['bimbelgroup_id']."','".$params['description']."') ";
+        $sql.= "('".$params['name']."','".$params['sppgroup_id']."','".$params['bimbelgroup_id']."','".$params['dupsbgroup_id']."','".$params['description']."') ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $ci->db->insert_id();

@@ -48,6 +48,12 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="bimbelgroup_id">Default DU/PSB</label>
+                                                <div class="col-lg-8" id="the-basics">
+                                                    <?php echo form_dropdown("dupsbgroup_id",$dupsbdefault,0);?>&nbsp;(Akan mengganti nilai default DU/PSB seluruh siswa dalam kelas)
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
                                                 <div class="col-lg-8" id="the-basics">
                                                     <input class="form-control typeahead" id="classname" name="description" type="text" value="" placeholder="Nama Kelas">
