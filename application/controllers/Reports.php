@@ -52,6 +52,34 @@ class Reports extends CI_Controller{
         );
         $this->load->view("reports/dailyrekapperuser",$data);        
     }
+    function filterrekapdu(){
+        $params = $this->input->post();
+        redirect("../rekapdu/".$params["user"]);
+    }
+    function rekapdu(){
+        session_start();
+        checklogin();
+        $params = $this->input->post();
+        if($this->uri->total_segments()>2){
+            $user = $this->uri->segment(3);
+            $rekapdu = $this->report->rekapdu($user);
+        }else{
+            $user = "all";
+            $rekapdu = $this->report->rekapdu("all");
+        }
+        $data = array(
+            "breadcrumb" => array(1=>"Laporan",2=>"Rekap DU/PSB"),
+            "formtitle"=>"Rekap DU / PSB",
+            "feedData"=>"reports",
+            "err_message"=>"",
+            "role"=>$this->User->getrole($_SESSION["userid"]),
+            "rekapdu"=>$rekapdu,
+            "users"=>$this->User->getarray(),
+            "user"=>$user,
+            "humanmonth"=>getperiodmonths()
+        );
+        $this->load->view("reports/rekapdu",$data);        
+    }
     function dailytransactions(){
         session_start();
         checklogin();

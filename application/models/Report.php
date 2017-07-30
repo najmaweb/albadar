@@ -223,4 +223,16 @@ class Report extends CI_Model{
         $que = $ci->db->query($sql);
         return $que->result();
     }
+    function rekapdu(){
+        $ci = & get_instance();
+        $year = $this->Setting->getcurrentyear();
+        $sql = "select id,nis,name,amount,";
+        $sql.= "case when tot is null then '0' else tot end tot,";
+        $sql.= "case when tot is null then amount else amount-tot end sisa ";
+        $sql.= "from (select a.id,a.nis,a.name,b.amount,sum(c.amount)tot from students a ";
+        $sql.= "left outer join dupsbgroups b on b.id=a.dupsbgroup_id ";
+        $sql.= "left outer join (select id,amount,nis from dupsb where year='".$year."') c on c.nis=a.nis group by a.id,a.nis,a.name,b.amount) x ;";
+        $que = $ci->db->query($sql);
+        return $que->result();
+    }
 }
