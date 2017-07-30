@@ -17,14 +17,14 @@
                 <img src="/assets/images/logo100x500.png">
                 <?php }?>
             </td>
-            <td colspan=2 >KWITANSI</td>
+            <td colspan=2 style="font-size:16px;">KWITANSI</td>
             <td id="nokwitansi" colspan=2 ><?php echo $kwitansi;?></td>
         </tr>
-                <tr id="identity">
-                    <td></td><td></td>
-                    <td colspan=2>YPS El Haq, RT 06 RW 01 Banjarsari Buduran Sidoarjo (031) 801 2710</td>
-                    <td></td><td></td>
-                </tr>
+        <tr id="identity">
+            <td></td>
+            <td colspan=4>YPS El Haq, RT 06 RW 01 Banjarsari Buduran Sidoarjo (031) 801 2710</td>
+            <td></td>
+        </tr>
         
     </thead>
     <tbody>
@@ -125,10 +125,12 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td><td></td></tr>
+                <tr>
+                <td>&nbsp;</td><td class="rightaligned number"></td><td>&nbsp;</td><td colspan=2 class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td><td></td>
+                </tr>
                 <tr><td><b>Catatan:</b></td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
                 <tr><td colspan=2>* Disimpan sebagai bukti pembayaran yang sah</td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
-                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td>&nbsp;</td><td colspan=2 class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
     </tbody>
 </table>
 <script type="text/javascript" src="/assets/js/kwitansi.js"></script>
