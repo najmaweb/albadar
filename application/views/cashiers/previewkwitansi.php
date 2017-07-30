@@ -45,7 +45,7 @@
                 </tr>
                 <tr id="identity">
                     <td></td><td></td>
-                    <td colspan=2>YPS El Haq, RT 06 RW 01 Banjarsari Buduran Sidoarjo (031) 801 2710</td>
+                    <td colspan=2 style="font-size:10px;">YPS El Haq, RT 06 RW 01 Banjarsari Buduran Sidoarjo (031) 801 2710</td>
                     <td></td><td></td>
                 </tr>
             </thead>
@@ -148,8 +148,13 @@
                     <td></td>
                 </tr>
                 
-                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td><td></td></tr>
-                <tr><td><b>Catatan:</b></td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
+                <tr>
+                <td>&nbsp;</td><td class="rightaligned number"></td>
+                <td colspan=2>&nbsp;</td><td class="centeraligned">Banjarsari, <?php echo date("d") . "-" . $periodmonths[removezero(date("m"))] . "-" . date("Y");?></td>
+                <td></td>
+                </tr>
+                <tr><td><b>Catatan:</b></td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td>
+                </tr>
                 <tr><td colspan=2>* Disimpan sebagai bukti pembayaran yang sah</td><td colspan=2>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
                 <tr><td>&nbsp;</td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
             </tbody>
