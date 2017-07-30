@@ -80,6 +80,34 @@ class Reports extends CI_Controller{
         );
         $this->load->view("reports/rekapdu",$data);        
     }
+    function filterrekapbuku(){
+        $params = $this->input->post();
+        redirect("../rekapbuku/".$params["user"]);
+    }
+    function rekapbuku(){
+        session_start();
+        checklogin();
+        $params = $this->input->post();
+        if($this->uri->total_segments()>2){
+            $user = $this->uri->segment(3);
+            $rekapbuku = $this->report->rekapbuku($user);
+        }else{
+            $user = "all";
+            $rekapbuku = $this->report->rekapbuku("all");
+        }
+        $data = array(
+            "breadcrumb" => array(1=>"Laporan",2=>"Rekap Buku"),
+            "formtitle"=>"Rekap Buku",
+            "feedData"=>"reports",
+            "err_message"=>"",
+            "role"=>$this->User->getrole($_SESSION["userid"]),
+            "rekapdu"=>$rekapbuku,
+            "users"=>$this->User->getarray(),
+            "user"=>$user,
+            "humanmonth"=>getperiodmonths()
+        );
+        $this->load->view("reports/rekapbuku",$data);        
+    }
     function dailytransactions(){
         session_start();
         checklogin();
