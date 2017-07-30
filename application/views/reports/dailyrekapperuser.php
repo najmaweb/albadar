@@ -7,7 +7,7 @@
         <div class="topnavcenter"><a href="/reports"><img src="/assets/images/home16.png" /></a></div>
         <h1>Laporan Rekap Transaksi Per Petugas</h1>
         <h3>
-        <form action="/reports/dailyrekapperuser" method="post">
+        <form action="/reports/filterdailyrekapperuser" method="post">
         <span class="filter">Petugas</label>
         <?php echo form_dropdown("user",$users,$user);?>
         <button id="filter" name="filter">Filter</button>

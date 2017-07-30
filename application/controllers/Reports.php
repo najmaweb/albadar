@@ -24,15 +24,20 @@ class Reports extends CI_Controller{
         );
         $this->load->view("reports/index",$data);
     }
+    function filterdailyrekapperuser(){
+        $params = $this->input->post();
+        redirect("../dailyrekapperuser/".$params["user"]);
+    }
     function dailyrekapperuser(){
         session_start();
         checklogin();
-        if($this->uri->total_segments()>4){
-            $user = $this->uri->segment(5);
-            $dailyreports = $this->report->dailyrekapperuser();
+        $params = $this->input->post();
+        if($this->uri->total_segments()>2){
+            $user = $this->uri->segment(3);
+            $dailyreports = $this->report->dailyrekapperuser($user);
         }else{
             $user = "all";
-            $dailyreports = $this->report->dailyrekapperuser();
+            $dailyreports = $this->report->dailyrekapperuser("all");
         }
         $data = array(
             "breadcrumb" => array(1=>"Laporan",2=>"Rekap Harian Per Petugas"),
@@ -40,7 +45,7 @@ class Reports extends CI_Controller{
             "feedData"=>"reports",
             "err_message"=>"",
             "role"=>$this->User->getrole($_SESSION["userid"]),
-            "dailyreports"=>$this->report->dailyrekapperuser(),
+            "dailyreports"=>$dailyreports,//$this->report->dailyrekapperuser(),
             "users"=>$this->User->getarray(),
             "user"=>$user,
             "humanmonth"=>getperiodmonths()
