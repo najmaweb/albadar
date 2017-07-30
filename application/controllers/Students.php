@@ -252,6 +252,7 @@ class Students extends CI_Controller{
     }
     function savefromcsv(){
         $params = $this->input->post();
+        $this->load->helper("terbilang");
         if(isset($_POST["btnsavedata"])){
             $year = $params["year"][0];
             $grade_id = $params["grade_id"][0];
@@ -262,7 +263,7 @@ class Students extends CI_Controller{
                 $sql.= "values ";
                 $sql.= "(";
                 $sql.= "'".$params["year"][$c]."',";
-                $sql.= "'".$params["nis"][$c]."',";
+                $sql.= "'".add_trailing_zero($params["nis"][$c],6)."',";
                 $sql.= "'".str_replace("'","''",$params["name"][$c])."',";
                 $sql.= "'".$params["grade_id"][$c]."',";
                 $sql.= "'".$params["sppgroup_id"][$c]."',";
@@ -270,6 +271,16 @@ class Students extends CI_Controller{
                 $sql.= "'".$params["dupsbgroup_id"][$c]."',";
                 $sql.= "'".$params["bookpaymentgroup_id"][$c]."'";
                 $sql.= ")";
+                $this->db->query($sql);
+
+
+                $sql = "update students ";
+                $sql.= "set name='".str_replace("'","''",$params["name"][$c])."', ";
+                $sql.= " grade_id='".$params["grade_id"][$c]."', ";
+                $sql.= " sppgroup_id='".$params["sppgroup_id"][$c]."', ";
+                $sql.= " bimbelgroup_id='".$params["bimbelgroup_id"][$c]."', ";
+                $sql.= " dupsbgroup_id='".$params["dupsbgroup_id"][$c]."' ";
+                $sql.= "where nis='".add_trailing_zero($params["nis"][$c],6)."'";
                 $this->db->query($sql);
             }
         }
