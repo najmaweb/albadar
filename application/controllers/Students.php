@@ -160,9 +160,9 @@ class Students extends CI_Controller{
         $sql.= "case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
         $sql.= "from students a ";
         $sql.= "left outer join (select id,name,nis,year,bookpaymentgroup_id from studentshistory where year='$year') h on h.nis=a.nis ";
-        $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
-        $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
-        $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
+        $sql.= "left outer join sppgroups b on b.id=h.sppgroup_id ";
+        $sql.= "left outer join bimbelgroups c on c.id=h.bimbelgroup_id ";
+        $sql.= "left outer join dupsbgroups d on d.id=h.dupsbgroup_id ";
         $sql.= "left outer join (select nis,count(amount) dupsbpaid,sum(amount) amount from dupsb where nis='".$nis."' and year='".$year."' group by nis) e on e.nis=a.nis ";
         $sql.= "left outer join (select a.nis,b.pyear,mmonth pmonth from  (select nis,max(pyear)myear from spp where nis='".$nis."' and cyear='".$year."') a left outer join (select nis,pyear,max(pmonth)mmonth from spp where nis='".$nis."' group by nis,pyear) b on b.nis=a.nis and b.pyear=a.myear) f on f.nis=a.nis ";
         $sql.= "left outer join (";
