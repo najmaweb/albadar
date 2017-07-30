@@ -18,7 +18,7 @@
                 <?php }?>
             </td>
             <td colspan=2 style="font-size:16px;">KWITANSI</td>
-            <td id="nokwitansi" colspan=2 ><?php echo $kwitansi;?></td>
+            <td id="nokwitansi" colspan=2  style="font-size:16px;"><?php echo $kwitansi;?></td>
         </tr>
         <tr id="identity">
             <td></td>
