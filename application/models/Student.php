@@ -42,7 +42,7 @@ class Student extends CI_Model{
 
         $sql = "insert into students (name,nis,grade_id,sppgroup_id,description) ";
         $sql.= "values ";
-        $sql.= "('".$params['name']."',";
+        $sql.= "('".str_replace("'","''",$params['name'])."',";
         $sql.= "'".$params['nis']."',";
         $sql.= "'".$params['grade_id']."',";
         $sql.= "'".$params['sppgroup_id']."',";
@@ -51,8 +51,8 @@ class Student extends CI_Model{
         $que = $ci->db->query($sql);
         return $ci->db->insert_id();
     }
-    function update($params){
-        $sql = "update students set name= '".$params["name"]."',description='".$params["description"]."', ";
+    function update($params){//str_replace("'","''",$params["name"][$c])
+        $sql = "update students set name= '".str_replace("'","''",$params["name"])."',description='".$params["description"]."', ";
         $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",";
         $sql.= "grade_id=".$params["grade_id"].",nis='".$params["nis"]."' ";
         $sql.= "where ";
@@ -60,7 +60,7 @@ class Student extends CI_Model{
         $ci = & get_instance();
         $que = $ci->db->query($sql);
 
-        $sql = "update studentshistory set name= '".$params["name"]."',description='".$params["description"]."', ";
+        $sql = "update studentshistory set name= '".str_replace("'","''",$params["name"])."',description='".$params["description"]."', ";
         $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",";
         $sql.= "grade_id=".$params["grade_id"].",nis='".$params["nis"]."' ";
         $sql.= "where ";
