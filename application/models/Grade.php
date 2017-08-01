@@ -4,17 +4,20 @@ class Grade extends CI_Model{
         parent::__construct();
     }
     function getgrade($id){
-        $sql = "select id,name,sppgroup_id,bimbelgroup_id,dupsbgroup_id,description from grades ";
+        $sql = "select id,name,sppgroup_id,bimbelgroup_id,dupsbgroup_id,bookpaymentgroup_id,description from grades ";
         $sql.= "where id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result()[0];
     }
     function getgrades(){
-        $sql = "select a.id,a.name,a.description,b.amount spp,b.name sppname,c.amount bimbel,c.name bimbelname,d.amount dupsb,d.name dupsbname from grades a ";
+        $this->load->model("Setting");
+        $year = $this->Setting->getcurrentyear();
+        $sql = "select a.id,a.name,a.description,b.amount spp,b.name sppname,c.amount bimbel,c.name bimbelname,d.amount dupsb,d.name dupsbname,e.name bookpaymentname,e.amount bookpayment from grades a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
+        $sql.= "left outer join bookpaymentgroups e on e.id=a.bookpaymentgroup_id ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result();
@@ -45,7 +48,7 @@ class Grade extends CI_Model{
         return $ci->db->insert_id();
     }
     function update($params){
-        $sql = "update grades set name= '".$params["name"]."',sppgroup_id='".$params["sppgroup_id"]."',bimbelgroup_id='".$params["bimbelgroup_id"]."',dupsbgroup_id='".$params["dupsbgroup_id"]."', description='".$params["description"]."' ";
+        $sql = "update grades set name= '".$params["name"]."',sppgroup_id='".$params["sppgroup_id"]."',bimbelgroup_id='".$params["bimbelgroup_id"]."',dupsbgroup_id='".$params["dupsbgroup_id"]."', bookpaymentgroup_id='".$params["bookpaymentgroup_id"]."', description='".$params["description"]."' ";
         $sql.= "where ";
         $sql.= "id='".$params['id']."' ";
         $ci = & get_instance();
@@ -53,11 +56,15 @@ class Grade extends CI_Model{
         return $sql;
     }
     function updatesppall($params){
+        $this->load->model("Setting");
         $sql = "update students set sppgroup_id= '".$params["sppgroup_id"]."', ";
         $sql.= "bimbelgroup_id= '".$params["bimbelgroup_id"]."',dupsbgroup_id='".$params["dupsbgroup_id"]."'";
         $sql.= "where ";
         $sql.= "grade_id='".$params['id']."' ";
         $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        $sql = "update studentshistory set bookpaymentgroup_id='".$params["bookpaymentgroup_id"]."' ";
+        $sql.= "where grade_id='".$params["id"]."' and year='".$this->Setting->getcurrentyear()."'";
         $que = $ci->db->query($sql);
         return $sql;        
     }

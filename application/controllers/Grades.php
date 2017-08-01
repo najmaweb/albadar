@@ -6,6 +6,7 @@ class Grades extends CI_Controller{
         $this->load->model("Sppgroup");
         $this->load->model("Bimbelgroup");
         $this->load->model("Dupsbgroup");
+        $this->load->model("Bookpaymentgroup");
         $this->load->model("User");
     }
     function index(){
@@ -46,6 +47,7 @@ class Grades extends CI_Controller{
             "sppdefault"=>$this->Sppgroup->getsppgrouparray(),
             "bimbeldefault"=>$this->Bimbelgroup->getbimbelgrouparray(),
             "dupsbdefault"=>$this->Dupsbgroup->getDupsbgrouparray(),
+            "bookpaymentdefault"=>$this->Bookpaymentgroup->getBookpaymentgrouparray(),
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("grades/edit",$data);        

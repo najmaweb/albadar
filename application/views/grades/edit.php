@@ -55,6 +55,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="bookpaymentgroup_id">Default Pemb. Buku</label>
+                                                <div class="col-lg-8" id="the-basics">
+                                                    <?php echo form_dropdown("bookpaymentgroup_id",$bookpaymentdefault,$obj->bookpaymentgroup_id);?>&nbsp;(Akan mengganti nilai default Pemb. Buku seluruh siswa dalam kelas)
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
                                                 <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
                                                 <div class="col-lg-8" id="the-basics">
                                                     <input class="form-control typeahead" id="classname" name="description" type="text" value="<?php echo $obj->description;?>" placeholder="Nama Kelas">

@@ -35,7 +35,8 @@
                                                 <th>SPP</th>
                                                 <th>Bimbel</th>
                                                 <th>DU/PSB</th>
-                                                <th width="30%">Keterangan</th>
+                                                <th>Buku</th>
+                                                
                                                 <th width="15%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -46,7 +47,9 @@
                                                 <td class="rightaligned" title="<?php echo $grade->sppname;?>"><?php echo number_format($grade->spp);?></td>
                                                 <td class="rightaligned" title="<?php echo $grade->bimbelname;?>"><?php echo number_format($grade->bimbel);?></td>
                                                 <td class="rightaligned" title="<?php echo $grade->dupsbname;?>"><?php echo number_format($grade->dupsb);?></td>
-                                                <td><?php echo $grade->description?></td>
+                                                
+                                                
+                                                <td title="<?php echo $grade->bookpaymentname;?>"><?php echo $grade->bookpayment?></td>
                                                 <td class="center">
                                                 <div class="btn-group">
                                                     <button class="btn">Action</button>
