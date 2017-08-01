@@ -150,14 +150,21 @@ class Students extends CI_Controller{
         checklogin();
         $nis = $this->uri->segment(3);
         $year = $this->dates->getcurrentyear();
+        $initmonth = $this->Setting->getinitmonth();
+        $lastmaxmonth = $initmonth - 1;
+        if($initmonth>1){
+            $lastmaxmonth = $initmonth - 1;
+        }else{
+            $lastmaxmonth = 12;
+        }
         $sql = "select a.id,a.name,b.amount spp,c.amount bimbel,d.amount dupsb, ";
         $sql.= "e.dupsbpaid,j.bookpaymentpaid, ";
         $sql.= "case when e.amount is null then d.amount else (d.amount-e.amount) end  dupsbremain, ";
         $sql.= "case when j.amount is null then i.amount else (i.amount-j.amount) end  bookremain, ";
         $sql.= "case when f.pyear is null then a.inityear else f.pyear end sppmaxyear,";
-        $sql.= "case when f.pmonth is null then a.initmonth else f.pmonth end sppmaxmonth, ";
+        $sql.= "case when f.pmonth is null then '".$lastmaxmonth."' else f.pmonth end sppmaxmonth, ";
         $sql.= "case when g.pyear is null then a.inityear else g.pyear end bimbelmaxyear,";
-        $sql.= "case when g.pmonth is null then a.initmonth else g.pmonth end bimbelmaxmonth ";
+        $sql.= "case when g.pmonth is null then '".$lastmaxmonth."' else g.pmonth end bimbelmaxmonth ";
         $sql.= "from students a ";
         $sql.= "left outer join (select id,name,nis,year,bookpaymentgroup_id from studentshistory where year='$year') h on h.nis=a.nis ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
