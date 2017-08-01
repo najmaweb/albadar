@@ -15,4 +15,10 @@ class Setting extends CI_Model{
         $que = $ci->db->query($sql);
         return $que->result()[0]->currentyear;
     }
+    function getinitmonth(){
+        $sql = "select initmonth from settings  ";
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return $que->result()[0]->initmonth;
+    }    
 }
