@@ -143,7 +143,21 @@ class Mcashier extends CI_Model{
         $ci = & get_instance();
         $res = $ci->db->query($sql);
         $out = $res->result();
+        //return array("maxyear"=>$out[0]->mpyear,"maxmonth"=>$out[0]->mpmonth);
+
+
+        $thisyear = $this->Setting->getcurrentyear();
+        $sql = "select ";
+        $sql.= "case when mpyear is null then '".$thisyear."' else mpyear end mpyear, ";
+        $sql.= "case when mpmonth is null then '07' else mpmonth end mpmonth ";
+        $sql.= "from ";
+        $sql.= "(select max(pyear)mpyear,max(pmonth)mpmonth from bimbel where nis='".$nis."' ) X ";
+        
+        $ci = & get_instance();
+        $res = $ci->db->query($sql);
+        $out = $res->result();
         return array("maxyear"=>$out[0]->mpyear,"maxmonth"=>$out[0]->mpmonth);
+        
     }
     function getbimbel($nis){
         $sql = "select nis,amount from students a left outer join bimbelgroups b on b.id=a.bimbelgroup_id where nis='".$nis."' ";

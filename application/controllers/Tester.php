@@ -84,4 +84,9 @@ class Tester extends CI_Controller{
         $this->load->model("Mcashier");
         echo $this->Mcashier->getbimbelremain($nis);
     }
+    function getbimbelmaxyearmonth(){
+        $this->load->model("Mcashier");
+        echo $this->Mcashier->getbimbelmaxyearmonth($this->uri->segment(3))["maxyear"] . "<br />";
+        echo $this->Mcashier->getbimbelmaxyearmonth($this->uri->segment(3))["maxmonth"];
+    }
 }
