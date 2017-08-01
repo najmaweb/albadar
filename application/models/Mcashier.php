@@ -86,9 +86,10 @@ class Mcashier extends CI_Model{
     }
     function getsppmaxyearmonth($nis){
         $thisyear = $this->Setting->getcurrentyear();
+        $initmonth = $this->Setting->getinitmonth();
         $sql = "select ";
         $sql.= "case when mpyear is null then '".$thisyear."' else mpyear end mpyear, ";
-        $sql.= "case when mpmonth is null then '07' else mpmonth end mpmonth ";
+        $sql.= "case when mpmonth is null then '".$initmonth."' else mpmonth end mpmonth ";
         $sql.= "from ";
         $sql.= "(select max(pyear)mpyear,max(pmonth)mpmonth from spp where nis='".$nis."' ) X ";
         
@@ -132,6 +133,22 @@ class Mcashier extends CI_Model{
         }
         return $tagihan;
     }
+    function getcurrbimbelbill($nis){
+        $maxym = $this->getbimbelmaxyearmonth($nis);
+        $bimbel = $this->getbimbel($nis);
+        if($maxym["maxyear"]>date("Y")){
+            $tagihan = 0;
+        }elseif($maxym["maxyear"]===date("Y")){
+            if($maxym["maxmonth"]>date("m")){
+                $tagihan = 0;
+            }else{
+                $tagihan = $bimbel;
+            }
+        }else{
+            $tagihan = $bimbel;
+        }
+        return $tagihan;
+    }    
     function getspp($nis){
         $sql = "select nis,amount from students a left outer join sppgroups b on b.id=a.sppgroup_id where nis='".$nis."' ";
         $ci = & get_instance();
@@ -147,9 +164,10 @@ class Mcashier extends CI_Model{
 
 
         $thisyear = $this->Setting->getcurrentyear();
+        $initmonth = $this->Setting->getinitmonth();
         $sql = "select ";
         $sql.= "case when mpyear is null then '".$thisyear."' else mpyear end mpyear, ";
-        $sql.= "case when mpmonth is null then '07' else mpmonth end mpmonth ";
+        $sql.= "case when mpmonth is null then '".$initmonth."' else mpmonth end mpmonth ";
         $sql.= "from ";
         $sql.= "(select max(pyear)mpyear,max(pmonth)mpmonth from bimbel where nis='".$nis."' ) X ";
         
