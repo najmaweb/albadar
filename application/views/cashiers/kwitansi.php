@@ -126,7 +126,7 @@
                 </tr>
                 <tr><td><b>Catatan:</b></td><td class="rightaligned number"></td><td colspan=2>&nbsp;</td><td>&nbsp;</td><td></td></tr>
                 <tr><td colspan=3>* Disimpan sebagai bukti pembayaran yang sah</td><td>&nbsp;</td><td class="centeraligned"></td><td></td></tr>
-                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td>&nbsp;</td><td colspan=2 class="centeraligned"><?php echo $_SESSION["username"];?></td><td></td></tr>
+                <tr><td>&nbsp;</td><td class="rightaligned number"></td><td>&nbsp;</td><td colspan=2 class="centeraligned"><?php echo humanize($_SESSION["username"]);?></td><td></td></tr>
     </tbody>
 </table>
 <script type="text/javascript" src="/assets/js/kwitansi.js"></script>
