@@ -34,6 +34,7 @@
                                                 <th>Nama</th>
                                                 <th>SPP</th>
                                                 <th>Bimbel</th>
+                                                <th>DU/PSB</th>
                                                 <th width="30%">Keterangan</th>
                                                 <th width="15%">Aksi</th>
                                             </tr>
@@ -44,6 +45,7 @@
                                                 <td class="centeraligned"><?php echo $grade->name?></td>
                                                 <td class="rightaligned"><?php echo number_format($grade->spp);?></td>
                                                 <td class="rightaligned"><?php echo number_format($grade->bimbel);?></td>
+                                                <td class="rightaligned"><?php echo number_format($grade->dupsb);?></td>
                                                 <td><?php echo $grade->description?></td>
                                                 <td class="center">
                                                 <div class="btn-group">
