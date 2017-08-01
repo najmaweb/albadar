@@ -43,9 +43,9 @@
                                             <?php foreach($objs as $grade){?>
                                             <tr class="odd gradeX">
                                                 <td class="centeraligned"><?php echo $grade->name?></td>
-                                                <td class="rightaligned"><?php echo number_format($grade->spp);?></td>
-                                                <td class="rightaligned"><?php echo number_format($grade->bimbel);?></td>
-                                                <td class="rightaligned"><?php echo number_format($grade->dupsb);?></td>
+                                                <td class="rightaligned" title="<?php echo $grade->sppname;?>"><?php echo number_format($grade->spp);?></td>
+                                                <td class="rightaligned" title="<?php echo $grade->bimbelname;?>"><?php echo number_format($grade->bimbel);?></td>
+                                                <td class="rightaligned" title="<?php echo $grade->dupsbname;?>"><?php echo number_format($grade->dupsb);?></td>
                                                 <td><?php echo $grade->description?></td>
                                                 <td class="center">
                                                 <div class="btn-group">

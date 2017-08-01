@@ -11,7 +11,7 @@ class Grade extends CI_Model{
         return $que->result()[0];
     }
     function getgrades(){
-        $sql = "select a.id,a.name,a.description,b.amount spp,c.amount bimbel,d.amount dupsb from grades a ";
+        $sql = "select a.id,a.name,a.description,b.amount spp,b.name sppname,c.amount bimbel,c.name bimbelname,d.amount dupsb,d.name dupsbname from grades a ";
         $sql.= "left outer join sppgroups b on b.id=a.sppgroup_id ";
         $sql.= "left outer join bimbelgroups c on c.id=a.bimbelgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
