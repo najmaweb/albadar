@@ -8,6 +8,7 @@ class Students extends CI_Controller{
         $this->load->model("User");
         $this->load->model("Sppgroup");
         $this->load->model("Dupsbgroup");
+        $this->load->model("Bookpaymentgroup");
         $this->load->library("Dates");
         $this->load->helper("datetime");
     }
@@ -82,6 +83,7 @@ class Students extends CI_Controller{
             "students"=>$this->Student->getStudents(),
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
+            "bookpaymentgroups"=>$this->Bookpaymentgroup->getbookpaymentgrouparray(),
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("students/add",$data);        
@@ -97,6 +99,7 @@ class Students extends CI_Controller{
             "grades"=>$this->Grade->getclassarray(),
             "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
             "dupsbgroups"=>$this->Dupsbgroup->getDupsbgrouparray(),
+            "bookpaymentgroups"=>$this->Bookpaymentgroup->getBookpaymentgrouparray(),
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("students/edit",$data);        

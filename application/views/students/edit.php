@@ -58,6 +58,12 @@
                                                     <?php echo form_dropdown("dupsbgroup_id",$dupsbgroups,$obj->dupsbgroup_id,"class='form-control'");?>
                                                 </div>
                                             </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Grup Buku</label>
+                                                <div class="col-lg-8">
+                                                    <?php echo form_dropdown("bookpaymentgroup_id",$bookpaymentgroups,$obj->bookpaymentgroup_id,"class='form-control'");?>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
                                                 <div class="col-lg-8" id="the-basics">

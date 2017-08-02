@@ -51,6 +51,12 @@
                                                     <?php echo form_dropdown("sppgroup_id",$sppgroups,1,"class='form-control'");?>
                                                 </div>
                                             </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Grup Buku</label>
+                                                <div class="col-lg-8">
+                                                    <?php echo form_dropdown("bookpaymentgroup_id",$bookpaymentgroups,1,"class='form-control'");?>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
                                                 <div class="col-lg-8" id="the-basics">

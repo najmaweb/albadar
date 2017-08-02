@@ -4,7 +4,7 @@ class Student extends CI_Model{
         parent::__construct();
     }
     function getStudent($id){
-        $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.description ";
+        $sql = "select a.id,a.name,a.nis,a.grade_id,a.sppgroup_id,a.dupsbgroup_id,a.bookpaymentgroup_id,a.description ";
         $sql.= "from studentshistory a ";
         $sql.= "right outer join settings b on b.currentyear=a.year ";
         $sql.= "where a.id=".$id;
@@ -30,12 +30,13 @@ class Student extends CI_Model{
         return $sql;
     }
     function save($params){
-        $sql = "insert into studentshistory (name,nis,grade_id,sppgroup_id,description) ";
+        $sql = "insert into studentshistory (name,nis,grade_id,sppgroup_id,bookpaymentgroup_id,description) ";
         $sql.= "values ";
         $sql.= "('".$params['name']."',";
         $sql.= "'".$params['nis']."',";
         $sql.= "'".$params['grade_id']."',";
         $sql.= "'".$params['sppgroup_id']."',";
+        $sql.= "'".$params['bookpaymentgroup_id']."',";
         $sql.= "'".$params['description']."') ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
@@ -61,7 +62,7 @@ class Student extends CI_Model{
         $que = $ci->db->query($sql);
 
         $sql = "update studentshistory set name= '".str_replace("'","''",$params["name"])."',description='".$params["description"]."', ";
-        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",";
+        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",bookpaymentgroup_id=".$params["bookpaymentgroup_id"].",";
         $sql.= "grade_id=".$params["grade_id"].",nis='".$params["nis"]."' ";
         $sql.= "where ";
         $sql.= "id='".$params['id']."' ";
