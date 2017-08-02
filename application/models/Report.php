@@ -226,12 +226,16 @@ class Report extends CI_Model{
     function rekapdu(){
         $ci = & get_instance();
         $year = $this->Setting->getcurrentyear();
-        $sql = "select id,nis,name,amount,";
+        $sql = "select id,nis,name,amount, grade, ";
         $sql.= "case when tot is null then '0' else tot end tot,";
         $sql.= "case when tot is null then amount else amount-tot end sisa ";
-        $sql.= "from (select a.id,a.nis,a.name,b.amount,sum(c.amount)tot from students a ";
+        $sql.= "from (select a.id,a.nis,a.name,b.amount,d.name grade,sum(c.amount)tot from students a ";
         $sql.= "left outer join dupsbgroups b on b.id=a.dupsbgroup_id ";
-        $sql.= "left outer join (select id,amount,nis from dupsb where year='".$year."') c on c.nis=a.nis group by a.id,a.nis,a.name,b.amount) x ;";
+        $sql.= "left outer join (select id,amount,nis from dupsb where year='".$year."') c on c.nis=a.nis ";
+        $sql.= "left outer join grades d on d.id=a.grade_id ";
+        $sql.= "group by a.id,a.nis,a.name,b.amount,d.name ";
+        $sql.= ") x ";
+        $sql.= "order by grade,nis ";
         $que = $ci->db->query($sql);
         return $que->result();
     }
