@@ -1,30 +1,7 @@
 <html>
     <head>
         <title><?php echo $formtitle;?></title>
-        <style>
-            h1,h2,h3{
-                text-align: center;
-            }
-            .commonreport{
-                width: 100%;
-            }
-            .commonreport thead tr th{
-                border: 1px solid black;
-            }
-            .commonreport tbody tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-
-            }
-            .number{
-                text-align: right;
-            }
-            .commonreport tfoot tr td{
-                padding: 10px;
-                border-bottom: solid 1px black;
-                font-weight: bold;
-            }
-         </style>
+        <link rel="stylesheet" href="/assets/css/najma.reports.css" />
     </head>
     <body>
         <h1><?php echo $formtitle;?></h1>
@@ -37,8 +14,32 @@
             <?php 
                 $c = 1;
                 $tot = 0;$sisa = 0;
+                $lastgrade = "";
+                $gradetot = 0;
+                $gradetot = 0;
+                $gradesisa = 0;
             ?>
             <?php foreach($rekapdu as $rkd){?>
+                <?php 
+                    $grade = $rkd->grade;
+                    if(($grade != $lastgrade)){
+                ?>
+                <?php if(($lastgrade!="")){?>
+                <tr class="subtotal">
+                    <td colspan="3">Total DU/PSB Kelas <?php echo $lastgrade;?></td>
+                    <td class="number"><?php echo "Rp." . number_format($gradetot);?></td>
+                    <td class="number"><?php echo "Rp." . number_format($gradesisa);?></td>
+                </tr>
+                <?php }?>
+                <tr class="subhead1"><td colspan="5"><?php echo "Kelas " . $grade;?></td></tr>
+                <?php
+                        $gradetot = $rkd->tot;
+                        $gradesisa = $rkd->sisa;
+                    }else{
+                        $gradetot+=$rkd->tot;
+                        $gradesisa+=$rkd->sisa;
+                    }
+                ?>
                 <tr>
                     <td class="number"><?php echo $c;?></td>
                     <td class="number"><?php echo $rkd->nis;?></td>
@@ -46,12 +47,18 @@
                     <td class="number"><?php echo "Rp." . number_format($rkd->tot);?></td>
                     <td class="number"><?php echo "Rp." . number_format($rkd->sisa);?></td>
                 </tr>
-            <?php
-                $tot+= $rkd->tot; 
-                $sisa+= $rkd->sisa; 
-                $c++;
-            ?>
-            <?php }?>
+                <?php
+                    $lastgrade = $grade;
+                    $tot+= $rkd->tot; 
+                    $sisa+= $rkd->sisa;
+                    $c++;
+                ?>
+                <?php }?>
+                <tr class="subtotal">
+                <td colspan="3">Total DU/PSB Kelas <?php echo $lastgrade;?></td>
+                <td class="number"><?php echo "Rp." . number_format($gradetot);?></td>
+                <td class="number"><?php echo "Rp." . number_format($gradesisa);?></td>
+                </tr>            
             </tbody>
             <tfoot>
                 <tr>
