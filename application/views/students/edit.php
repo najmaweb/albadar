@@ -64,6 +64,26 @@
                                                     <?php echo form_dropdown("bookpaymentgroup_id",$bookpaymentgroups,$obj->bookpaymentgroup_id,"class='form-control'");?>
                                                 </div>
                                             </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Grup Bimbel</label>
+                                                <div class="col-lg-8">
+                                                    <?php echo form_dropdown("bimbelgroup_id",$bimbelgroups,$obj->bimbelgroup_id,"class='form-control'");?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Inisialisasi Bulan</label>
+                                                <div class="col-lg-2">
+                                                    <?php echo form_dropdown("initmonth",$months,$obj->initmonth,"class='form-control'");?>
+                                                </div>
+                                                <label class="col-lg-6">Untuk menghitung awal bulan apabila ada tunggakan</label>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Inisialisasi Tahun</label>
+                                                <div class="col-lg-2">
+                                                    <?php echo form_dropdown("inityear",$years,$obj->inityear,"class='form-control'");?>
+                                                </div>
+                                                <label class="col-lg-6">Untuk menghitung awal tahun apabila ada tunggakan</label>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
                                                 <div class="col-lg-8" id="the-basics">

@@ -57,6 +57,32 @@
                                                     <?php echo form_dropdown("bookpaymentgroup_id",$bookpaymentgroups,1,"class='form-control'");?>
                                                 </div>
                                             </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Grup DU/PSB</label>
+                                                <div class="col-lg-8">
+                                                    <?php echo form_dropdown("dupsbgroup_id",$dupsbgroups,1,"class='form-control'");?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Grup Bimbel</label>
+                                                <div class="col-lg-8">
+                                                    <?php echo form_dropdown("bimbelgroup_id",$bimbelgroups,1,"class='form-control'");?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Inisialisasi Bulan</label>
+                                                <div class="col-lg-2">
+                                                    <?php echo form_dropdown("initmonth",$months,1,"class='form-control'");?>
+                                                </div>
+                                                <label class="col-lg-6">Untuk menghitung awal bulan apabila ada tunggakan</label>
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label class="col-lg-4 control-label" for="selectError">Inisialisasi Tahun</label>
+                                                <div class="col-lg-2">
+                                                    <?php echo form_dropdown("inityear",$years,1,"class='form-control'");?>
+                                                </div>
+                                                <label class="col-lg-6">Untuk menghitung awal tahun apabila ada tunggakan</label>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
                                                 <div class="col-lg-8" id="the-basics">
