@@ -45,11 +45,16 @@
                                         <tbody>
                                             <?php foreach($objs as $obj){?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $obj->nis;?></td>
-                                                <td><?php echo $obj->name;?></td>
-                                                <td><?php echo $obj->grade;?></td>
-                                                <td class="center"><?php echo $obj->sppgroup . '(' . $obj->sppamount . ')';?></td>
-                                                <td class="center"><?php echo $obj->description;?></td>
+                                                <?php 
+                                                    $info = "DU/PSB: " . $obj->dupsb;
+                                                    $info.= "\nBuku: " . $obj->bookpayment;
+                                                    $info.= "\nBimbel: " . $obj->bimbel;
+                                                ?>
+                                                <td title='<?php echo $info;?>'><?php echo $obj->nis;?></td>
+                                                <td title='<?php echo $info;?>'><?php echo $obj->name;?></td>
+                                                <td title='<?php echo $info;?>'><?php echo $obj->grade;?></td>
+                                                <td title='<?php echo $info;?>' class="center"><?php echo $obj->sppgroup . '(' . $obj->sppamount . ')';?></td>
+                                                <td title='<?php echo $info;?>' class="center"><?php echo $obj->description;?></td>
                                                 <td class="center">
                                                 <div class="btn-group">
                                                     <button class="btn">Action</button>
