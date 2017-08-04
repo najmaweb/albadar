@@ -15,11 +15,12 @@ class Student extends CI_Model{
     }
     function getStudents(){
         $sql = "select a.id,a.name,a.nis,a.description,b.name grade,";
-        $sql.= "c.name sppgroup,c.amount sppamount,d.name dupsb,f.name bookpayment from studentshistory a " ;
+        $sql.= "c.name sppgroup,c.amount sppamount,d.name dupsb,f.name bookpayment,g.name bimbel from studentshistory a " ;
         $sql.= "left outer join grades b on b.id=a.grade_id ";
         $sql.= "left outer join sppgroups c on c.id=a.sppgroup_id ";
         $sql.= "left outer join dupsbgroups d on d.id=a.dupsbgroup_id ";
         $sql.= "left outer join bookpaymentgroups f on f.id=a.bookpaymentgroup_id ";
+        $sql.= "left outer join bimbelgroups g on g.id=a.bimbelgroup_id ";
         $sql.= "right outer join settings e on e.currentyear=a.year ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
