@@ -39,7 +39,6 @@
                 }
                 $grade = $student->grade;
                 ?>
-
                 <tr><td colspan=5><?php echo $student->grade;?></td></tr>
                 <?php
                 $subspp = 0;$subdupsb = 0;$subbook = 0;$subbimbel = 0;
