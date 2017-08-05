@@ -59,11 +59,11 @@
             </tbody>
             <tfoot>
                 <tr>
-                <td colspan=2>Total</td>
-                <td class="number"><?php echo "Rp." . number_format($totspp);?></td>
-                <td class="number"><?php echo "Rp." . number_format($totdupsb);?></td>
-                <td class="number"><?php echo "Rp." . number_format($totbook);?></td>
-                <td class="number"><?php echo "Rp." . number_format($totbimbel);?></td></tr>
+                <th colspan=2>Total</th>
+                <th class="number"><?php echo "Rp." . number_format($totspp);?></th>
+                <th class="number"><?php echo "Rp." . number_format($tothupsb);?></th>
+                <th class="number"><?php echo "Rp." . number_format($totbook);?></th>
+                <th class="number"><?php echo "Rp." . number_format($totbimbel);?></th></tr>
             </tfoot>
         </table>
     </body>
