@@ -12,8 +12,39 @@
                 <tr><th>No</th><th>Siswa</th><th>SPP</th><th>DU</th><th>Buku</th><th>Bimbel</th></tr>
             </thead>
             <tbody>
-            <?php $c = 1;$book = 0;$spp = 0; $bimbel = 0; $dupsb = 0;?>
+            <?php 
+                $c = 1;
+                $totbook = 0;
+                $totspp = 0; 
+                $totbimbel = 0; 
+                $totdupsb = 0;
+                $subbook = 0;
+                $subspp = 0; 
+                $subbimbel = 0; 
+                $subdupsb = 0;
+                $grade = "";
+            ?>
                 <?php foreach($students as $student){?>
+                <?php
+                if($grade!==$student->grade){
+                ?>
+                <?php if($grade!==""){?>
+                <tr><th class="number"></th><th>Sub Total</th>
+                    <th class="number"><?php echo "Rp." . number_format($subspp);?></th>
+                    <th class="number"><?php echo "Rp." . number_format($subdupsb);?></th>
+                    <th class="number"><?php echo "Rp." . number_format($subbook);?></th>
+                    <th class="number"><?php echo "Rp." . number_format($subbimbel);?></th>
+                </tr>
+                <?php 
+                }
+                $grade = $student->grade;
+                ?>
+
+                <tr><td colspan=5><?php echo $student->grade;?></td></tr>
+                <?php
+                $subspp = 0;$subdupsb = 0;$subbook = 0;$subbimbel = 0;
+                }
+                ?>
                 <tr><td class="number"><?php echo $c;?></td><td><?php echo $student->nis;?> - <?php echo $student->name;?></td>
                     <td class="number"><?php echo "Rp." . number_format($student->spp);?></td>
                     <td class="number"><?php echo "Rp." . number_format($student->dupsb);?></td>
@@ -21,7 +52,8 @@
                     <td class="number"><?php echo "Rp." . number_format($student->bimbel);?></td>
                 </tr>
                 <?php
-                $dupsb+=$student->dupsb;$book+=$student->book;$bimbel+=$student->bimbel;$spp+=$student->spp;
+                $subdupsb+=$student->dupsb;$subbook+=$student->book;$subbimbel+=$student->bimbel;$subspp+=$student->spp;
+                $totdupsb+=$student->dupsb;$totbook+=$student->book;$totbimbel+=$student->bimbel;$totspp+=$student->spp;
                 ?>
                 <?php $c++;?>
                 <?}?>
@@ -29,10 +61,10 @@
             <tfoot>
                 <tr>
                 <td colspan=2>Total</td>
-                <td class="number"><?php echo "Rp." . number_format($spp);?></td>
-                <td class="number"><?php echo "Rp." . number_format($dupsb);?></td>
-                <td class="number"><?php echo "Rp." . number_format($book);?></td>
-                <td class="number"><?php echo "Rp." . number_format($bimbel);?></td></tr>
+                <td class="number"><?php echo "Rp." . number_format($totspp);?></td>
+                <td class="number"><?php echo "Rp." . number_format($totdupsb);?></td>
+                <td class="number"><?php echo "Rp." . number_format($totbook);?></td>
+                <td class="number"><?php echo "Rp." . number_format($totbimbel);?></td></tr>
             </tfoot>
         </table>
     </body>

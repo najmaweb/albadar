@@ -204,14 +204,20 @@ class Report extends CI_Model{
         $ci = & get_instance();
         $enddate = date("Y-m-d");
         $year = $ci->Setting->getcurrentyear();
-        $sql = "select a.name,a.nis,j.name grade,";
+        $sql = "select name,nis,grade,spp,bimbel,dupsb,book from ";
+        $sql.= "(";
+        $sql.= "select a.name,a.nis,j.name grade,";
         $sql.= "case when b.mdate is null then c.amount when timestampdiff(month,b.mdate,'".$enddate."')<0 then '0' ";
         $sql.= "else timestampdiff(month,b.mdate,'".$enddate."')*c.amount end spp, ";
         $sql.= "case when d.mdate is null then e.amount when timestampdiff(month,d.mdate,'".$enddate."')<0 then '0' ";
         $sql.= "else timestampdiff(month,d.mdate,'".$enddate."')*e.amount end bimbel, ";
         $sql.= "case when f.amnt is null then g.amount else g.amount-f.amnt end dupsb, ";
         $sql.= "case when h.amnt is null then i.amount else i.amount-h.amnt end book ";
-        $sql.= "from (select nis,name,sppgroup_id,bimbelgroup_id,dupsbgroup_id,bookpaymentgroup_id,grade_id from studentshistory where year='".$year."') a ";
+        $sql.= "from ";
+        $sql.= "(";
+        $sql.= " select nis,name,sppgroup_id,bimbelgroup_id,dupsbgroup_id,bookpaymentgroup_id,grade_id from studentshistory ";
+        $sql.= " where year='".$year."'";
+        $sql.= ") a ";
         $sql.= "left outer join (select nis,max(concat(pyear,'-',pmonth,'-01'))mdate from spp group by nis) b on b.nis=a.nis ";
         $sql.= "left outer join sppgroups c on c.id=a.sppgroup_id ";
         $sql.= "left outer join (select nis,max(concat(pyear,'-',pmonth,'-01'))mdate from bimbel group by nis) d on d.nis=a.nis ";
@@ -221,7 +227,7 @@ class Report extends CI_Model{
         $sql.= "left outer join (select nis,sum(amount)amnt from bookpayment group by nis) h on h.nis=a.nis ";
         $sql.= "left outer join bookpaymentgroups i on i.id=a.bookpaymentgroup_id ";
         $sql.= "left outer join grades j on j.id=a.grade_id ";
-        $sql.= "order by a.nis";
+        $sql.= ") X order by grade,nis ";
         $que = $ci->db->query($sql);
         return $que->result();
     }
