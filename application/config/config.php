@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+/*options of theme : plain and bm*/
+$config["theme"] = "bm";
+$config["appname"] = "EmployeeDB";
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

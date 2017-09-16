@@ -19,8 +19,8 @@
         <li class="<?php echo ($feedData==='bookpaymentgroup')?'active':'';?>">
             <a href="/Bookpaymentgroups"><i class="glyphicon glyphicon-chevron-right"></i> Grup Pemb. Buku</a>
         </li>
-        <li class="<?php echo ($feedData==='siswa')?'active':'';?>">
-            <a href="/students"><i class="glyphicon glyphicon-chevron-right"></i> Siswa</a>
+        <li class="<?php echo ($feedData==='employee')?'active':'';?>">
+            <a href="/employees"><i class="glyphicon glyphicon-chevron-right"></i> Pegawai</a>
         </li>
         <li class="<?php echo ($feedData==='cashier')?'active':'';?>">
             <a href="/cashier"><i class="glyphicon glyphicon-chevron-right"></i> Pembayaran</a>

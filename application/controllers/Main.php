@@ -1,8 +1,10 @@
 <?php
 class Main extends CI_Controller{
+    var $theme;
     function __construct(){
         parent::__construct();
         $this->load->model("User");
+        $this->theme=$this->config->item("theme");
     }
     function changepassword(){
         $this->load->view("changepassword");
@@ -34,14 +36,14 @@ class Main extends CI_Controller{
             "breadcrumb" => array(1=>"Siswa",2=>"Entri Nilai"),
             "feedData"=>"evaluasi"
         );
-        redirect("../cashier");
+        redirect("../employees");
     }
     function info(){
         session_start();
         $data = array(
             "info1"=>"test",
             "info2"=>"Hi",
-            "redirect"=>"../../cashier"
+            "redirect"=>"../../employees"
         );
         $this->load->view("info",$data);
     }
@@ -50,7 +52,10 @@ class Main extends CI_Controller{
         redirect($params["redirector"]);
     }
     function login(){
-        $this->load->view("login");
+        $data = array(
+            "title" => $this->config->item("appname")
+        );
+        $this->load->view("commons/".$this->theme."/login",$data);
     }
     function loginhandler(){
         $params = $this->input->post();
@@ -60,7 +65,8 @@ class Main extends CI_Controller{
                 session_start();
                 $_SESSION["username"] = $login["username"];
                 $_SESSION["userid"] = $login["userid"];
-                redirect("../../cashier");
+                $_SESSION["employeeid"]=1;
+                redirect("../../employees");
             break;
             case "password tidak cocok":
                 $data = array(

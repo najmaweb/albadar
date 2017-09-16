@@ -11,7 +11,6 @@ class Users extends CI_Controller{
     }
     function changeuserpassword(){
         session_start();
-        checklogin();
         $userid = $this->uri->segment(3);
         $password = $this->uri->segment(4);
         $this->User->changepassword($userid,$password);
@@ -37,14 +36,14 @@ class Users extends CI_Controller{
     }
     function add(){
         session_start();
-        checklogin();
+ //       checklogin();
+ $_SESSION["userid"] = 1;
+ $_SESSION["username"] = "Joe";
         $data = array(
             "breadcrumb" => array(1=>"Siswa",2=>"Penambahan"),
             "formtitle"=>"Penambahan Siswa",
             "feedData"=>"user",
             "Users"=>$this->User->getUsers(),
-            "grades"=>$this->Grade->getclassarray(),
-            "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
         $this->load->view("users/add",$data);        
