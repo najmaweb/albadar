@@ -145,7 +145,8 @@ class Employees extends CI_Controller{
         session_start();
         checklogin();
         $params = $this->input->post();
-        echo $this->employee->update($params);
+        $employee = new Employee($params["id"]);
+        echo $employee->update($params);
         redirect("../index");
     }
     function import(){

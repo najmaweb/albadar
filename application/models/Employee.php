@@ -50,22 +50,16 @@ class Employee extends CI_Model{
         return $ci->db->insert_id();
     }
     function update($params){
-        $sql = "update employees set nname= '".str_replace("'","''",$params["nname"])."',fname='".$params["description"]."', ";
-        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",";
-        $sql.= "grade_id=".$params["grade_id"].",bimbelgroup_id=".$params["bimbelgroup_id"].",nis='".$params["nis"]."',initmonth=".$params["initmonth"].",inityear=".$params["inityear"]." ";
+        $arr = array();
+        foreach($params as $key=>$val){
+            array_push($arr,"".$key."='".$val."'");
+        }
+        $sql = "update employees ";
+        $sql.= "set ".implode(",",$arr)." ";
         $sql.= "where ";
-        $sql.= "id='".$params['id']."' ";
+        $sql.= "id='".$this->id."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
-
-        $sql = "update employeeshistory set name= '".str_replace("'","''",$params["name"])."',description='".$params["description"]."', ";
-        $sql.= "sppgroup_id=".$params["sppgroup_id"].",dupsbgroup_id=".$params["dupsbgroup_id"].",bookpaymentgroup_id=".$params["bookpaymentgroup_id"].",";
-        $sql.= "grade_id=".$params["grade_id"].",bimbelgroup_id=".$params["bimbelgroup_id"].",nis='".$params["nis"]."' ";
-        $sql.= "where ";
-        $sql.= "id='".$params['id']."' ";
-        $ci = & get_instance();
-        $que = $ci->db->query($sql);
-
         return $sql;
     }
 }

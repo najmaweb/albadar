@@ -47,7 +47,7 @@
 			<ul class="breadcrumb">
 			<li>
 			<i class="icon-home"></i>
-			<a href="/"><?php echo $breadcrumb[1];?></a> 
+			<a href="/employees"><?php echo $breadcrumb[1];?></a> 
 			<i class="icon-angle-right"></i>
 		</li>
 		<li><a href="#"><?php echo $breadcrumb[2];?></a></li>
@@ -57,26 +57,25 @@
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Pegawai</h2>
 						<div class="box-icon">
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							<a href="#" class="btn_save" title="Simpan"><i class="halflings-icon ok-sign"></i></a>
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal">
+						<form class="form-horizontal" action="/employees/update" method="post">
 						  <fieldset>
+							<input type="hidden" name="id" value="<?php echo $obj->id;?>" />
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Nama Panggilan</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="nname" type="text" value="<?php echo $obj->nname;?>">
+								  <input class="input-xlarge focused" id="nname" name="nname" type="text" value="<?php echo $obj->nname;?>">
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Nama Lengkap</label>
 								<div class="controls">
-								  <input class="input-xlarge" id="fname" type="text" value="<?php echo $obj->fname;?>" placeholder="Nama Awal">
-								  <input class="input-xlarge" id="mname" type="text" value="<?php echo $obj->mname;?>" placeholder="Nama Tengah">
-								  <input class="input-xlarge" id="lname" type="text" value="<?php echo $obj->lname;?>" placeholder="Nama Akhir">
+								  <input class="input-xlarge" id="fname" name="fname" type="text" value="<?php echo $obj->fname;?>" placeholder="Nama Awal">
+								  <input class="input-xlarge" id="mname" name="mname" type="text" value="<?php echo $obj->mname;?>" placeholder="Nama Tengah">
+								  <input class="input-xlarge" id="lname" name="lname" type="text" value="<?php echo $obj->lname;?>" placeholder="Nama Akhir">
 								</div>
 							</div>
 							<div class="control-group">
@@ -119,7 +118,7 @@
 							  </div>
 							</div>
 							<div class="form-actions">
-							  <button type="submit" class="btn btn-primary">Save changes</button>
+							  <button type="submit" id="btnsave" class="btn btn-primary">Save changes</button>
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>
@@ -178,9 +177,13 @@
 			<a href="#" class="btn btn-primary">Save changes</a>
 		</div>
 	</div>
-	
 	<div class="clearfix"></div>
 	<?php $this->load->view("commons/bm/footer");?>	
 	<?php $this->load->view("commons/bm/js");?>
+	<script type="text/javascript">
+		$(".btn_save").click(function(){
+			$("#btnsave").click();
+		});
+	</script>
 	</body>
 </html>
