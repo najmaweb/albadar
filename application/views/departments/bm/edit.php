@@ -55,27 +55,25 @@
 			<div class="row-fluid sortable">
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Pegawai</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit <?php echo $title;?></h2>
 						<div class="box-icon">
 							<a href="#" class="btn_save" title="Simpan"><i class="halflings-icon hdd"></i></a>
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" action="/employees/update" method="post">
+						<form class="form-horizontal" action="/<?php echo $parent;?>/update" method="post">
 						  <fieldset>
 							<input type="hidden" name="id" value="<?php echo $obj->id;?>" />
 							<div class="control-group">
-								<label class="control-label" for="focusedInput">Nama Panggilan</label>
+								<label class="control-label" for="focusedInput">Nama</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="nname" name="nname" type="text" value="<?php echo $obj->nname;?>">
+								  <input class="input-xlarge focused" id="nname" name="nname" type="text" value="<?php echo $obj->name;?>">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="focusedInput">Nama Lengkap</label>
+								<label class="control-label" for="focusedInput">Perusahaan</label>
 								<div class="controls">
-								  <input class="input-xlarge" id="fname" name="fname" type="text" value="<?php echo $obj->fname;?>" placeholder="Nama Awal">
-								  <input class="input-xlarge" id="mname" name="mname" type="text" value="<?php echo $obj->mname;?>" placeholder="Nama Tengah">
-								  <input class="input-xlarge" id="lname" name="lname" type="text" value="<?php echo $obj->lname;?>" placeholder="Nama Akhir">
+								  <input class="input-xlarge" id="fname" name="fname" type="text" value="<?php echo $obj->company;?>" placeholder="Nama Perusahaan">
 								</div>
 							</div>
 							<div class="control-group">
@@ -84,72 +82,11 @@
 								<input type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Satoria Tower","Polaris"]' value="<?php echo $obj->company;?>">
 							  </div>
 							</div>
-							<div class="control-group">
-							  <label class="control-label" for="department">Department </label>
-							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="department"  data-provide="typeahead" data-items="4" data-source='<?php echo $departments;?>' value="<?php echo $obj->department;?>">
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="role">Role </label>
-							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="role"  data-provide="typeahead" data-items="4" data-source='<?php echo $roles;?>' value="<?php echo $obj->role;?>">
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="date01">Tanggal Join</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="date01" value="02/16/12">
-							  </div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="selectError3">Jenis Kelamin</label>
-								<div class="controls">
-								  <select id="selectError3">
-									<option>Laki-laki</option>
-									<option>Wanita</option>
-								  </select>
-								</div>
-							  </div>
-							<div class="control-group hidden-phone">
-							  <label class="control-label" for="textarea2">Keterangan</label>
-							  <div class="controls">
-								<textarea class="cleditor" id="textarea2" rows="3"></textarea>
-							  </div>
-							</div>
 							<div class="form-actions">
 							  <button type="submit" id="btnsave" class="btn btn-primary">Save changes</button>
 							  <button type="reset" class="btn">Cancel</button>
 							</div>
 						  </fieldset>
-						</form>
-					</div>
-				</div><!--/span-->
-			</div><!--/row-->
-			<div class="row-fluid sortable">
-				<div class="box span12">
-					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Foto Pegawai</h2>
-						<div class="box-icon">
-							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
-						</div>
-					</div>
-					<div class="box-content">
-						<form class="form-horizontal">
-							<fieldset>
-							<div class="control-group">
-							<label class="control-label" for="fileInput">Upload Foto</label>
-							<div class="controls">
-							<input class="input-file uniform_on" id="fileInput" type="file">
-							</div>
-						</div>          
-							<div class="form-actions">
-								<button type="submit" class="btn btn-primary">Save changes</button>
-								<button class="btn">Cancel</button>
-							  </div>
-							</fieldset>
 						</form>
 					</div>
 				</div><!--/span-->

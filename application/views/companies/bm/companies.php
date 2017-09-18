@@ -55,7 +55,7 @@
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon user"></i><span class="break"></span>Daftar Karyawan</h2>
+						<h2><i class="halflings-icon user"></i><span class="break"></span>Daftar <?php echo $title;?></h2>
 						<div class="box-icon">
 							<a href="/employees/import" class="btn-setting"><i class="halflings-icon import"></i></a>
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
@@ -68,8 +68,8 @@
 						  <thead>
 							  <tr>
 								  <th width=25%>Nama</th>
-								  <th width=20%>Tanggal Join</th>
-								  <th width=20%>Role</th>
+								  <th width=20%>Alamat</th>
+								  <th width=20%>Keterangan</th>
 								  <th width=20%>Status</th>
 								  <th width=15%>Actions</th>
 							  </tr>
@@ -77,9 +77,9 @@
 						  <tbody>
 						  <?php foreach($objs as $obj){?>
 							<tr>
-								<td><?php echo $obj->nname;?></td>
-								<td class="center"><?php echo $obj->startdate;?></td>
-								<td class="center"><?php echo $obj->role;?></td>
+								<td><?php echo $obj->name;?></td>
+								<td class="center"><?php echo $obj->address . " (" . $obj->city . ")";?></td>
+								<td class="center"><?php echo $obj->description;?></td>
 								<td class="center">
 									<span class="label label-success">Active</span>
 								</td>

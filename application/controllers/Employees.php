@@ -39,6 +39,7 @@ class Employees extends CI_Controller{
             "feedData"=>"employee",
             "title"=>"Data Pegawai",
             "objs"=>$this->Employee->getemployees(),
+            "parent"=>"employees",
             "role"=>$this->Employee->getrole($_SESSION["userid"])
         );
         $this->load->view("employees/".$this->theme."/employees",$data);
@@ -67,7 +68,10 @@ class Employees extends CI_Controller{
             "feedData"=>"employee",
             "title"=>"Edit Pegawai",
             "obj"=>$employee->getemployee(),
-            "role"=>$employee->getrole($_SESSION["employeeid"])
+            "parent"=>"employees",
+            "role"=>$employee->getrole($_SESSION["employeeid"]),
+            "roles"=>'["Programmer","IT Manager","IT Supervisor","IT Staff","Full Stack Developer"]',
+            "departments"=>'["IT","Accounting","Purchasing","Marketing"]',
         );
         $this->load->view("employees/".$this->theme."/edit",$data);        
     }

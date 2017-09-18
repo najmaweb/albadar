@@ -92,4 +92,7 @@ class Main extends CI_Controller{
         unset($_SESSION["username"]);
         redirect("../../main/login");
     }
+    function phpinfo(){
+        phpinfo();
+    }
 }

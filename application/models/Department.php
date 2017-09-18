@@ -1,23 +1,27 @@
 <?php
-class Dupsbgroup extends CI_Model{
-    function __construct(){
+class Department extends CI_Model{
+    var $id;
+    function __construct($id = null){
         parent::__construct();
+        $this->id = $id;
     }
-    function getDupsbgroup($id){
-        $sql = "select id,name,amount,description from dupsbgroups ";
-        $sql.= "where id=".$id;
+    function get(){
+        $sql = "select a.id,a.name,a.description,b.name company from departments a ";
+        $sql.= "left outer join companies b on b.id=a.company_id ";
+        $sql.= "where a.id=".$this->id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result()[0];
     }
-    function getDupsbgroups(){
-        $sql = "select id,name,amount,description from dupsbgroups ";
+    function gets(){
+        $sql = "select a.id,a.name,a.description,b.name company  from departments a ";
+        $sql.= "left outer join companies b on b.id=a.company_id ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result();
     }
-    function getDupsbgrouparray(){
-        $sql = "select id,name,amount,description from dupsbgroups ";
+    function getarray(){
+        $sql = "select id,name,description from departments ";
         $sql.= "order by name";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
@@ -28,13 +32,18 @@ class Dupsbgroup extends CI_Model{
         return $arr;
     }
     function remove($id){
-        $sql = "delete from dupsbgroups where id=".$id;
+        $sql = "delete from departments where id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $sql;
     }
     function save($params){
-        $sql = "insert into dupsbgroups (name,amount,description) ";
+        $keys = array();$vals = array();
+        foreach($params as $key=>$val){
+            array_push($keys,$key);
+            array_push($vals,$val);
+        }
+        $sql = "insert into departments (".implode(",",$keys).") ";
         $sql.= "values ";
         $sql.= "('".$params['name']."','".$params['amount']."','".$params['description']."') ";
         $ci = & get_instance();
@@ -42,7 +51,7 @@ class Dupsbgroup extends CI_Model{
         return $ci->db->insert_id();
     }
     function update($params){
-        $sql = "update dupsbgroups set name= '".$params["name"]."',amount='".$params["amount"]."',description='".$params["description"]."' ";
+        $sql = "update departments set name= '".$params["name"]."',description='".$params["description"]."' ";
         $sql.= "where ";
         $sql.= "id='".$params['id']."' ";
         $ci = & get_instance();

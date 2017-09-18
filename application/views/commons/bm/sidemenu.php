@@ -2,10 +2,18 @@
 <div id="sidebar-left" class="span2">
     <div class="nav-collapse sidebar-nav">
         <ul class="nav nav-tabs nav-stacked main-menu">
-            <li><a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a></li>	
-            <li><a href="messages.html"><i class="icon-user"></i><span class="hidden-tablet"> Pegawai</span></a></li>
-            <li><a href="tasks.html"><i class="icon-group"></i><span class="hidden-tablet"> Department</span></a></li>
-            <li><a href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> Company</span></a></li>
+            <li>
+                <a href="/companies"><i class="icon-eye-open"></i><span class="hidden-tablet"> Company</span></a>
+            </li>
+            <li>
+                <a href="/departments"><i class="icon-group"></i><span class="hidden-tablet"> Department</span></a>
+            </li>
+            <li>
+                <a href="/employees"><i class="icon-user"></i><span class="hidden-tablet"> Pegawai</span></a>
+            </li>
+            <li>
+                <a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a>
+            </li>	
             <li>
                 <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Dropdown</span><span class="label label-important"> 3 </span></a>
                 <ul>

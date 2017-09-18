@@ -1,29 +1,26 @@
 <?php
-class Students extends CI_Controller{
+class Companies extends CI_Controller{
+    var $theme;
     function __construct(){
         parent::__construct();
-        $this->load->model("Mcashier");
-        $this->load->model("Student");
-        $this->load->model("Grade");
-        $this->load->model("User");
-        $this->load->model("Sppgroup");
-        $this->load->model("Bimbelgroup");
-        $this->load->model("Dupsbgroup");
-        $this->load->model("Bookpaymentgroup");
         $this->load->library("Dates");
         $this->load->helper("datetime");
+        $this->theme = $this->config->item("theme");
     }
     function index(){
         session_start();
         checklogin();
+        $company = new Company();
         $data = array(
-            "breadcrumb" => array(1=>"Siswa",2=>"Daftar"),
+            "breadcrumb" => array(1=>"Perusahaan",2=>"Daftar Perusahaan"),
             "formtitle"=>"Daftar Siswa",
             "feedData"=>"siswa",
-            "objs"=>$this->Student->getStudents(),
+            "objs"=>$company->getCompanies(),
+            "parent"=>"companies",
+            "title"=>"Perusahaan",
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
-        $this->load->view("students/students",$data);
+        $this->load->view("companies/".$this->theme."/companies",$data);
     }
     function import(){
         session_start();
@@ -96,21 +93,19 @@ class Students extends CI_Controller{
     function edit(){
         session_start();
         checklogin();
+        $company = new Company($this->uri->segment(3));
         $data = array(
-            "breadcrumb" => array(1=>"Siswa",2=>"Edit"),
-            "formtitle"=>"Edit siswa",
-            "feedData"=>"siswa",
-            "obj"=>$this->Student->getStudent($this->uri->segment(3)),
-            "grades"=>$this->Grade->getclassarray(),
-            "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
-            "dupsbgroups"=>$this->Dupsbgroup->getDupsbgrouparray(),
-            "bookpaymentgroups"=>$this->Bookpaymentgroup->getBookpaymentgrouparray(),
-            "bimbelgroups"=>$this->Bimbelgroup->getbimbelgrouparray(),
+            "breadcrumb" => array(1=>"Perusahaan",2=>"Edit"),
+            "formtitle"=>"Edit perusahaan",
+            "feedData"=>"company",
+            "obj"=>$company->getCompany(),
             "years"=>$this->dates->getyearsarray(),
             "months"=>$this->dates->getmonthsarray(),
+            "title"=>"Perusahaan",
+            "parent"=>"employees",
             "role"=>$this->User->getrole($_SESSION["userid"])
         );
-        $this->load->view("students/edit",$data);        
+        $this->load->view("companies/".$this->config->item("theme")."/edit",$data);        
     }
     function getjson(){
         session_start();

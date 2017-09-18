@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Master Grup Dupsb</title>
+        <title><?php echo $title;?></title>
         <?php
         $this->load->view("commons/headcontent");
         ?>
@@ -24,7 +24,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="head panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Daftar Grup Dupsb</div>
+                                    <div class="text-muted bootstrap-admin-box-title"><?php echo $title;?></div>
                                     <button class="xright btn btn-sm btn-default" id="addDupsbgroup"><i class="glyphicon glyphicon-plus"></i> Penambahan</button>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">

@@ -4,9 +4,9 @@
 	<!-- start: Meta -->
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
-	<meta name="description" content="Bootstrap Metro Dashboard">
-	<meta name="author" content="Dennis Ji">
-	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<meta name="description" content="EmployeeDB">
+	<meta name="author" content="puji">
+	<meta name="keyword" content="">
 	<!-- end: Meta -->
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>Metro</span></a>
+				<a class="brand" href="/"><span><?php echo $this->config->item("appname");?></span></a>
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
@@ -47,7 +47,7 @@
 			<ul class="breadcrumb">
 			<li>
 			<i class="icon-home"></i>
-			<a href="/employees"><?php echo $breadcrumb[1];?></a> 
+			<a href="/<?php echo $parent;?>"><?php echo $breadcrumb[1];?></a> 
 			<i class="icon-angle-right"></i>
 		</li>
 		<li><a href="#"><?php echo $breadcrumb[2];?></a></li>
@@ -55,66 +55,31 @@
 			<div class="row-fluid sortable">
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Pegawai</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit <?php echo $title;?></h2>
 						<div class="box-icon">
 							<a href="#" class="btn_save" title="Simpan"><i class="halflings-icon hdd"></i></a>
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" action="/employees/update" method="post">
+						<form class="form-horizontal" action="/<?php echo $parent;?>/update" method="post">
 						  <fieldset>
 							<input type="hidden" name="id" value="<?php echo $obj->id;?>" />
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Nama Panggilan</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="nname" name="nname" type="text" value="<?php echo $obj->nname;?>">
+								  <input class="input-xlarge focused" id="nname" name="nname" type="text" value="<?php echo $obj->name;?>">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="focusedInput">Nama Lengkap</label>
+								<label class="control-label" for="focusedInput">Alamat</label>
 								<div class="controls">
-								  <input class="input-xlarge" id="fname" name="fname" type="text" value="<?php echo $obj->fname;?>" placeholder="Nama Awal">
-								  <input class="input-xlarge" id="mname" name="mname" type="text" value="<?php echo $obj->mname;?>" placeholder="Nama Tengah">
-								  <input class="input-xlarge" id="lname" name="lname" type="text" value="<?php echo $obj->lname;?>" placeholder="Nama Akhir">
+								  <input class="input-xlarge" id="fname" name="fname" type="text" value="<?php echo $obj->address;?>" placeholder="Nama Awal">
 								</div>
 							</div>
 							<div class="control-group">
-							  <label class="control-label" for="typeahead">Company </label>
+							  <label class="control-label" for="typeahead">Kota </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Satoria Tower","Polaris"]' value="<?php echo $obj->company;?>">
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="department">Department </label>
-							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="department"  data-provide="typeahead" data-items="4" data-source='<?php echo $departments;?>' value="<?php echo $obj->department;?>">
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="role">Role </label>
-							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="role"  data-provide="typeahead" data-items="4" data-source='<?php echo $roles;?>' value="<?php echo $obj->role;?>">
-							  </div>
-							</div>
-							<div class="control-group">
-							  <label class="control-label" for="date01">Tanggal Join</label>
-							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" id="date01" value="02/16/12">
-							  </div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="selectError3">Jenis Kelamin</label>
-								<div class="controls">
-								  <select id="selectError3">
-									<option>Laki-laki</option>
-									<option>Wanita</option>
-								  </select>
-								</div>
-							  </div>
-							<div class="control-group hidden-phone">
-							  <label class="control-label" for="textarea2">Keterangan</label>
-							  <div class="controls">
-								<textarea class="cleditor" id="textarea2" rows="3"></textarea>
+								<input type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Satoria Tower","Polaris"]' value="<?php echo $obj->city;?>">
 							  </div>
 							</div>
 							<div class="form-actions">
