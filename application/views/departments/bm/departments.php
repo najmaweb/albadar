@@ -57,7 +57,7 @@
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon user"></i><span class="break"></span>Daftar <?php echo $title;?></h2>
 						<div class="box-icon">
-							<a href="/employees/import" class="btn-setting"><i class="halflings-icon import"></i></a>
+							<a href="/<?php echo $cname;?>/add" ><i class="halflings-icon plus"></i></a>
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
@@ -68,8 +68,8 @@
 						  <thead>
 							  <tr>
 								  <th width=25%>Nama</th>
-								  <th width=20%>Tanggal Join</th>
-								  <th width=20%>Role</th>
+								  <th width=20%>Perusahaan</th>
+								  <th width=20%>Keterangan</th>
 								  <th width=20%>Status</th>
 								  <th width=15%>Actions</th>
 							  </tr>

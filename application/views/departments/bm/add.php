@@ -61,13 +61,12 @@
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" action="/<?php echo $parent;?>/update" method="post">
+						<form class="form-horizontal" action="/<?php echo $parent;?>/save" method="post">
 						  <fieldset>
-							<input type="hidden" name="id" value="<?php echo $obj->id;?>" />
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Nama</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="name" name="name" type="text" value="<?php echo $obj->name;?>">
+								  <input class="input-xlarge focused" id="name" name="name" type="text" value="">
 								</div>
 							</div>
 							<div class="control-group">
