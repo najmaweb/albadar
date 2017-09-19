@@ -73,13 +73,13 @@
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Perusahaan</label>
 								<div class="controls">
-								  <?php echo form_dropdown("company_id",$companies,0,"id=company");?>
+								  <?php echo form_dropdown("company_id",$companies,$obj->company_id,"id=company");?>
 								</div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">Keterangan </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" id="description" name="description"/>
+								<input type="text" class="span6 typeahead" id="description" name="description" value="<?php echo $obj->description;?>" />
 							  </div>
 							</div>
 							<div class="form-actions">

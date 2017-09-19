@@ -8,7 +8,7 @@ class Department extends CI_Model{
         $this->tname = "departments";
     }
     function get(){
-        $sql = "select a.id,a.name,a.description,b.name company from  " . $this->tname . "  a ";
+        $sql = "select a.id,a.name,a.description,a.company_id,b.name company from  " . $this->tname . "  a ";
         $sql.= "left outer join companies b on b.id=a.company_id ";
         $sql.= "where a.id=".$this->id;
         $ci = & get_instance();
