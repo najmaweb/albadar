@@ -25,7 +25,7 @@ $config["appname"] = "EmployeeDB";
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'academicsi';
+$config['base_url'] = '/';
 
 /*
 |--------------------------------------------------------------------------
