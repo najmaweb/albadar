@@ -12,6 +12,9 @@
                 <a href="/employees"><i class="icon-user"></i><span class="hidden-tablet"> Pegawai</span></a>
             </li>
             <li>
+                <a href="/shifts"><i class="icon-user"></i><span class="hidden-tablet"> Shift</span></a>
+            </li>
+            <li>
                 <a href="index.html"><i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span></a>
             </li>	
             <li>
