@@ -82,6 +82,7 @@ class Employees extends CI_Controller{
             "departments"=>$dep->getcombodata(),
             "formtitle"=>"Edit Pegawai",
             "feedData"=>$this->parent,
+            "genders"=>array("0"=>"Wanita","1"=>"Pria"),
             "title"=>"Edit Pegawai",
             "obj"=>$obj->get(),
             "parent"=>$this->parent,
@@ -126,7 +127,7 @@ class Employees extends CI_Controller{
         $obj = new Employee();
         $params = $this->input->post();
         echo $obj->save($params);
-        //redirect("/".$this->parent);
+        redirect("/".$this->parent);
     }
     function savefromcsv(){
         $params = $this->input->post();

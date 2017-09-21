@@ -10,8 +10,9 @@ class Employee extends CI_Model{
         $this->load->helper("datetime");
     }
     function get(){
-        $sql = "select a.id,a.nname,fname,mname,lname,birthday, ";
-        $sql.= "a.department_id,b.name department,a.role,a.company_id,c.name company ";
+        $sql = "select a.id,a.nname,fname,mname,lname,birthday, gender, ";
+        $sql.= "a.department_id,b.name department,a.role,a.company_id,c.name company, ";
+        $sql.= "a.startdate ";
         $sql.= "from employees a ";
         $sql.= "left outer join departments b on b.id=a.department_id ";
         $sql.= "left outer join companies c on c.id=a.company_id ";
@@ -21,7 +22,7 @@ class Employee extends CI_Model{
         return $que->result()[0];
     }
     function gets(){
-        $sql = "select a.id,a.nname,birthday,b.name department,a.startdate,a.role ";
+        $sql = "select a.id,a.nname,birthday,b.name department,a.startdate,a.role,a.gender ";
         $sql.= "from employees a ";
         $sql.= "right outer join departments b on b.id=a.department_id ";
         $sql.= "where a.status='1'";

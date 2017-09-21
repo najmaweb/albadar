@@ -31,15 +31,24 @@ function convertdateformat($val,$formatbefore,$formatafter){
     $out = "";
     switch($formatbefore){
         case "dd/mm/yyyy":
-        $arr = explode("/",$val);
-        $year = $arr[2];
-        $month = $arr[1];
-        $date = $arr[0];
+            $arr = explode("/",$val);
+            $year = $arr[2];
+            $month = $arr[1];
+            $date = $arr[0];
+        break;
+        case "yyyy-mm-dd":
+            $arr = explode("-",$val);
+            $year = $arr[0];
+            $month = $arr[1];
+            $date = $arr[2];
         break;
     }
     switch($formatafter){
         case "yyyy-mm-dd":
         $out = $year."-".$month."-".$date;
+        break;
+        case "dd/mm/yyyy":
+        $out = $date."/".$month."/".$year;
         break;
     }
     return $out;

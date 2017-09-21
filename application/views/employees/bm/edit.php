@@ -4,9 +4,9 @@
 	<!-- start: Meta -->
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
-	<meta name="description" content="Bootstrap Metro Dashboard">
-	<meta name="author" content="Dennis Ji">
-	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<meta name="description" content="EmployeeDB">
+	<meta name="author" content="puji">
+	<meta name="keyword" content="">
 	<!-- end: Meta -->
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>Metro</span></a>
+				<a class="brand" href="/"><span><?php echo $this->config->item("appname");?></span></a>
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
@@ -47,7 +47,7 @@
 			<ul class="breadcrumb">
 			<li>
 			<i class="icon-home"></i>
-			<a href="/employees"><?php echo $breadcrumb[1];?></a> 
+			<a href="/<?php echo $parent;?>"><?php echo $breadcrumb[1];?></a> 
 			<i class="icon-angle-right"></i>
 		</li>
 		<li><a href="#"><?php echo $breadcrumb[2];?></a></li>
@@ -99,16 +99,13 @@
 							<div class="control-group">
 							  <label class="control-label" for="date01">Tanggal Join</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" name="startdate" id="startdate" value="<?php echo date("d/m/Y")?>">
+								<input type="text" class="input-xlarge datepicker" name="startdate" id="startdate" value="<?php echo convertdateformat($obj->startdate,"yyyy-mm-dd","dd/mm/yyyy");?>">
 							  </div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="selectError3">Jenis Kelamin</label>
 								<div class="controls">
-								  <select id="selectError3">
-									<option>Laki-laki</option>
-									<option>Wanita</option>
-								  </select>
+								<?php echo form_dropdown("gender",$genders,$obj->gender);?>
 								</div>
 							  </div>
 							<div class="control-group hidden-phone">
