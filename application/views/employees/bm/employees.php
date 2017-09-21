@@ -57,7 +57,7 @@
 					<div class="box-header" data-original-title>
 						<h2><i class="halflings-icon user"></i><span class="break"></span>Daftar Karyawan</h2>
 						<div class="box-icon">
-							<a href="/employees/import" class="btn-setting"><i class="halflings-icon import"></i></a>
+							<a href="/<?php echo $parent;?>/import" class="btn-setting"><i class="halflings-icon import"></i></a>
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
 							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>

@@ -1,12 +1,16 @@
 <?php
 class Employees extends CI_Controller{
     var $theme;
+    var $parent;
+    var $tname;
     function __construct(){
         parent::__construct();
         $this->load->model("Employee");
         $this->load->helper("Login");
         $this->load->library("Dates");
         $this->theme = $this->config->item("theme");
+        $this->parent = "employees";
+        $this->tname = "employees";
     }
     function changeemployeepassword(){
         session_start();
@@ -16,7 +20,7 @@ class Employees extends CI_Controller{
         $this->employee->changepassword($employeeid,$password);
     }
     function checkexist($emp_id){
-        $sql = "select id from employees where emp_id='".$emp_id."'";
+        $sql = "select id from ".$this->tname." where emp_id='".$emp_id."'";
         $que = $this->db->query($sql);
         if($que->num_rows()>0){
             return true;
@@ -36,50 +40,62 @@ class Employees extends CI_Controller{
         $data = array(
             "breadcrumb" => array(1=>"Pegawai",2=>"Daftar Pegawai"),
             "formtitle"=>"Daftar Pegawai",
-            "feedData"=>"employee",
+            "feedData"=>$this->parent,
             "title"=>"Data Pegawai",
-            "objs"=>$this->Employee->getemployees(),
-            "parent"=>"employees",
+            "objs"=>$this->Employee->gets(),
+            "parent"=>$this->parent,
             "role"=>$this->Employee->getrole($_SESSION["userid"])
         );
-        $this->load->view("employees/".$this->theme."/employees",$data);
+        $this->load->view($this->parent."/".$this->theme."/employees",$data);
     }
     function add(){
         session_start();
         checklogin();
+        $obj = new Employee();
+        $dep = new Department();
+        $com = new Company();
+        $rol = new Role();
         $data = array(
             "breadcrumb" => array(1=>"Pegawai",2=>"Penambahan"),
+            "companies"=>$com->getcombodata(),
+            "departments"=>$dep->getcombodata(),
+            "employees"=>$obj->gets(),
+            "feedData"=>$this->parent,
             "formtitle"=>"Penambahan Pegawai",
-            "feedData"=>"employee",
-            "employees"=>$this->employee->getemployees(),
-            "grades"=>$this->Grade->getclassarray(),
-            "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
-            "role"=>$this->employee->getrole($_SESSION["employeeid"])
+            "parent"=>$this->parent,
+            "role"=>$obj->getrole($_SESSION["employeeid"]),
+            "roles"=>$rol->gets(),
+            "title"=>"Penambahan Pegawai",
         );
-        $this->load->view("employees/add",$data);        
+        $this->load->view($this->parent."/".$this->theme."/add",$data);        
     }
     function edit(){
         session_start();
         checklogin();
-        $employee = new Employee($this->uri->segment(3));
+        $obj = new Employee($this->uri->segment(3));
+        $dep = new Department();
+        $com = new Company();
+        $rol = new Role();
         $data = array(
             "breadcrumb" => array(1=>"Pegawai",2=>"Edit"),
+            "companies"=>$com->getcombodata(),
+            "departments"=>$dep->getcombodata(),
             "formtitle"=>"Edit Pegawai",
-            "feedData"=>"employee",
+            "feedData"=>$this->parent,
             "title"=>"Edit Pegawai",
-            "obj"=>$employee->getemployee(),
-            "parent"=>"employees",
-            "role"=>$employee->getrole($_SESSION["employeeid"]),
-            "roles"=>'["Programmer","IT Manager","IT Supervisor","IT Staff","Full Stack Developer"]',
-            "departments"=>'["IT","Accounting","Purchasing","Marketing"]',
+            "obj"=>$obj->get(),
+            "parent"=>$this->parent,
+            "role"=>$obj->getrole($_SESSION["employeeid"]),
+            "roles"=>$rol->gets(),
+            "departments"=>$dep->getcombodata(),
         );
-        $this->load->view("employees/".$this->theme."/edit",$data);        
+        $this->load->view($this->parent."/".$this->theme."/edit",$data);        
     }
     function getjson(){
         session_start();
         checklogin();
         $year = $this->dates->getcurrentyear();
-        $sql = "select a.id,a.name,email from employees a ";
+        $sql = "select a.id,a.name,email from ".$this->tname." a ";
         $que = $this->db->query($sql);
         $res = $que->result();
         $arr = array();
@@ -92,23 +108,25 @@ class Employees extends CI_Controller{
         $data = array(
             "info1"=>"Anda telah mengimport",
             "info2"=>"File csv pegawai",
-            "redirect"=>"../../employees"
+            "redirect"=>"/".$this->parent
         );
-        $this->load->view("employees/info",$data);
+        $this->load->view($this->parent."/info",$data);
     }
     function remove(){
         session_start();
         checklogin();
+        $obj = new Employee();
         $id = $this->uri->segment(3);
-        $this->employee->remove($id);
-        redirect("../../");
+        $obj->remove($id);
+        redirect("/".$this->parent);
     }
     function save(){
         session_start();
         checklogin();
+        $obj = new Employee();
         $params = $this->input->post();
-        $this->employee->save($params);
-        redirect("../index");
+        echo $obj->save($params);
+        //redirect("/".$this->parent);
     }
     function savefromcsv(){
         $params = $this->input->post();
@@ -117,7 +135,7 @@ class Employees extends CI_Controller{
         if(isset($_POST["btnsavedata"])){
             for($c=0;$c<count($params["name"]);$c++){
                 if($this->checkexist(add_trailing_zero($params["emp_id"][$c],6))){
-                    $sql = "update employees ";
+                    $sql = "update ".$this->tname." ";
                     $sql.= "set nname='".str_replace("'","''",$params["name"][$c])."', ";
                     $sql.= " fname='".$params["fname"][$c]."', ";
                     $sql.= " mname='".$params["mname"][$c]."', ";
@@ -126,7 +144,7 @@ class Employees extends CI_Controller{
                     $sql.= "where emp_id='".add_trailing_zero($params["emp_id"][$c],6)."'";
                     $this->db->query($sql);
                 }else{
-                    $sql = "insert into employees ";
+                    $sql = "insert into ".$this->tname." ";
                     $sql.= "(startdate,emp_id,nname,fname,mname,lname,department_id,shift_id) ";
                     $sql.= "values ";
                     $sql.= "(";
@@ -143,15 +161,15 @@ class Employees extends CI_Controller{
                 }
             }
         }
-        redirect("../../employees/importfinished");
+        redirect("/".$this->parent."/importfinished");
     }
     function update(){
         session_start();
         checklogin();
         $params = $this->input->post();
-        $employee = new Employee($params["id"]);
-        echo $employee->update($params);
-        redirect("../index");
+        $obj = new Employee($params["id"]);
+        echo $obj->update($params);
+        redirect("/".$this->parent);
     }
     function import(){
         session_start();
@@ -160,10 +178,10 @@ class Employees extends CI_Controller{
             "breadcrumb" => array(1=>"Siswa",2=>"Import CSV"),
             "formtitle"=>"Import Pegawai",
             "feedData"=>"siswa",
-            "objs"=>$this->Employee->getEmployees(),
+            "objs"=>$this->Employee->gets(),
             "role"=>$this->Employee->getrole($_SESSION["userid"])
         );
-        $this->load->view("employees/".$this->theme."/import",$data);
+        $this->load->view($this->parent."/".$this->theme."/import",$data);
     }
     function importcsv(){
         session_start();
@@ -197,9 +215,9 @@ class Employees extends CI_Controller{
             $data = array(
                 "results" =>$objarr,
                 "role"=>"1",
-                "feedData"=>"employees"
+                "feedData"=>$this->parent,
             );
-            $this->load->view("employees/importresult",$data);
+            $this->load->view($this->parent."/importresult",$data);
         }        
     }
 }

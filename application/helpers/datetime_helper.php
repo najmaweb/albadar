@@ -27,6 +27,23 @@ function addzero($str){
     }
     return $str;
 }
+function convertdateformat($val,$formatbefore,$formatafter){
+    $out = "";
+    switch($formatbefore){
+        case "dd/mm/yyyy":
+        $arr = explode("/",$val);
+        $year = $arr[2];
+        $month = $arr[1];
+        $date = $arr[0];
+        break;
+    }
+    switch($formatafter){
+        case "yyyy-mm-dd":
+        $out = $year."-".$month."-".$date;
+        break;
+    }
+    return $out;
+}
 function removezero($str,$length=2){
     $out = "";
     $found = false;

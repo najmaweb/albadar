@@ -4,9 +4,9 @@
 	<!-- start: Meta -->
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
-	<meta name="description" content="Bootstrap Metro Dashboard">
-	<meta name="author" content="Dennis Ji">
-	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<meta name="description" content="EmployeeDB">
+	<meta name="author" content="Puji">
+	<meta name="keyword" content="">
 	<!-- end: Meta -->
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>Metro</span></a>
+				<a class="brand" href="index.html"><span><?php echo $this->config->item("appname");?></span></a>
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
@@ -55,51 +55,50 @@
 			<div class="row-fluid sortable">
 				<div class="box span12">
 					<div class="box-header" data-original-title>
-						<h2><i class="halflings-icon edit"></i><span class="break"></span>Edit Pegawai</h2>
+						<h2><i class="halflings-icon edit"></i><span class="break"></span>Penambahan Pegawai</h2>
 						<div class="box-icon">
 							<a href="#" class="btn_save" title="Simpan"><i class="halflings-icon hdd"></i></a>
 						</div>
 					</div>
 					<div class="box-content">
-						<form class="form-horizontal" action="/<?php echo $parent;?>/update" method="post">
+						<form class="form-horizontal" action="/<?php echo $parent;?>/save" method="post">
 						  <fieldset>
-							<input type="hidden" name="id" value="<?php echo $obj->id;?>" />
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Nama Panggilan</label>
 								<div class="controls">
-								  <input class="input-xlarge focused" id="nname" name="nname" type="text" value="<?php echo $obj->nname;?>">
+								  <input class="input-xlarge focused" id="nname" name="nname" type="text" />
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Nama Lengkap</label>
 								<div class="controls">
-								  <input class="input-xlarge" id="fname" name="fname" type="text" value="<?php echo $obj->fname;?>" placeholder="Nama Awal">
-								  <input class="input-xlarge" id="mname" name="mname" type="text" value="<?php echo $obj->mname;?>" placeholder="Nama Tengah">
-								  <input class="input-xlarge" id="lname" name="lname" type="text" value="<?php echo $obj->lname;?>" placeholder="Nama Akhir">
+								  <input class="input-xlarge" id="fname" name="fname" type="text" placeholder="Nama Awal">
+								  <input class="input-xlarge" id="mname" name="mname" type="text" placeholder="Nama Tengah">
+								  <input class="input-xlarge" id="lname" name="lname" type="text" placeholder="Nama Akhir">
 								</div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="typeahead">Company </label>
 							  <div class="controls">
-								<?php echo form_dropdown("company_id",$companies,$obj->company_id);?>
+								<?php echo form_dropdown("company_id",$companies,"0");?>
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="department">Department </label>
 							  <div class="controls">
-								<?php echo form_dropdown("department_id",$departments,$obj->department_id);?>
+								<?php echo form_dropdown("department_id",$departments,"0");?>
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="role">Role </label>
 							  <div class="controls">
-								<input type="text" class="span6 typeahead" name="role" id="role" data-provide="typeahead" data-items="4" data-source='<?php echo $roles;?>' value="<?php echo $obj->role;?>">
+								<?php echo form_dropdown("role",$roles,"0");?>
 							  </div>
 							</div>
 							<div class="control-group">
 							  <label class="control-label" for="date01">Tanggal Join</label>
 							  <div class="controls">
-								<input type="text" class="input-xlarge datepicker" name="startdate" id="startdate" value="<?php echo date("d/m/Y")?>">
+								<input type="text" class="input-xlarge datepicker" id="date01" value="02/16/12">
 							  </div>
 							</div>
 							<div class="control-group">
