@@ -47,7 +47,7 @@
 			<ul class="breadcrumb">
 			<li>
 			<i class="icon-home"></i>
-			<a href="/employees"><?php echo $breadcrumb[1];?></a> 
+			<a href="/<?php echo $parent;?>"><?php echo $breadcrumb[1];?></a> 
 			<i class="icon-angle-right"></i>
 		</li>
 		<li><a href="#"><?php echo $breadcrumb[2];?></a></li>

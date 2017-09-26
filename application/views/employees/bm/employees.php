@@ -4,14 +4,14 @@
 	<!-- start: Meta -->
 	<meta charset="utf-8">
 	<title><?php echo $title;?></title>
-	<meta name="description" content="EmployeeDB">
+	<meta name="description" content="<?php echo $this->config->item('appname');?>">
 	<meta name="author" content="Puji">
 	<meta name="keyword" content="">
 	<!-- end: Meta -->
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- end: Mobile Specific -->
-	<?php $this->load->view("commons/bm/styling");?>	
+	<?php $this->load->view("commons/bm/styling");?>
 </head>
 <body>
 	<!-- start: Header -->
@@ -59,8 +59,7 @@
 						<div class="box-icon">
 							<a href="/<?php echo $parent;?>/import" class="btn-setting"><i class="halflings-icon import"></i></a>
 							<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
-							<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-							<a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+							<a href="<?php echo $parent;?>/add" class=""><i class="halflings-icon plus"></i></a>
 						</div>
 					</div>
 					<div class="box-content">
@@ -77,7 +76,7 @@
 						  <tbody>
 						  <?php foreach($objs as $obj){?>
 							<tr>
-								<td><?php echo $obj->nname;?></td>
+								<td class="nname"><?php echo $obj->nname;?></td>
 								<td class="center"><?php echo $obj->startdate;?></td>
 								<td class="center"><?php echo $obj->role;?></td>
 								<td class="center">
@@ -90,7 +89,7 @@
 									<a class="btn btn-info" href="/<?php echo $parent;?>/edit/<?php echo $obj->id;?>">
 										<i class="halflings-icon white edit"></i>  
 									</a>
-									<a class="btn btn-danger" href="#">
+									<a class="btn btn-danger btn-remove">
 										<i class="halflings-icon white trash"></i> 
 									</a>
 								</td>
@@ -105,21 +104,10 @@
 		<!-- end: Content -->
 		</div><!--/#content.span10-->
 		</div><!--/fluid-row-->
-	<div class="modal hide fade" id="myModal">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">×</button>
-			<h3>Settings</h3>
-		</div>
-		<div class="modal-body">
-			<p>Here settings can be configured...</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
-		</div>
-	</div>
+		<?php $this->load->view($parent."/".$theme."/modals");?>
 	<div class="clearfix"></div>
 	<?php $this->load->view("commons/bm/footer");?>
 	<?php $this->load->view("commons/bm/js");?>
+	<script type="text/javascript" src="/js/employees/bm/employees.js"></script>
 </body>
 </html>

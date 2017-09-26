@@ -5,15 +5,15 @@ class Mdashboard extends CI_Model{
     }
     function getsppstatistic(){
         $ci = & get_instance();
-        $sql = "select count(a.id)tot,count(b.id)byr from studentshistory a ";
-        $sql.= "left outer join spp b on b.nis=a.nis; ";
+        $sql = "select 10 tot,35 byr from employees a ";
         $que = $ci->db->query($sql);
         $res = $que->result()[0];
         return array("tot"=>$res->tot,"byr"=>$res->byr);
     }
-    function getspppercentage(){
+    function getgenderpercentage(){
         $spp = $this->getsppstatistic();
-        return floor(($spp["byr"]/$spp["tot"])*100);
+        return 75;
+//        return floor(($spp["byr"]/$spp["tot"])*100);
     }
     function getbimbelstatistic(){
         $ci = & get_instance();

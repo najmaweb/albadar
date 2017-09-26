@@ -29,4 +29,5 @@
     <script src="/assets/bmetronic/js/counter.js"></script>
     <script src="/assets/bmetronic/js/retina.js"></script>
     <script src="/assets/bmetronic/js/custom.js"></script>
+    <script src="/assets/js/radu.js"></script>
 <!-- end: JavaScript-->

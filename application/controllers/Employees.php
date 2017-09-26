@@ -44,7 +44,8 @@ class Employees extends CI_Controller{
             "title"=>"Data Pegawai",
             "objs"=>$this->Employee->gets(),
             "parent"=>$this->parent,
-            "role"=>$this->Employee->getrole($_SESSION["userid"])
+            "role"=>$this->Employee->getrole($_SESSION["userid"]),
+            "theme"=>$this->theme,
         );
         $this->load->view($this->parent."/".$this->theme."/employees",$data);
     }
