@@ -14,9 +14,7 @@ class Dashboard extends CI_Controller{
             "feedData"=>"dashboard",
             "role"=>1,
             "spppercentage"=>$this->Mdashboard->getgenderpercentage(),
-            "bimbelpercentage"=>$this->Mdashboard->getgenderpercentage(),
-            "dupsbpercentage"=>$this->Mdashboard->getgenderpercentage(),
-            "bookpercentage"=>$this->Mdashboard->getgenderpercentage(),
+            "title"=>"Dashboard",
         );
         $this->load->view("dashboard/".$this->theme."/dashboard",$data);
     }
